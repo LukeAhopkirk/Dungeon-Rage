@@ -414,7 +414,7 @@ public class AStarGrid : MonoBehaviour {
 	 * Tracing path of previous nodes from target to start node allows reconstruction of the path taken.
 	 * 
 	 */
-	public List<Vector2> ShortestPath(Vector2 start, Vector2 target) {
+	public List<Vector2>   ShortestPath(Vector2 start, Vector2 target) {
 
 		// List of nodes that have a path to from the start node
 		List<AStarNode> open = new List<AStarNode> ();

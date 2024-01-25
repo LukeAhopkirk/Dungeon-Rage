@@ -53,7 +53,7 @@ public class Chase : MonoBehaviour
 		float alpha = 0f;
 
 		// Specify the layer mast for ray casting - ray casting will
-		// only interact with layer 8
+		// interact with layer 8 (player) and 7 (walls)
 		int layerMask = 1 << 8 | 1 << 7;
 
 		//Cast rays in circle around monster
@@ -75,7 +75,7 @@ public class Chase : MonoBehaviour
 			RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, ray.magnitude, layerMask);
 			if (hit.collider != null && hit.collider.tag == "Player")
 			{
-				Debug.Log("Ray hit: " + hit.collider.name);
+				//Debug.Log("Ray hit: " + hit.collider.name);
 				isChasing = true;
 				
 			}
@@ -87,37 +87,44 @@ public class Chase : MonoBehaviour
 			//Travel towards the target object at certain speed.
 			pathfinder.GoTowards(target, speed);
 		}
-    }
 
+		float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
 
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        // Compute the angle between two triangles in the cricle
-        float delta = 2f * Mathf.PI / (float)(numPoints - 1);
-        // Stat with angle of 0
-        float alpha = 0f;
-
-        //Other vertices will be positioned evenly around the circle
-        for (int i = 1; i <= numPoints; i++)
+		if(distanceToPlayer <= 0.5f)
         {
-            //Radius and alpha give a position of a point around
-            //the circle in spherical coordinates 
+			//Debug.Log("Distance: " + distanceToPlayer);
+		}
+	}
 
-            // Compute position x from spherical coordinates
-            float x = radius * Mathf.Cos(alpha);
-            // Compute position y from spherical coordinates
-            float y = radius * Mathf.Sin(alpha);
 
-            // Create a ray
-            Vector3 ray = new Vector3(x, y, transform.position.z);
 
-            Gizmos.DrawRay(transform.position, ray);
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
 
-            // Increase the angle to get the next positon around the circle
-            alpha += delta;
-        }
-    }
+    //    // Compute the angle between two triangles in the cricle
+    //    float delta = 2f * Mathf.PI / (float)(numPoints - 1);
+    //    // Stat with angle of 0
+    //    float alpha = 0f;
+
+    //    //Other vertices will be positioned evenly around the circle
+    //    for (int i = 1; i <= numPoints; i++)
+    //    {
+    //        //Radius and alpha give a position of a point around
+    //        //the circle in spherical coordinates 
+
+    //        // Compute position x from spherical coordinates
+    //        float x = radius * Mathf.Cos(alpha);
+    //        // Compute position y from spherical coordinates
+    //        float y = radius * Mathf.Sin(alpha);
+
+    //        // Create a ray
+    //        Vector3 ray = new Vector3(x, y, transform.position.z);
+
+    //        Gizmos.DrawRay(transform.position, ray);
+
+    //        // Increase the angle to get the next positon around the circle
+    //        alpha += delta;
+    //    }
+    //}
 }
