@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
 
         //animator.SetFloat("Horizontal", movement.x);
         //animator.SetFloat("Vertical", movement.y);
+
+        // nomalizing the movement vector to ensure consistent movement in all directions
+        movement.Normalize();
+
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         Flip();
