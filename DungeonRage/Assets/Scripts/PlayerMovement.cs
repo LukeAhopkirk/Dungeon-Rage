@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-
+    public float moveSpeed = 3f;
+    private bool isFacingRight = true;
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
         //animator.SetFloat("Horizontal", movement.x);
         //animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        Flip();
     }
 
     private void FixedUpdate()
@@ -28,4 +30,14 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
+    private void Flip()
+    {
+        if (isFacingRight && movement.x <0f || !isFacingRight && movement.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+    }
 }
