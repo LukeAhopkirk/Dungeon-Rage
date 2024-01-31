@@ -24,12 +24,22 @@ public class PlayerMovement : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
+<<<<<<< HEAD
             // Check for dash input and cooldown
             if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastDashTime > dashCooldown)
             {
                 StartCoroutine(Dash());
                 lastDashTime = Time.time;
             }
+=======
+        //animator.SetFloat("Horizontal", movement.x);
+        //animator.SetFloat("Vertical", movement.y);
+
+        // nomalizing the movement vector to ensure consistent movement in all directions
+        movement.Normalize();
+
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+>>>>>>> 98022a19a15f2e023da4a796e5b36eb20a4679ff
 
             // Update animator
             animator.SetFloat("Speed", movement.sqrMagnitude);
