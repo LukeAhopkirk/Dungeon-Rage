@@ -18,15 +18,7 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            TakeDamage(10f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Heal(10f);
-        }
+        
     }
 
     public void TakeDamage(float damage)
