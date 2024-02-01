@@ -2,18 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class FollowCamera : MonoBehaviour
 {
-    public Transform target; // Reference to the player's transform
-    public float smoothSpeed = 0.125f; // Smoothness of the camera follow
+    public Transform target;
+    public float smoothSpeed = 0.125f;
+    public Vector3 cameraOffset = new Vector3(0f, 0f, -10f);
+    public float zoomSpeed = 2f;
+    public float minZoom = 5f;
+    public float maxZoom = 10f;
+    public Vector2 minBounds = new Vector2(-10f, -5f);
+    public Vector2 maxBounds = new Vector2(10f, 5f);
 
     void LateUpdate()
     {
         if (target != null)
         {
-            Vector3 desiredPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothedPosition;
+            Vector3 desiredPos = target.position + cameraOffset;
+            Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
+            transform.position = new Vector3(
+                Mathf.Clamp(smoothedPos.x, minBounds.x, maxBounds.x),
+                Mathf.Clamp(smoothedPos.y, minBounds.y, maxBounds.y),
+                transform.position.z
+            );
+
+            float zoomFactor = Mathf.Clamp(target.GetComponent<Rigidbody2D>().velocity.magnitude, 0f, 1f);
+            float targetZoom = Mathf.Lerp(minZoom, maxZoom, zoomFactor);
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, targetZoom, Time.deltaTime * zoomSpeed);
         }
     }
 }
