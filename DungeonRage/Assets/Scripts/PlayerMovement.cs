@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     private bool isDashing = false;
     private float dashTime = 0.2f;
-    private float dashDistance = 3f;
-    private float dashCooldown = 0f; // Cooldown time for the dash (currently set to zero for immediate use)
+    private float dashDistance = 2f;
+    private float dashCooldown = 2f; // Cooldown time for the dash (currently set to zero for immediate use)
     private float playerOffset = 0.1f; // Adjust as needed to avoid colliding with walls during a dash
     private float lastDashTime = 0f;
 
@@ -21,8 +21,12 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing)
         {
             // Input for movement
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            // Normalizing vector for diagonal movement
+            Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+            movement = inputVector.magnitude == 0 ? Vector2.zero : inputVector.normalized;
 
             // Check for dash input and cooldown
             if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastDashTime > dashCooldown)
@@ -31,10 +35,6 @@ public class PlayerMovement : MonoBehaviour
                 lastDashTime = Time.time;
             }
 
-            // nomalizing the movement vector to ensure consistent movement in all directions
-            movement.Normalize();
-
-            animator.SetFloat("Speed", movement.sqrMagnitude);
 
             // Update animator
             animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
 
         // Normalize the movement vector to ensure consistent dash distance in all directions
-        Vector2 dashDirection = new Vector2(movement.x, movement.y).normalized;
+        Vector2 dashDirection = movement.magnitude == 0 ? Vector2.zero : movement.normalized;
 
         // Calculate the target position for the dash
         Vector2 dashTarget = (Vector2)transform.position + dashDirection * dashDistance;
