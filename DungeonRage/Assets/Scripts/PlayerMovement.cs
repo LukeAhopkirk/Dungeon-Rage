@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private float dashTime = 0.2f;
     private float dashDistance = 2f;
-    public float dashCooldown = 2f; // Cooldown time for the dash (currently set to zero for immediate use)
-    private float playerOffset = 0.1f; // Adjust as needed to avoid colliding with walls during a dash
+    public float dashCooldown = 2f; // Cooldown time for the dash 
+    private float playerOffset = 0.1f; 
     private float lastDashTime = 0f;
 
     void Update()
