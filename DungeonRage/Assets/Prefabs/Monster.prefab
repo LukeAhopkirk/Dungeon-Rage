@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 4584713507064326916}
   - component: {fileID: 3100283867785696382}
   - component: {fileID: 3772472846267095627}
-  - component: {fileID: 3938821109264667902}
   - component: {fileID: 8871433321922635888}
+  - component: {fileID: 3596357098421697240}
   - component: {fileID: 222780117491023342}
+  - component: {fileID: 9120947996977224088}
+  - component: {fileID: 2999737056505621731}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -101,23 +103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 1
---- !u!114 &3938821109264667902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4829898755323246806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b258fdd30f8429599371e0f32d591e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridObject: {fileID: 0}
-  updateFrequency: 5
-  DrawPathInEditor: 0
-  PathColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!58 &8871433321922635888
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,6 +138,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.145
+--- !u!114 &3596357098421697240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829898755323246806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9ef15e52dba4677af07e133fbaf036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canFly: 0
+  stayGrounded: 1
+  groundFollowDistance: 0.1
+  groundCheckMask:
+    serializedVersion: 2
+    m_Bits: 819
+  slopeLimit: 80
 --- !u!95 &222780117491023342
 Animator:
   serializedVersion: 5
@@ -174,3 +178,50 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9120947996977224088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829898755323246806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db36412f2353e49829954497b13c961d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVelocity: 3
+  maxAcceleration: 10
+  turnSpeed: 20
+  targetRadius: 0.4
+  slowRadius: 1
+  timeToTarget: 0.5
+  smoothing: 1
+  numSamplesForSmoothing: 5
+--- !u!50 &2999737056505621731
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829898755323246806}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
