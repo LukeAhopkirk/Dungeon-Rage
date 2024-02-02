@@ -10,8 +10,7 @@ public class FollowCamera : MonoBehaviour
     public float zoomSpeed = 2f;
     public float minZoom = 5f;
     public float maxZoom = 10f;
-    public Vector2 minBounds = new Vector2(-10f, -5f);
-    public Vector2 maxBounds = new Vector2(10f, 5f);
+    
 
     void LateUpdate()
     {
@@ -19,11 +18,8 @@ public class FollowCamera : MonoBehaviour
         {
             Vector3 desiredPos = target.position + cameraOffset;
             Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
-           transform.position = new Vector3(
-                Mathf.Clamp(smoothedPos.x, minBounds.x, maxBounds.x),
-                Mathf.Clamp(smoothedPos.y, minBounds.y, maxBounds.y),
-                transform.position.z
-           );
+            transform.position = smoothedPos;
+
 
             float zoomFactor = Mathf.Clamp(target.GetComponent<Rigidbody2D>().velocity.magnitude, 0f, 1f);
             float targetZoom = Mathf.Lerp(minZoom, maxZoom, zoomFactor);
