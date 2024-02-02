@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityMovementAI;
 
 public class MonsterController : MonoBehaviour
 {
@@ -26,13 +27,11 @@ public class MonsterController : MonoBehaviour
 
 	// Chaser's speed
 	// (initialise via the Inspector Panel)
-	public float speed;
+	//public float speed;
 
 
-	// Chasing game object must have a AStarPathfinder component - 
-	// this is a reference to that component, which will get initialised
-	// in the Start() method
-	private AStarPathfinder pathfinder = null;
+	//Instance of steering basics
+	SteeringBasics steeringBasics;
 
 	// Reference to animator component
 	Animator anim;
@@ -43,13 +42,15 @@ public class MonsterController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		//Get the reference to object's AStarPathfinder component
-		pathfinder = transform.GetComponent<AStarPathfinder>();
+		////Get the reference to object's AStarPathfinder component
+		//pathfinder = transform.GetComponent<AStarPathfinder>();
 
 		// Initialise the reference to the Animator component
 		anim = GetComponent<Animator>();
 
-	}
+		steeringBasics = GetComponent<SteeringBasics>();
+
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -57,25 +58,32 @@ public class MonsterController : MonoBehaviour
 		//Make enemy allways face target
 		faceTarget();
 
-		Debug.Log("idle: " + idle);
+		//Debug.Log("idle: " + idle);
 		if (idle == false)
 		{
 			isEnraged = targetCheck();
 
 		}
-		Debug.Log("Enraged: " + isEnraged);
+		//Debug.Log("Enraged: " + isEnraged);
 		if (isEnraged)
 		{
 			anim.SetTrigger("enrage");
 
 		}
 
-		if (pathfinder != null && isChasing && isAttacking == false)
+		Debug.Log(steeringBasics != null);
+		Debug.Log("is chasing: " + isChasing + "is attacking: " + isAttacking);
+
+		if (steeringBasics != null && isChasing && isAttacking == false)
 		//if (pathfinder != null && isChasing && isAttacking ==false && isEnraged ==false)
 		{
 			anim.SetTrigger("run");
 			//Travel towards the target object at certain speed.
-			pathfinder.GoTowards(target, speed);
+
+			Vector3 accel = steeringBasics.Arrive(target.transform.position);
+
+			steeringBasics.Steer(accel);
+
 		}
 
 		float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);

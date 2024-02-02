@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     public Image experienceBar;
     public Image rageBar;
     public Button[] spellButtons;
+
     public float healthAmount = 100f;
     public float experienceAmount = 0f;
     public float rageAmount = 0f;
@@ -20,8 +21,31 @@ public class HUDManager : MonoBehaviour
         healthBar.fillAmount = healthAmount / 100f;
         experienceBar.fillAmount = experienceAmount / 100f;
         rageBar.fillAmount = rageAmount / 100f;
+
+        for (int i = 0; i < spellButtons.Length; i++)
+        {
+            int index = i;
+            spellButtons[i].onClick.AddListener(() => OnSpellButtonClicked(index));
+        }
     }
 
+    public void OnSpellButtonClicked(int buttonIndex)
+    {
+        switch (buttonIndex)
+        {
+            case 0:
+                // Cast spell 1
+                break;
+            case 1:
+                // Cast spell 2
+                break;
+            case 2:
+                // Cast spell 3
+            break;
+            default:
+                break;
+        }
+    }
     private void Update()
     {
 
