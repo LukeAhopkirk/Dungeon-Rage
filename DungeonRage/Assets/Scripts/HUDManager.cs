@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
-
     public Image healthBar;
     public Image experienceBar;
     public Image rageBar;
@@ -17,6 +15,7 @@ public class HUDManager : MonoBehaviour
     public float rageAmount = 0f;
 
     public static bool isPaused;
+    private bool isAbilityDraining = false; // Flag to track ability draining state
 
     // Start is called before the first frame update
     void Start()
@@ -24,51 +23,20 @@ public class HUDManager : MonoBehaviour
         SetPauseMenuActive(false);
 
         healthBar.fillAmount = healthAmount / 100f;
-        //experienceBar.fillAmount = experienceAmount / 100f;
-        //rageBar.fillAmount = rageAmount / 100f;
+        experienceBar.fillAmount = experienceAmount / 100f;
+        rageBar.fillAmount = rageAmount / 100f;
 
         for (int i = 0; i < spellButtons.Length; i++)
         {
             int index = i;
             spellButtons[i].onClick.AddListener(() => OnSpellButtonClicked(index));
         }
-    }
-    public void TogglePause()
-    {
-        isPaused = !Time.timeScale.Equals(0f);
-        SetPauseMenuActive(isPaused);
-        Time.timeScale = isPaused ? 0f : 1f;
-    }
-    private void SetPauseMenuActive(bool isActive)
-    {
-        pauseMenu.SetActive(isActive);
-    }
-    public void OnSpellButtonClicked(int buttonIndex)
-    {
-        switch (buttonIndex)
-        {
-            case 0:
-                // Cast spell 1
-                break;
-            case 1:
-                // Cast spell 2
-                break;
-            case 2:
-                // Cast spell 3
-            break;
-            default:
-                break;
-        }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+
+        // Subscribe to the DealDamageEvent
+        RageSystem.DealDamageEvent += HandleDealDamageEvent;
     }
 
-    public void TakeDamage(float damage)
+    public void DealDamage(float damage)
     {
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
@@ -89,11 +57,84 @@ public class HUDManager : MonoBehaviour
 
         experienceBar.fillAmount = experienceAmount / 100f;
     }
+
     public void GetRage(float rage)
     {
-        rageAmount += rage;
-        rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
+        // Update rageAmount based on the gained rage, only if not in ability draining state
+        if (!isAbilityDraining)
+        {
+            rageAmount += rage;
+            rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
+        }
 
+        UpdateRageBar();
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !Time.timeScale.Equals(0f);
+        SetPauseMenuActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+
+    private void SetPauseMenuActive(bool isActive)
+    {
+        pauseMenu.SetActive(isActive);
+    }
+
+    public void OnSpellButtonClicked(int buttonIndex)
+    {
+        switch (buttonIndex)
+        {
+            case 0:
+                // Cast spell 1
+                break;
+            case 1:
+                // Cast spell 2
+                break;
+            case 2:
+                // Cast spell 3
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void UpdateRageBar()
+    {
         rageBar.fillAmount = rageAmount / 100f;
+        Debug.Log($"Updated Rage Bar. Rage Amount: {rageAmount}");
+    }
+
+    private void HandleDealDamageEvent(float damage)
+    {
+        if (damage < 0)
+        {
+            // Handle ability drain (negative damage)
+            rageAmount += damage;
+            rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
+        }
+        else
+        {
+            // Handle normal damage
+            rageAmount += damage * 0.5f;
+            rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
+        }
+
+        UpdateRageBar();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
+
+    // Add a public method to set the ability draining state from other scripts
+    public void SetAbilityDrainingState(bool isDraining)
+    {
+        isAbilityDraining = isDraining;
     }
 }

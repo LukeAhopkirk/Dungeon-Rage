@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-
     public int damage = 30;
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.CompareTag("Walls"))
         {
             Destroy(gameObject);
         }
-        else if(collision.gameObject.CompareTag("Enemy")){
-            MonsterController Enemy = collision.gameObject.GetComponent<MonsterController>();
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            MonsterController enemy = collision.gameObject.GetComponent<MonsterController>();
 
-            Enemy.TakeDamage(damage);
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                RageSystem rageSystem = FindObjectOfType<RageSystem>();
+                if (rageSystem != null)
+                {
+                    rageSystem.DealDamage(damage);
+                }
+            }
 
             Destroy(gameObject);
         }
     }
-
 }

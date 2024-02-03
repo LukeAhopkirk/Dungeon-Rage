@@ -172,7 +172,7 @@ public class MonsterController : MonoBehaviour
 
         if (isTouching)
         {
-			hud.TakeDamage(5);
+			hud.DealDamage(5);
         }
 
         //transform.localPosition = pos;
@@ -216,4 +216,28 @@ public class MonsterController : MonoBehaviour
         }
 
     }
+
+	public void Knockback(Vector2 direction, float force)
+	{
+		// Stop chasing
+		isChasing = false;
+
+		// Apply knockback force
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		rb.velocity = Vector2.zero;
+		rb.AddForce(direction * force, ForceMode2D.Impulse);
+
+		// Start a coroutine to simulate a knockback duration
+		StartCoroutine(KnockbackDuration());
+	}
+
+	private IEnumerator KnockbackDuration()
+	{
+		// Wait for a short duration to simulate knockback effect
+		yield return new WaitForSeconds(0.5f);
+
+		// Resume chasing after knockback duration
+		isChasing = true;
+		anim.SetTrigger("run");
+	}
 }
