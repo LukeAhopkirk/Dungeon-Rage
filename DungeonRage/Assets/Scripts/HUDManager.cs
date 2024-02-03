@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     public Image experienceBar;
     public Image rageBar;
     public Button[] spellButtons;
+    public GameObject pauseMenu;
 
     public float healthAmount = 100f;
     public float experienceAmount = 0f;
@@ -18,6 +19,8 @@ public class HUDManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetPauseMenuActive(false);
+
         healthBar.fillAmount = healthAmount / 100f;
         experienceBar.fillAmount = experienceAmount / 100f;
         rageBar.fillAmount = rageAmount / 100f;
@@ -28,7 +31,16 @@ public class HUDManager : MonoBehaviour
             spellButtons[i].onClick.AddListener(() => OnSpellButtonClicked(index));
         }
     }
-
+    public void TogglePause()
+    {
+        bool isPaused = !Time.timeScale.Equals(0f);
+        SetPauseMenuActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
+    }
+    private void SetPauseMenuActive(bool isActive)
+    {
+        pauseMenu.SetActive(isActive);
+    }
     public void OnSpellButtonClicked(int buttonIndex)
     {
         switch (buttonIndex)
@@ -48,7 +60,10 @@ public class HUDManager : MonoBehaviour
     }
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 
     public void TakeDamage(float damage)
