@@ -9,11 +9,13 @@ public class MonsterController : MonoBehaviour
 	// (initialise via the Inspector Panel)
 	public GameObject target;
 
+	//Instacne of the HUD manager
+	public HUDManager hud;
+
 	//Boolean variable to control whether enemy is chasing or not
 	//intialised to false so monster doesnt start chasing straight away
 	bool isChasing = false;
 
-	public static bool isAttacking = false;
 
 	bool isEnraged = false;
 
@@ -24,10 +26,7 @@ public class MonsterController : MonoBehaviour
 	// Number of points on circle's circumference
 	int numPoints = 64;
 
-
-	// Chaser's speed
-	// (initialise via the Inspector Panel)
-	//public float speed;
+	private bool isTouching = false;
 
 
 	//Instance of steering basics
@@ -39,18 +38,24 @@ public class MonsterController : MonoBehaviour
 	//Bool to declare if monster is flipped or not
 	private bool flip;
 
+	public int health = 100;
+
+
 	// Use this for initialization
 	void Start()
 	{
 		//Find game object with player tag and set to target
 		target = GameObject.FindGameObjectWithTag("Player");
 
-		// Initialise the reference to the Animator component
-		anim = GetComponent<Animator>();
+
+        // Initialise the reference to the Animator component
+        anim = GetComponent<Animator>();
 
 		steeringBasics = GetComponent<SteeringBasics>();
 
-    }
+		////Set the HUD to to the obejct with hud Tag
+		hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDManager>();
+	}
 
 	// Update is called once per frame
 	void Update()
@@ -72,8 +77,8 @@ public class MonsterController : MonoBehaviour
 		}
 
 
-		if (steeringBasics != null && isChasing && isAttacking == false)
-		//if (pathfinder != null && isChasing && isAttacking ==false && isEnraged ==false)
+		//if (steeringBasics != null && isChasing && isAttacking == false)
+		if (steeringBasics != null && isChasing)
 		{
 			anim.SetTrigger("run");
 			//Travel towards the target object at certain speed.
@@ -92,6 +97,7 @@ public class MonsterController : MonoBehaviour
 		{
 			anim.SetTrigger("attack");
 		}
+
 	}
 
 	private bool targetCheck()
@@ -102,8 +108,9 @@ public class MonsterController : MonoBehaviour
 		float alpha = 0f;
 
 		// Specify the layer mast for ray casting - ray casting will
-		// interact with layer 8 (player) and 7 (walls)
-		int layerMask = 1 << 8;
+		// interact with layer 8 (player) and 9 (walls)
+		int layerMask = 1 << 8|1 << 9;
+
 		//Cast rays in circle around monster
 		for (int i = 1; i <= numPoints; i++)
 		{
@@ -131,8 +138,27 @@ public class MonsterController : MonoBehaviour
 		return false;
 	}
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
 
-	public void enragedFinished()
+        if (collision.gameObject.CompareTag("Player"))
+        {
+			isTouching = true;
+        }
+    }
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+
+		if (collision.gameObject.CompareTag("Player"))
+		{
+			isTouching = false;
+		}
+	}
+
+
+
+    public void enragedFinished()
 	{
 		isEnraged = false;
 		isChasing = true;
@@ -143,15 +169,18 @@ public class MonsterController : MonoBehaviour
 	{
 		//Vector2 pos = transform.localPosition;
 		isChasing = false;
-		isAttacking = true;
 
-		//transform.localPosition = pos;
+        if (isTouching)
+        {
+			hud.TakeDamage(5);
+        }
 
-	}
+        //transform.localPosition = pos;
+
+    }
 
 	public void AttackFinished()
 	{
-		isAttacking = false;
 		isChasing = true;
 		anim.SetTrigger("run");
 
@@ -176,4 +205,15 @@ public class MonsterController : MonoBehaviour
 
 
 	}
+
+	public void TakeDamage(int damage)
+    {
+		health -= damage;
+
+		if(health <= 0)
+        {
+			Destroy(gameObject);
+        }
+
+    }
 }
