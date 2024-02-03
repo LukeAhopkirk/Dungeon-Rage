@@ -38,6 +38,8 @@ public class MonsterController : MonoBehaviour
 	//Bool to declare if monster is flipped or not
 	private bool flip;
 
+	public int health = 100;
+
 
 	// Use this for initialization
 	void Start()
@@ -203,4 +205,15 @@ public class MonsterController : MonoBehaviour
 
 
 	}
+
+	public void TakeDamage(int damage)
+    {
+		health -= damage;
+
+		if(health <= 0)
+        {
+			Destroy(gameObject);
+        }
+
+    }
 }
