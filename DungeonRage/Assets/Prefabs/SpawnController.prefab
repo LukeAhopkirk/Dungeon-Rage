@@ -1004,6 +1004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: room1
       objectReference: {fileID: 0}
+    - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
+      propertyPath: maxEnemies
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6510743479380011130, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.15
