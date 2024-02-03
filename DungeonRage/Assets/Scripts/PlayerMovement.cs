@@ -55,7 +55,16 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator Dash()
     {
+        //Gathers all the game objects tagged enemy to deal with the dashing collisions.
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         isDashing = true;
+
+        //Goes through each enemy and ignores the collision during the dash.
+        foreach (GameObject enemy in enemies)
+        {
+            Physics2D.IgnoreCollision(rb.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+        }
 
         // Normalize the movement vector to ensure consistent dash distance in all directions
         Vector2 dashDirection = movement.magnitude == 0 ? Vector2.zero : movement.normalized;
@@ -89,6 +98,15 @@ public class PlayerMovement : MonoBehaviour
 
         // Reset the dash state
         isDashing = false;
+
+
+        //resets collisions back with enemys
+        foreach (GameObject enemy in enemies)
+        {
+            Physics2D.IgnoreCollision(rb.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), false);
+        }
+
+
     }
 
     private void Flip()

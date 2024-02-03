@@ -7,7 +7,7 @@ public class MonsterController : MonoBehaviour
 {
 	// Target of the chase
 	// (initialise via the Inspector Panel)
-	public GameObject target = null;
+	public GameObject target;
 
 	//Boolean variable to control whether enemy is chasing or not
 	//intialised to false so monster doesnt start chasing straight away
@@ -20,7 +20,7 @@ public class MonsterController : MonoBehaviour
 	bool idle = false;
 
 	// Radius of the circle
-	float radius = 2f;
+	public float radius = 2f;
 	// Number of points on circle's circumference
 	int numPoints = 64;
 
@@ -42,8 +42,8 @@ public class MonsterController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		////Get the reference to object's AStarPathfinder component
-		//pathfinder = transform.GetComponent<AStarPathfinder>();
+		//Find game object with player tag and set to target
+		target = GameObject.FindGameObjectWithTag("Player");
 
 		// Initialise the reference to the Animator component
 		anim = GetComponent<Animator>();
@@ -71,8 +71,6 @@ public class MonsterController : MonoBehaviour
 
 		}
 
-		Debug.Log(steeringBasics != null);
-		Debug.Log("is chasing: " + isChasing + "is attacking: " + isAttacking);
 
 		if (steeringBasics != null && isChasing && isAttacking == false)
 		//if (pathfinder != null && isChasing && isAttacking ==false && isEnraged ==false)
@@ -105,7 +103,7 @@ public class MonsterController : MonoBehaviour
 
 		// Specify the layer mast for ray casting - ray casting will
 		// interact with layer 8 (player) and 7 (walls)
-		int layerMask = 1 << 8 | 1 << 7;
+		int layerMask = 1 << 8;
 		//Cast rays in circle around monster
 		for (int i = 1; i <= numPoints; i++)
 		{
