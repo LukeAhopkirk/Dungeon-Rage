@@ -16,6 +16,8 @@ public class HUDManager : MonoBehaviour
     public float experienceAmount = 0f;
     public float rageAmount = 0f;
 
+    public static bool isPaused;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class HUDManager : MonoBehaviour
     }
     public void TogglePause()
     {
-        bool isPaused = !Time.timeScale.Equals(0f);
+        isPaused = !Time.timeScale.Equals(0f);
         SetPauseMenuActive(isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
     }
