@@ -11,7 +11,7 @@ public class HUDManager : MonoBehaviour
     public Image rageBar;
     public Button[] spellButtons;
 
-    public float healthAmount = 100f;
+    public static float healthAmount = 100f;
     public float experienceAmount = 0f;
     public float rageAmount = 0f;
 
@@ -19,8 +19,8 @@ public class HUDManager : MonoBehaviour
     void Start()
     {
         healthBar.fillAmount = healthAmount / 100f;
-        experienceBar.fillAmount = experienceAmount / 100f;
-        rageBar.fillAmount = rageAmount / 100f;
+        //experienceBar.fillAmount = experienceAmount / 100f;
+        //rageBar.fillAmount = rageAmount / 100f;
 
         for (int i = 0; i < spellButtons.Length; i++)
         {
