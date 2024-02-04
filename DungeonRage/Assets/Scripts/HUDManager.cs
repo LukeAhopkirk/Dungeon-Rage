@@ -149,14 +149,16 @@ public class HUDManager : MonoBehaviour
         if (damage < 0)
         {
             // Handle ability drain (negative damage)
+            Debug.Log("Ability drain");
             rageAmount += damage;
             rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
         }
         else
         {
             // Handle normal damage
-            rageAmount += damage * 0.5f;
+            rageAmount += damage * RageSystem.damageRageRatio;
             rageAmount = Mathf.Clamp(rageAmount, 0f, 100f);
+            Debug.Log(rageAmount);
         }
 
         UpdateRageBar();

@@ -28,9 +28,11 @@ public class RageSystem : MonoBehaviour
 
     private KnockbackAbility knockbackAbility;
     private abilityBoost abilityBoost;
-    private Outburst outburst;  
+    private Outburst outburst;
 
-
+    private float baseDamageRageRatio = 0.05f;
+    public static float damageRageRatio;
+    public SkillPointManager skillPointManager;
 
     void Start()
     {
@@ -41,6 +43,19 @@ public class RageSystem : MonoBehaviour
         knockbackAbility = FindObjectOfType<KnockbackAbility>();
         abilityBoost = FindObjectOfType<abilityBoost>();
         outburst = FindObjectOfType<Outburst>();
+
+        damageRageRatio = baseDamageRageRatio;
+        foreach(var stat in skillPointManager.stats)
+        {
+            if (stat.statName == "Resentment")
+            {
+                stat.OnStatChanged += UpdateDamageRageRatio;
+            }
+        }
+    }
+    void UpdateDamageRageRatio(float resentment)
+    {
+        damageRageRatio = baseDamageRageRatio + resentment * 0.005f;
     }
 
 
@@ -69,10 +84,9 @@ public class RageSystem : MonoBehaviour
         rageText.text = $"{Mathf.Round(currentRage)}";
     }
 
+
     public void DealDamage(float damage)
     {
-        float damageRageRatio = 0.5f;
-
         // Only gain rage if not currently draining abilities
         if (!isAbilityDraining && damage > 0)
         {
