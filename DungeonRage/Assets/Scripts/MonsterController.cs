@@ -17,7 +17,7 @@ public class MonsterController : MonoBehaviour
 	bool isChasing = false;
 
 
-	bool isEnraged = false;
+    bool isEnraged = false;
 
 	bool idle = false;
 
@@ -218,27 +218,28 @@ public class MonsterController : MonoBehaviour
 
     }
 
-	public void Knockback(Vector2 direction, float force)
-	{
-		// Stop chasing
-		isChasing = false;
+    public void Knockback(Vector2 direction, float force)
+    {
+        // Stop chasing
+        isChasing = false;
 
-		// Apply knockback force
-		Rigidbody2D rb = GetComponent<Rigidbody2D>();
-		rb.velocity = Vector2.zero;
-		rb.AddForce(direction * force, ForceMode2D.Impulse);
+        // Apply knockback force
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
 
-		// Start a coroutine to simulate a knockback duration
-		StartCoroutine(KnockbackDuration());
-	}
+        // Start a coroutine to simulate a knockback duration
+        StartCoroutine(KnockbackDuration());
+    }
 
-	private IEnumerator KnockbackDuration()
-	{
-		// Wait for a short duration to simulate knockback effect
-		yield return new WaitForSeconds(0.5f);
+    private IEnumerator KnockbackDuration()
+    {
+        // Wait for a short duration to simulate knockback effect
+        yield return new WaitForSeconds(0.5f);
 
-		// Resume chasing after knockback duration
-		isChasing = true;
-		anim.SetTrigger("run");
-	}
+        // Resume chasing after knockback duration
+        isChasing = true;
+        anim.SetTrigger("run");
+    }
+
 }
