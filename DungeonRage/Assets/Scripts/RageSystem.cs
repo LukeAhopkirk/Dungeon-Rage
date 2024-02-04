@@ -75,7 +75,7 @@ public class RageSystem : MonoBehaviour
         ability1CooldownTimer -= Time.deltaTime;
         ability1CooldownTimer = Mathf.Clamp(ability1CooldownTimer, 0f, ability1Cooldown);
 
-        UpdateCooldownImage(rage1Cooldown, currentRage >= 25f, ability1CooldownTimer);
+        UpdateCooldownImage(rage1Cooldown, currentRage >= ability1Cost, ability1CooldownTimer);
         UpdateCooldownImageDrain(rage2Cooldown, currentRage >= 65f);
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && currentRage >= ability1Cost && ability1CooldownTimer <= 0f)

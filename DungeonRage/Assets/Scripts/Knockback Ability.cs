@@ -24,7 +24,7 @@ public class KnockbackAbility : MonoBehaviour
                 // Check if the enemy is within the knockback radius
                 if (distanceToEnemy <= knockbackRadius)
                 {
-                    // Apply knockback to the enemy
+                    // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                     monsterController.Knockback(knockbackDirection, knockbackForce);
                 }
