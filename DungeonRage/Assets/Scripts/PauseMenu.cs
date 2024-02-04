@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         //Default panel
-        ShowPanel(optionsPanel);
+        ShowPanel(skillPointsPanel);
     }
     public void ShowOptionsPanel()
     {
