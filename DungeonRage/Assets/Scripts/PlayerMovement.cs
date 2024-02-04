@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.Jobs;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,14 +19,25 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private float dashTime = 0.2f;
     private float dashDistance = 2f;
-    public float dashCooldown = 2f; // Cooldown time for the dash 
+    public float dashCooldown = 3f; // Cooldown time for the dash 
     private float playerOffset = 0.1f; 
     private float lastDashTime = 0f;
+
+    private float cooldownTimer = 0.0f;
+    public Image imageCooldown;
+
+    public float cooldownAnimationTime;
+    private Coroutine cooldownCoroutine;
 
     public SkillPointManager skillPointManager;
     private void Start()
     {
+
+        imageCooldown.fillAmount = 0f;
+
         moveSpeed = baseMoveSpeed;
+
+        cooldownAnimationTime = dashCooldown;
 
         skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
 
@@ -60,14 +73,34 @@ public class PlayerMovement : MonoBehaviour
             // Normalizing vector for diagonal movement
             Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
             movement = inputVector.magnitude == 0 ? Vector2.zero : inputVector.normalized;
-
-            // Check for dash input and cooldown
+            
             if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastDashTime > dashCooldown)
             {
                 StartCoroutine(Dash());
                 lastDashTime = Time.time;
+                imageCooldown.fillAmount = 1.0f;
             }
 
+            if(Time.time - lastDashTime < dashCooldown)
+            {
+                cooldownTimer = Time.time - lastDashTime;
+                imageCooldown.fillAmount = 1 - cooldownTimer / dashCooldown;
+
+                if(cooldownTimer > 0f && cooldownCoroutine == null)
+                {
+                    cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
+                }
+            }
+            else
+            {
+                imageCooldown.fillAmount = 0.0f;
+
+                if(cooldownCoroutine != null)
+                {
+                    StopCoroutine(cooldownCoroutine);
+                    cooldownCoroutine = null;
+                }
+            }
 
             // Update animator
             animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -78,6 +111,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    IEnumerator CooldownFillAnimation()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+        float startFill = imageCooldown.fillAmount;
+
+        while (elapsedTime < cooldownAnimationTime)
+        {
+            imageCooldown.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / cooldownAnimationTime);
+            elapsedTime = Time.time - startTime;
+            yield return null;
+        }
+
+        imageCooldown.fillAmount = 0f;
+        cooldownCoroutine = null;
+    }
     private void FixedUpdate()
     {
         if (!isDashing)
