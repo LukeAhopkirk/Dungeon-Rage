@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public float cooldownAnimationTime;
     private Coroutine cooldownCoroutine;
 
+    public static bool isMoving;
+
     public SkillPointManager skillPointManager;
     private void Start()
     {
@@ -101,6 +103,16 @@ public class PlayerMovement : MonoBehaviour
                     cooldownCoroutine = null;
                 }
             }
+
+            if (horizontalInput == 0 && verticalInput == 0)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
 
             // Update animator
             animator.SetFloat("Speed", movement.sqrMagnitude);

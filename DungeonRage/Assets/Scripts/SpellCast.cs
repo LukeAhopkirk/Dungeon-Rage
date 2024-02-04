@@ -7,7 +7,7 @@ public class SpellCast : MonoBehaviour
 
     public Transform SpellCastPos;
     public GameObject SpellTypePrefab;
-    //public Vector2 mousePos;
+    public Animator animator;
 
     public bool spellReady = true;
     private float Timer;
@@ -33,16 +33,24 @@ public class SpellCast : MonoBehaviour
             if (spellReady && Input.GetButtonDown("Fire1"))
             {
                 spellReady = false;
-                CastSpell();
+                if (PlayerMovement.isMoving)
+                {
+                    animator.SetTrigger("shot1");
+                }
+                else
+                {
+                    animator.SetTrigger("shot2");
+                }
             }
         }
-
-
     }
 
 
     void CastSpell()
     {
+
+        //animator.SetTrigger("shot1");
+
         // Find the mouse position
         //mousePos = PlayerMovement.cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -66,6 +74,9 @@ public class SpellCast : MonoBehaviour
 
         // Add force in the direction of the mouse
         rb.AddForce(direction * force, ForceMode2D.Impulse);
+
+        //animator.SetTrigger("run");
+
 
 
         //GameObject Spell = Instantiate(SpellTypePrefab, SpellCastPos.position, SpellCastPos.rotation);
