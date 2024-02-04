@@ -1,6 +1,7 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RageSystem : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class RageSystem : MonoBehaviour
     public static float damageRageRatio;
     public SkillPointManager skillPointManager;
 
+    public Image rage1Cooldown;
+    public Image rage2Cooldown;
+    public Image rage3Cooldown;
+
     void Start()
     {
         // Find the HUDManager script in the scene
@@ -52,6 +57,11 @@ public class RageSystem : MonoBehaviour
                 stat.OnStatChanged += UpdateDamageRageRatio;
             }
         }
+
+        rage1Cooldown.fillAmount = 1f;
+        rage2Cooldown.fillAmount = 1f;
+        rage3Cooldown.fillAmount = 1f;
+
     }
     void UpdateDamageRageRatio(float resentment)
     {
@@ -109,6 +119,7 @@ public class RageSystem : MonoBehaviour
 
         // Invoke the DealDamageEvent with a negative value to represent rage depletion
         DealDamageEvent?.Invoke(-ability1Cost);
+
     }
 
     void UseAbility2()

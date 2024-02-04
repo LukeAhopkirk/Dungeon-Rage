@@ -139,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
         imageCooldown.fillAmount = 0f;
         cooldownCoroutine = null;
     }
+
     private void FixedUpdate()
     {
         if (!isDashing)
