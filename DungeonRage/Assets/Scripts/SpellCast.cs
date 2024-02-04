@@ -1,24 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellCast : MonoBehaviour
 {
 
     public Transform SpellCastPos;
     public GameObject SpellTypePrefab;
-    //public Vector2 mousePos;
     public Animator animator;
+
+    public bool spellReady = true;
+    private float Timer = 0f;
+    public float cooldownLength = 2f;
+
+    public Image imageCooldown;
+
+    public float cooldownAnimationTime;
+    private Coroutine cooldownCoroutine;
+    private float lastFireballTime = 0f;
+
 
     public float force = 10f;
 
+    private void Start()
+    {
+        imageCooldown.fillAmount = 0f;
+        cooldownAnimationTime = cooldownLength;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (!HUDManager.isPaused)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (!spellReady)
+            {
+                Timer += Time.deltaTime;
+                if (Timer > cooldownLength)
+                {
+                   spellReady = true;
+                   Timer = 0;
+                }
+            }
+            if (spellReady && Input.GetButtonDown("Fire1"))
             {
                 if (PlayerMovement.isMoving)
                 {
@@ -28,9 +54,56 @@ public class SpellCast : MonoBehaviour
                 {
                     animator.SetTrigger("shot2");
                 }
+
+                imageCooldown.fillAmount = 1.0f;
+                spellReady = false;
+                lastFireballTime = Time.time;
+
+                if (Time.time - lastFireballTime < cooldownLength)
+                {
+                    Timer = Time.time - lastFireballTime;
+                    imageCooldown.fillAmount = 1 - Timer / cooldownLength;
+
+                    if (Timer > 0f && cooldownCoroutine == null)
+                    {
+                        cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
+                    }
+                }
+                else
+                {
+                    imageCooldown.fillAmount = 0.0f;
+
+                    if (cooldownCoroutine != null)
+                    {
+                        StopCoroutine(cooldownCoroutine);
+                        cooldownCoroutine = null;
+                    }
+                }
             }
         }
     }
+
+
+    IEnumerator CooldownFillAnimation()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+        float startFill = imageCooldown.fillAmount;
+
+        while (elapsedTime < cooldownAnimationTime)
+        {
+            imageCooldown.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / cooldownAnimationTime);
+            elapsedTime = Time.time - startTime;
+            yield return null;
+        }
+
+        imageCooldown.fillAmount = 0f;
+        cooldownCoroutine = null;
+    }
+
+
+
+
 
     void CastSpell()
     {
