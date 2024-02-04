@@ -39,6 +39,7 @@ public class RageSystem : MonoBehaviour
     public Image rage2Cooldown;
     public Image rage3Cooldown;
 
+    private float targetFillAmount;
     void Start()
     {
         // Find the HUDManager script in the scene
@@ -75,8 +76,7 @@ public class RageSystem : MonoBehaviour
         ability1CooldownTimer -= Time.deltaTime;
         ability1CooldownTimer = Mathf.Clamp(ability1CooldownTimer, 0f, ability1Cooldown);
 
-        UpdateCooldownImage(rage1Cooldown, currentRage >= 25f, ability1CooldownTimer);
-        UpdateCooldownImageDrain(rage2Cooldown, currentRage >= 65f);
+        
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && currentRage >= ability1Cost && ability1CooldownTimer <= 0f)
         {
@@ -86,12 +86,33 @@ public class RageSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2) && currentRage >= 65f && !isAbility2Active)
         {
             UseAbility2();
+            UpdateCooldownImageDrain(rage2Cooldown, currentRage >= 65f);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3) && currentRage >= 100f && !isAbility3Active)
         {
             UseAbility3();
         }
+
+        if(currentRage >= 100f)
+        {
+            rage3Cooldown.fillAmount = 0f;
+        }
+        if(currentRage >= 65f)
+        {
+            rage2Cooldown.fillAmount = 0f;
+        }
+        if (currentRage <100)
+        {
+            rage3Cooldown.fillAmount = 1f;
+        }
+        if (currentRage < 65f)
+        {
+            rage2Cooldown.fillAmount = 1f;
+        }
+
+        UpdateCooldownImage(rage1Cooldown, currentRage >= 25f, ability1CooldownTimer);
+
 
         // Debug.Log($"Current Rage: {currentRage}");
        //rageText.text = $"{Mathf.Round(currentRage)}";
@@ -121,18 +142,13 @@ public class RageSystem : MonoBehaviour
         if (canUseAbility)
         {
 
-            float fillAmount = Mathf.Lerp(cooldownImage.fillAmount, 1 - currentRage / 100f, Time.deltaTime * 2f);
-
-            if (currentRage <= 0f)
-            {
-                cooldownImage.fillAmount = 1f;
-            }
-
-            cooldownImage.fillAmount = fillAmount;
+            targetFillAmount = 1 - currentRage / 100f;
+            cooldownImage.fillAmount = Mathf.Lerp(cooldownImage.fillAmount, targetFillAmount, Time.deltaTime * 2f);
         }
         else
         {
-            cooldownImage.fillAmount = 1f;
+            targetFillAmount = 0f;
+            cooldownImage.fillAmount = Mathf.Lerp(cooldownImage.fillAmount, targetFillAmount, Time.deltaTime * 2f);
         }
     }
 

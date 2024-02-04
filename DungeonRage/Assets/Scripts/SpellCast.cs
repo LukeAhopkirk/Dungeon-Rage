@@ -12,8 +12,8 @@ public class SpellCast : MonoBehaviour
     public Animator animator;
 
     public bool spellReady = true;
-    private float Timer;
-    public float cooldownLength;
+    private float Timer = 0f;
+    public float cooldownLength = 5f;
 
     public Image imageCooldown;
 
@@ -26,7 +26,6 @@ public class SpellCast : MonoBehaviour
 
     private void Start()
     {
-
         imageCooldown.fillAmount = 0f;
         cooldownAnimationTime = cooldownLength;
     }
@@ -41,8 +40,8 @@ public class SpellCast : MonoBehaviour
                 Timer += Time.deltaTime;
                 if (Timer > cooldownLength)
                 {
-                    spellReady = true;
-                    Timer = 0;
+                   spellReady = true;
+                   Timer = 0;
                 }
             }
             if (spellReady && Input.GetButtonDown("Fire1"))
@@ -55,6 +54,7 @@ public class SpellCast : MonoBehaviour
                 {
                     animator.SetTrigger("shot2");
                 }
+
                 imageCooldown.fillAmount = 1.0f;
                 spellReady = false;
                 lastFireballTime = Time.time;

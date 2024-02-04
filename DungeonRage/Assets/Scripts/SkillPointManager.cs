@@ -23,7 +23,7 @@ public class SkillPointManager : MonoBehaviour
 {
     public StatInfo[] stats;
     public TextMeshProUGUI availableSkillPointsText;
-    private int availableSkillPoints = 20;
+    private int availableSkillPoints;
 
     public float playerLevel = 0;
     public TextMeshProUGUI playerLevelText;
