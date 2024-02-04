@@ -28,6 +28,8 @@ public class RageSystem : MonoBehaviour
 
     private KnockbackAbility knockbackAbility;
     private abilityBoost abilityBoost;
+    private Outburst outburst;  
+
 
 
     void Start()
@@ -38,6 +40,7 @@ public class RageSystem : MonoBehaviour
         // Find the ability scripts in the scene
         knockbackAbility = FindObjectOfType<KnockbackAbility>();
         abilityBoost = FindObjectOfType<abilityBoost>();
+        outburst = FindObjectOfType<Outburst>();
     }
 
 
@@ -118,12 +121,16 @@ public class RageSystem : MonoBehaviour
     {
         Debug.Log("Using Ability 3: Invincibility and more powerful attack");
         isAbility3Active = true;
+        hudManager.SetInvincibilityState(true);
+        outburst.StartOutburst();
         StartCoroutine(DrainRageOverTime(ability3DrainRate, DeactivateAbility3, true));
     }
 
     void DeactivateAbility3()
     {
         isAbility3Active = false;
+        hudManager.SetInvincibilityState(false);
+        outburst.StopOutburst();
         Debug.Log("Ability 3 deactivated");
     }
 
