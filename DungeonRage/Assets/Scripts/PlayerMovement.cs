@@ -30,14 +30,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if (stat.statName == "Agility")
             {
-                stat.OnStatChanged += newMoveSpeed => UpdateMoveSpeed(newMoveSpeed);
+                stat.OnStatChanged += UpdateMoveSpeed;
             }
         }
     }
 
-    void UpdateMoveSpeed(float newMoveSpeed)
+    void UpdateMoveSpeed(float newAgility)
     {
-        moveSpeed = newMoveSpeed;
+        moveSpeed = baseMoveSpeed + newAgility * 0.05f;
     }
     void Update()
     {

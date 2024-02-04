@@ -18,15 +18,28 @@ public class HUDManager : MonoBehaviour
     public static bool isPaused;
     private bool isAbilityDraining = false; // Flag to track ability draining state
 
+    public SkillPointManager skillPointManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        healthAmount = baseHealthAmount;
-        SetPauseMenuActive(false);
+        SetPauseMenuActive(false);       
 
-        healthBar.fillAmount = healthAmount / 100f;
+        healthBar.fillAmount = baseHealthAmount / 100f;
         experienceBar.fillAmount = experienceAmount / 100f;
         rageBar.fillAmount = rageAmount / 100f;
+
+        healthAmount = baseHealthAmount;
+        skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
+        foreach(var stat in skillPointManager.stats)
+        {
+            if (stat.statName == "Endurance")
+            {
+                stat.OnStatChanged += UpdateHealthAmount;
+            }
+        }
+
+ 
 
         for (int i = 0; i < spellButtons.Length; i++)
         {
@@ -36,6 +49,18 @@ public class HUDManager : MonoBehaviour
 
         // Subscribe to the DealDamageEvent
         RageSystem.DealDamageEvent += HandleDealDamageEvent;
+    }
+    void UpdateHealthAmount(float newEndurance)
+    {
+        Debug.Log($"New Endurance: {newEndurance}");
+
+        // Calculate healthAmount based on baseHealthAmount and newEndurance
+        healthAmount = baseHealthAmount + newEndurance * 5f;
+
+        // Update the healthBar fill amount based on the calculated healthAmount
+        healthBar.fillAmount = healthAmount / 100f;
+
+        Debug.Log($"Updated healthAmount: {healthAmount}");
     }
 
     public void DealDamage(float damage)
