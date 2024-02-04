@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class StatInfo
 {
-    public Text availablePointsText;
-    public Text assignedPointsText;
+    public string statName;
+    public TextMeshProUGUI assignedPointsText;
     public Button plusButton;
     public Button minusButton;
 
-    public int availablePoints = 0;
     public int assignedPoints = 0;
 
     public int statMultiplier = 1;
@@ -20,6 +20,9 @@ public class StatInfo
 public class SkillPointManager : MonoBehaviour
 {
     public StatInfo[] stats;
+    public TextMeshProUGUI availableSkillPointsText;
+    private int availableSkillPoints = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,31 +30,57 @@ public class SkillPointManager : MonoBehaviour
         {
             stat.plusButton.onClick.AddListener(() => AllocatePoint(stat));
             stat.minusButton.onClick.AddListener(() => DeallocatePoint(stat));
-            stat.statMultiplier++;
 
             UpdateUI(stat);
         }
+
+        UpdateTotalSkillPoints();
     }
 
+    void AllocatePoint(StatInfo stat)
+    {
+        if (availableSkillPoints > 0)
+        {
+            stat.assignedPoints++;
+            availableSkillPoints--;
+            stat.statMultiplier++;
+
+            UpdateUI(stat);
+            UpdateTotalSkillPoints();
+        }
+    }
     void DeallocatePoint(StatInfo stat)
     {
         if (stat.assignedPoints > 0)
         {
             stat.assignedPoints--;
-            stat.availablePoints++;
+            availableSkillPoints++;
             stat.statMultiplier--;
 
             UpdateUI(stat);
+            UpdateTotalSkillPoints();
         }
     }
     void UpdateUI(StatInfo stat)
     {
-        stat.availablePointsText.text = stat.availablePoints.ToString();
-        stat.assignedPointsText.text = stat.assignedPoints.ToString();
+        stat.assignedPointsText.text = $"{stat.assignedPoints}";
     }
-    // Update is called once per frame
-    void Update()
+
+    void UpdateTotalSkillPoints()
     {
-        
+        availableSkillPointsText.text = $"{availableSkillPoints}";
+    }
+
+    public int GetStatValue(string statName)
+    {
+        foreach (var stat in stats)
+        {
+            if (stat.statName == statName)
+            {
+                return stat.assignedPoints * stat.statMultiplier;
+            }
+        }
+
+        return 0;
     }
 }
