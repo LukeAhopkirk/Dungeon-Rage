@@ -75,6 +75,9 @@ public class RageSystem : MonoBehaviour
         ability1CooldownTimer -= Time.deltaTime;
         ability1CooldownTimer = Mathf.Clamp(ability1CooldownTimer, 0f, ability1Cooldown);
 
+        UpdateCooldownImage(rage1Cooldown, currentRage >= 25f, ability1CooldownTimer);
+        UpdateCooldownImageDrain(rage2Cooldown, currentRage >= 65f);
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && currentRage >= ability1Cost && ability1CooldownTimer <= 0f)
         {
             UseAbility1();
@@ -92,6 +95,45 @@ public class RageSystem : MonoBehaviour
 
         // Debug.Log($"Current Rage: {currentRage}");
        //rageText.text = $"{Mathf.Round(currentRage)}";
+    }
+
+    void UpdateCooldownImage(Image cooldownImage, bool canUseAbility, float cooldownTimer)
+    {
+        if (canUseAbility)
+        {
+            if(cooldownTimer > 0f)
+            {
+                cooldownImage.fillAmount = cooldownTimer / ability1Cooldown;
+            }
+            else
+            {
+                cooldownImage.fillAmount = 0f;
+            }
+        } 
+        else
+        {
+            cooldownImage.fillAmount = 1f;
+        }
+    }
+
+    void UpdateCooldownImageDrain(Image cooldownImage, bool canUseAbility)
+    {
+        if (canUseAbility)
+        {
+
+            float fillAmount = Mathf.Clamp01(1 - currentRage / 100f);
+
+            if (currentRage <= 0f)
+            {
+                cooldownImage.fillAmount = 1f;
+            }
+
+            cooldownImage.fillAmount = fillAmount;
+        }
+        else
+        {
+            cooldownImage.fillAmount = 1f;
+        }
     }
 
 
