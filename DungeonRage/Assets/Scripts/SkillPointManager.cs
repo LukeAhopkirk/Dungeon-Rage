@@ -25,6 +25,9 @@ public class SkillPointManager : MonoBehaviour
     public TextMeshProUGUI availableSkillPointsText;
     private int availableSkillPoints;
 
+    public float playerLevel = 0;
+    public TextMeshProUGUI playerLevelText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,13 +38,15 @@ public class SkillPointManager : MonoBehaviour
 
             UpdateUI(stat);
         }
-
+        UpdatePlayerLevel();
         UpdateTotalSkillPoints();
     }
     public void LevelUp()
     {
         availableSkillPoints += 5;
+        playerLevel++;
         UpdateTotalSkillPoints();
+        UpdatePlayerLevel();
     }
     void AllocatePoint(StatInfo stat)
     {
@@ -74,6 +79,11 @@ public class SkillPointManager : MonoBehaviour
     void UpdateUI(StatInfo stat)
     {
         stat.assignedPointsText.text = $"{stat.assignedPoints}";
+    }
+
+    void UpdatePlayerLevel()
+    {
+        playerLevelText.text = $" {playerLevel}";
     }
 
     void UpdateTotalSkillPoints()
