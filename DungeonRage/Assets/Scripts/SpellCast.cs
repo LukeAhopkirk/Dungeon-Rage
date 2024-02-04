@@ -9,6 +9,10 @@ public class SpellCast : MonoBehaviour
     public GameObject SpellTypePrefab;
     //public Vector2 mousePos;
 
+    public bool spellReady = true;
+    private float Timer;
+    public float cooldownLength;
+
     public float force = 10f;
 
 
@@ -17,12 +21,25 @@ public class SpellCast : MonoBehaviour
     {
         if (!HUDManager.isPaused)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (!spellReady)
             {
+                Timer += Time.deltaTime;
+                if (Timer > cooldownLength)
+                {
+                    spellReady = true;
+                    Timer = 0;
+                }
+            }
+            if (spellReady && Input.GetButtonDown("Fire1"))
+            {
+                spellReady = false;
                 CastSpell();
             }
         }
+
+
     }
+
 
     void CastSpell()
     {
