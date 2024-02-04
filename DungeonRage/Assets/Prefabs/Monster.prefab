@@ -198,7 +198,7 @@ MonoBehaviour:
   turnSpeed: 20
   targetRadius: 0.2
   slowRadius: 1
-  timeToTarget: 0.5
+  timeToTarget: 0.0001
   smoothing: 1
   numSamplesForSmoothing: 5
 --- !u!50 &2999737056505621731
