@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float baseMoveSpeed = 3f;
+    public float moveSpeed;
     private bool isFacingRight = true;
     public Rigidbody2D rb;
     public Animator animator;
@@ -18,6 +19,26 @@ public class PlayerMovement : MonoBehaviour
     private float playerOffset = 0.1f; 
     private float lastDashTime = 0f;
 
+    public SkillPointManager skillPointManager;
+    private void Start()
+    {
+        moveSpeed = baseMoveSpeed;
+
+        skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
+
+        foreach(var stat in skillPointManager.stats)
+        {
+            if (stat.statName == "Agility")
+            {
+                stat.OnStatChanged += newMoveSpeed => UpdateMoveSpeed(newMoveSpeed);
+            }
+        }
+    }
+
+    void UpdateMoveSpeed(float newMoveSpeed)
+    {
+        moveSpeed = newMoveSpeed;
+    }
     void Update()
     {
         if (!isDashing)
@@ -43,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Flip character if needed
             Flip();
+
         }
     }
 
