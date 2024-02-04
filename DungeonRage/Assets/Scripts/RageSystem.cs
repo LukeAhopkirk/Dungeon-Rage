@@ -121,7 +121,7 @@ public class RageSystem : MonoBehaviour
         if (canUseAbility)
         {
 
-            float fillAmount = Mathf.Clamp01(1 - currentRage / 100f);
+            float fillAmount = Mathf.Lerp(cooldownImage.fillAmount, 1 - currentRage / 100f, Time.deltaTime * 2f);
 
             if (currentRage <= 0f)
             {
