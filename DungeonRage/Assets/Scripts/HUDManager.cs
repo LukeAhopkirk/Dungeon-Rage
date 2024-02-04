@@ -18,6 +18,8 @@ public class HUDManager : MonoBehaviour
     public static bool isPaused;
     private bool isAbilityDraining = false; // Flag to track ability draining state
 
+    private bool isInvincible = false;
+
     public SkillPointManager skillPointManager;
 
     // Start is called before the first frame update
@@ -65,8 +67,17 @@ public class HUDManager : MonoBehaviour
 
     public void DealDamage(float damage)
     {
+        if(isInvincible)
+        {
+            return;
+        }
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
+    }
+
+    public void SetInvincibilityState(bool isInvincible)
+    {
+        this.isInvincible = isInvincible;
     }
 
     public void Heal(float healingAmount)
