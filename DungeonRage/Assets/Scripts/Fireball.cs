@@ -4,7 +4,27 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public int baseDamage = 30; // Base damage without multiplier
+    public SkillPointManager skillPointManager;
+    public float baseDamage = 30f; // Base damage without multiplier
+    public float damage;
+
+    public void Start()
+    {
+        skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
+        foreach (var stat in skillPointManager.stats)
+        {
+            if (stat.statName == "Intelligence")
+            {
+                stat.OnStatChanged += UpdateDamage;
+
+            }
+        }
+    }
+    void UpdateDamage(float newIntelligence)
+    {
+        damage = baseDamage + newIntelligence * 5f;
+        Debug.Log($"Updated Fireball damage. New Intelligence: {newIntelligence}, New Damage: {damage}");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,7 +44,7 @@ public class Fireball : MonoBehaviour
                 if (playerMovement != null)
                 {
                     // Apply the damage multiplier
-                    int totalDamage = Mathf.RoundToInt(baseDamage * playerMovement.damageMultiplier);
+                    float totalDamage = damage * playerMovement.damageMultiplier;
 
                     // Deal damage to the enemy
                     enemy.TakeDamage(totalDamage);
