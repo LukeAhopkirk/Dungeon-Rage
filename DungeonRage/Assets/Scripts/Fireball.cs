@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     public SkillPointManager skillPointManager;
-    public float baseDamage = 30f; // Base damage without multiplier
+    public float baseDamage = 35f; // Base damage without multiplier
     public float damage;
     private void OnTriggerEnter2D(Collider2D collision)
     {
