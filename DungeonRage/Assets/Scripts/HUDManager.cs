@@ -10,7 +10,8 @@ public class HUDManager : MonoBehaviour
     public Button[] spellButtons;
     public GameObject pauseMenu;
 
-    public static float healthAmount = 100f;
+    public static float baseHealthAmount = 100f;
+    public static float healthAmount;
     public float experienceAmount = 0f;
     public float rageAmount = 0f;
 
@@ -20,6 +21,7 @@ public class HUDManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healthAmount = baseHealthAmount;
         SetPauseMenuActive(false);
 
         healthBar.fillAmount = healthAmount / 100f;

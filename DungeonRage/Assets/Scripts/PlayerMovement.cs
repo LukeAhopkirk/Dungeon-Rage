@@ -23,12 +23,19 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = baseMoveSpeed;
 
         skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
+
+        foreach(var stat in skillPointManager.stats)
+        {
+            if (stat.statName == "Agility")
+            {
+                stat.OnStatChanged += newMoveSpeed => UpdateMoveSpeed(newMoveSpeed);
+            }
+        }
     }
 
-    private void UpdateMoveSpeed()
+    void UpdateMoveSpeed(float newMoveSpeed)
     {
-        int agilityStat = skillPointManager.GetStatValue("Agility");
-        moveSpeed = baseMoveSpeed + agilityStat * (0.1f);
+        moveSpeed = newMoveSpeed;
     }
     void Update()
     {
@@ -56,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
             // Flip character if needed
             Flip();
 
-            UpdateMoveSpeed();
         }
     }
 

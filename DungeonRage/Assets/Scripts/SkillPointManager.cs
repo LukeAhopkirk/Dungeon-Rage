@@ -15,6 +15,8 @@ public class StatInfo
     public int assignedPoints = 0;
 
     public int statMultiplier = 1;
+
+    public System.Action<float> OnStatChanged;
 }
 
 public class SkillPointManager : MonoBehaviour
@@ -47,6 +49,8 @@ public class SkillPointManager : MonoBehaviour
 
             UpdateUI(stat);
             UpdateTotalSkillPoints();
+
+            stat.OnStatChanged?.Invoke(stat.assignedPoints * stat.statMultiplier *0.1f);
         }
     }
     void DeallocatePoint(StatInfo stat)
@@ -59,6 +63,8 @@ public class SkillPointManager : MonoBehaviour
 
             UpdateUI(stat);
             UpdateTotalSkillPoints();
+
+            stat.OnStatChanged?.Invoke(stat.assignedPoints * stat.statMultiplier * 0.1f);
         }
     }
     void UpdateUI(StatInfo stat)
