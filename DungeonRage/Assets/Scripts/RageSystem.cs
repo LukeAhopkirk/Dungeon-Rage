@@ -27,14 +27,17 @@ public class RageSystem : MonoBehaviour
     private HUDManager hudManager;
 
     private KnockbackAbility knockbackAbility;
+    private abilityBoost abilityBoost;
+
 
     void Start()
     {
         // Find the HUDManager script in the scene
         hudManager = FindObjectOfType<HUDManager>();
 
-        // Find the KnockbackAbility script in the scene
+        // Find the ability scripts in the scene
         knockbackAbility = FindObjectOfType<KnockbackAbility>();
+        abilityBoost = FindObjectOfType<abilityBoost>();
     }
 
 
@@ -72,7 +75,7 @@ public class RageSystem : MonoBehaviour
         {
             float gainedRage = damage * damageRageRatio;
             currentRage = Mathf.Clamp(currentRage + gainedRage, 0f, 100f);
-            Debug.Log($"Gained {gainedRage} rage for dealing {damage} damage.");
+            //Debug.Log($"Gained {gainedRage} rage for dealing {damage} damage.");
             DealDamageEvent?.Invoke(damage); 
         }
     }
@@ -95,6 +98,10 @@ public class RageSystem : MonoBehaviour
     {
         Debug.Log("Using Ability 2: Increased damage and attack speed");
         isAbility2Active = true;
+
+        // Activate Ability Boost
+        abilityBoost.ActivateAbilityBoost();
+
         StartCoroutine(DrainRageOverTime(ability2DrainRate, DeactivateAbility2, true));
     }
 
@@ -102,6 +109,9 @@ public class RageSystem : MonoBehaviour
     {
         isAbility2Active = false;
         Debug.Log("Ability 2 deactivated");
+
+        // Deactivate Ability Boost
+        abilityBoost.DeactivateAbilityBoost();
     }
 
     void UseAbility3()
@@ -146,6 +156,6 @@ public class RageSystem : MonoBehaviour
     void DrainRagePoints(float amount)
     {
         currentRage = Mathf.Clamp(currentRage - amount, 0f, 100f);
-        Debug.Log($"Drained {amount} rage. Current Rage: {currentRage}");
+        //Debug.Log($"Drained {amount} rage. Current Rage: {currentRage}");
     }
 }
