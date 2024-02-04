@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RageSystem : MonoBehaviour
 {
-    public TextMeshProUGUI rageText;
+    //public TextMeshProUGUI rageText;
     public float knockBackRageThreshold = 70f;
     public float ability1Cost = 25f;
     public float ability1Cooldown = 1.5f;
@@ -91,7 +91,7 @@ public class RageSystem : MonoBehaviour
         }
 
         // Debug.Log($"Current Rage: {currentRage}");
-        rageText.text = $"{Mathf.Round(currentRage)}";
+       //rageText.text = $"{Mathf.Round(currentRage)}";
     }
 
 
