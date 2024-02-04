@@ -130,7 +130,7 @@ public class HUDManager : MonoBehaviour
     private void UpdateRageBar()
     {
         rageBar.fillAmount = rageAmount / 100f;
-        Debug.Log($"Updated Rage Bar. Rage Amount: {rageAmount}");
+        //Debug.Log($"Updated Rage Bar. Rage Amount: {rageAmount}");
     }
 
     private void HandleDealDamageEvent(float damage)

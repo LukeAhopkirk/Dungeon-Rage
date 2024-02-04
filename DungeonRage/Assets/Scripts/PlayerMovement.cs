@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
+    public float damageMultiplier = 1.0f;
+
     private Vector2 movement;
     private bool isDashing = false;
     private float dashTime = 0.2f;

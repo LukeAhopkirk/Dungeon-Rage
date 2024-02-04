@@ -3,7 +3,7 @@ using UnityEngine;
 public class KnockbackAbility : MonoBehaviour
 {
     public float knockbackForce = 10f;
-    public float knockbackRadius = 3f; // Adjust this value for the desired knockback radius
+    public float knockbackRadius = 3f;
 
     // Function to be called when using the knockback ability
     public void UseKnockbackAbility()
