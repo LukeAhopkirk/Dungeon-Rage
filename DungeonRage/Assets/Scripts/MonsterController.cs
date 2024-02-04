@@ -213,6 +213,7 @@ public class MonsterController : MonoBehaviour
 		if(health <= 0)
         {
 			Destroy(gameObject);
+			hud.GetExperience(10);
         }
 
     }

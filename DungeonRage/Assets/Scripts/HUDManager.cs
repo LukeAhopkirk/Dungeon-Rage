@@ -90,6 +90,11 @@ public class HUDManager : MonoBehaviour
 
     public void GetExperience(float experience)
     {
+        if(experienceAmount >= 100f)
+        {
+            experienceAmount = 0f;
+            skillPointManager.LevelUp();
+        }
         experienceAmount += experience;
         experienceAmount = Mathf.Clamp(experienceAmount, 0f, 100f);
 

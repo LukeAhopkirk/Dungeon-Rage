@@ -23,7 +23,7 @@ public class SkillPointManager : MonoBehaviour
 {
     public StatInfo[] stats;
     public TextMeshProUGUI availableSkillPointsText;
-    private int availableSkillPoints = 10;
+    private int availableSkillPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,11 @@ public class SkillPointManager : MonoBehaviour
 
         UpdateTotalSkillPoints();
     }
-
+    public void LevelUp()
+    {
+        availableSkillPoints += 5;
+        UpdateTotalSkillPoints();
+    }
     void AllocatePoint(StatInfo stat)
     {
         if (availableSkillPoints > 0)
