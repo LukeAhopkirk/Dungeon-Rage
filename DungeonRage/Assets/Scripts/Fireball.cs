@@ -7,25 +7,6 @@ public class Fireball : MonoBehaviour
     public SkillPointManager skillPointManager;
     public float baseDamage = 30f; // Base damage without multiplier
     public float damage;
-
-    public void Start()
-    {
-        skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
-        foreach (var stat in skillPointManager.stats)
-        {
-            if (stat.statName == "Intelligence")
-            {
-                stat.OnStatChanged += UpdateDamage;
-
-            }
-        }
-    }
-    void UpdateDamage(float newIntelligence)
-    {
-        damage = baseDamage + newIntelligence * 5f;
-        Debug.Log($"Updated Fireball damage. New Intelligence: {newIntelligence}, New Damage: {damage}");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Walls"))

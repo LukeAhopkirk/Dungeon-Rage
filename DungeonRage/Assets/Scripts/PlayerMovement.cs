@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
-    public float damageMultiplier = 1.0f;
+    public float baseDamageMultiplier = 1.0f;
+    public float damageMultiplier;
 
     private Vector2 movement;
     private bool isDashing = false;
@@ -32,9 +34,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 stat.OnStatChanged += UpdateMoveSpeed;
             }
+            if(stat.statName == "Intelligence")
+            {
+                stat.OnStatChanged += UpdateDamageMultiplier;
+            }
         }
     }
 
+    void UpdateDamageMultiplier(float intelligence)
+    {
+        damageMultiplier = baseDamageMultiplier + intelligence * 5f;
+    }
     void UpdateMoveSpeed(float newAgility)
     {
         moveSpeed = baseMoveSpeed + newAgility * 0.05f;

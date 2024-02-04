@@ -30,7 +30,7 @@ public class abilityBoost : MonoBehaviour
     public void ActivateAbilityBoost()
     {
         // Apply boosted stats
-        playerMovement.damageMultiplier = boostedDamageMultiplier;
+        playerMovement.damageMultiplier *= boostedDamageMultiplier;
         playerMovement.baseMoveSpeed *= boostedMoveSpeed;
         playerMovement.dashCooldown *= reducedDashCooldown;
 
