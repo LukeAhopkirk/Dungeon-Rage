@@ -134,6 +134,19 @@ public class SpellCast : MonoBehaviour
         // Add force in the direction of the mouse
         rb.AddForce(direction * force, ForceMode2D.Impulse);
 
+
+        if (direction.x < 0)
+        {
+            // Get the current scale of the spell
+            Vector3 scale = Spell.transform.localScale;
+
+            // Flip the scale along the x-axis to reverse the rotation
+            scale.x *= -1;
+
+            // Apply the new scale to the spell
+            Spell.transform.localScale = scale;
+        }
+
         //animator.SetTrigger("run");
 
 
