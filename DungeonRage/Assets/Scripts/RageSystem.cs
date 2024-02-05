@@ -126,7 +126,7 @@ public class RageSystem : MonoBehaviour
 
 
         // Debug.Log($"Current Rage: {currentRage}");
-       rageText.text = $"{Mathf.Round(currentRage)}";
+        rageText.text = $"{Mathf.Round(currentRage)}";
     }
 
     void UpdateCooldownImage(Image cooldownImage, bool canUseAbility, float cooldownTimer)
