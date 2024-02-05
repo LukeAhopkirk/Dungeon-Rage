@@ -105,13 +105,21 @@ public class RageSystem : MonoBehaviour
         {
             rage2Cooldown.fillAmount = 0f;
         }
-        if (currentRage <100)
+        if (currentRage < 100 && !isAbility3Active)
         {
             rage3Cooldown.fillAmount = 1f;
         }
-        if (currentRage < 65f)
+        else 
+        {
+            rage3Cooldown.fillAmount = 0f;
+        }
+        if (currentRage < 65f && !isAbility2Active)
         {
             rage2Cooldown.fillAmount = 1f;
+        }
+        else
+        {             
+            rage2Cooldown.fillAmount = 0f;
         }
 
         UpdateCooldownImage(rage1Cooldown, currentRage >= 25f, ability1CooldownTimer);
