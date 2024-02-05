@@ -39,7 +39,9 @@ public class RageSystem : MonoBehaviour
     public Image rage2Cooldown;
     public Image rage3Cooldown;
 
-    private float targetFillAmount;
+    public Image rage2Active;
+    public Image rage3Active;
+
     void Start()
     {
         // Find the HUDManager script in the scene
@@ -62,6 +64,8 @@ public class RageSystem : MonoBehaviour
         rage1Cooldown.fillAmount = 1f;
         rage2Cooldown.fillAmount = 1f;
         rage3Cooldown.fillAmount = 1f;
+        rage2Active.fillAmount = 0f;
+        rage3Active.fillAmount = 0f;
 
     }
     void UpdateDamageRageRatio(float resentment)
@@ -86,7 +90,6 @@ public class RageSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2) && currentRage >= 65f && !isAbility2Active)
         {
             UseAbility2();
-            UpdateCooldownImageDrain(rage2Cooldown, currentRage >= 65f);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3) && currentRage >= 100f && !isAbility3Active)
@@ -137,21 +140,6 @@ public class RageSystem : MonoBehaviour
         }
     }
 
-    void UpdateCooldownImageDrain(Image cooldownImage, bool canUseAbility)
-    {
-        if (canUseAbility)
-        {
-
-            targetFillAmount = 1 - currentRage / 100f;
-            cooldownImage.fillAmount = Mathf.Lerp(cooldownImage.fillAmount, targetFillAmount, Time.deltaTime * 2f);
-        }
-        else
-        {
-            targetFillAmount = 0f;
-            cooldownImage.fillAmount = Mathf.Lerp(cooldownImage.fillAmount, targetFillAmount, Time.deltaTime * 2f);
-        }
-    }
-
 
     public void DealDamage(float damage)
     {
@@ -189,6 +177,11 @@ public class RageSystem : MonoBehaviour
         abilityBoost.ActivateAbilityBoost();
 
         StartCoroutine(DrainRageOverTime(ability2DrainRate, DeactivateAbility2, true));
+
+        rage2Active.fillAmount = 1f;
+
+        rage3Cooldown.fillAmount = 1f;
+        rage3Active.fillAmount = 0f;
     }
 
     void DeactivateAbility2()
@@ -198,6 +191,9 @@ public class RageSystem : MonoBehaviour
 
         // Deactivate Ability Boost
         abilityBoost.DeactivateAbilityBoost();
+
+        rage2Active.fillAmount = 0f;
+
     }
 
     void UseAbility3()
@@ -207,6 +203,10 @@ public class RageSystem : MonoBehaviour
         hudManager.SetInvincibilityState(true);
         outburst.StartOutburst();
         StartCoroutine(DrainRageOverTime(ability3DrainRate, DeactivateAbility3, true));
+
+        rage3Active.fillAmount = 1f;
+        rage2Active.fillAmount = 0f;
+        rage2Cooldown.fillAmount = 1f;
     }
 
     void DeactivateAbility3()
@@ -215,6 +215,8 @@ public class RageSystem : MonoBehaviour
         hudManager.SetInvincibilityState(false);
         outburst.StopOutburst();
         Debug.Log("Ability 3 deactivated");
+
+        rage3Active.fillAmount = 0f;
     }
 
     IEnumerator DrainRageOverTime(float drainRate, System.Action onDeactivate, bool isAbilityDrain = false)
