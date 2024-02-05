@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RageSystem : MonoBehaviour
 {
-    //public TextMeshProUGUI rageText;
+    public TextMeshProUGUI rageText;
     public float knockBackRageThreshold = 70f;
     public float ability1Cost = 25f;
     public float ability1Cooldown = 1.5f;
@@ -31,7 +31,7 @@ public class RageSystem : MonoBehaviour
     private abilityBoost abilityBoost;
     private Outburst outburst;
 
-    private float baseDamageRageRatio = 0.05f;
+    public float baseDamageRageRatio = 0.05f;
     public static float damageRageRatio;
     public SkillPointManager skillPointManager;
 
@@ -115,7 +115,7 @@ public class RageSystem : MonoBehaviour
 
 
         // Debug.Log($"Current Rage: {currentRage}");
-       //rageText.text = $"{Mathf.Round(currentRage)}";
+       rageText.text = $"{Mathf.Round(currentRage)}";
     }
 
     void UpdateCooldownImage(Image cooldownImage, bool canUseAbility, float cooldownTimer)
