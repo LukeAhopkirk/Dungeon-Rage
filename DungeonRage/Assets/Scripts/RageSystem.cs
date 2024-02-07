@@ -42,6 +42,8 @@ public class RageSystem : MonoBehaviour
     public Image rage2Active;
     public Image rage3Active;
 
+    public Animator animator;
+
     void Start()
     {
         // Find the HUDManager script in the scene
@@ -84,7 +86,8 @@ public class RageSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && currentRage >= ability1Cost && ability1CooldownTimer <= 0f)
         {
-            UseAbility1();
+            animator.SetTrigger("knockback");
+            //UseAbility1();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2) && currentRage >= 65f && !isAbility2Active)

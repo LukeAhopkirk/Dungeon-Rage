@@ -60,6 +60,8 @@ public class MonsterController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		anim.SetFloat("health", health);
+
 		//Make enemy allways face target
 		faceTarget();
 
@@ -210,13 +212,20 @@ public class MonsterController : MonoBehaviour
     {
 		health -= damage;
 
-		if(health <= 0)
+        if (health <= 0)
         {
-			Destroy(gameObject);
-			hud.GetExperience(10);
-        }
+			anim.SetTrigger("death");
+            hud.GetExperience(10);
+		}
 
     }
+
+
+    public void death()
+    {
+        Destroy(gameObject);
+    }
+
 
     public void Knockback(Vector2 direction, float force)
     {
@@ -235,7 +244,7 @@ public class MonsterController : MonoBehaviour
     private IEnumerator KnockbackDuration()
     {
         // Wait for a short duration to simulate knockback effect
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         // Resume chasing after knockback duration
         isChasing = true;

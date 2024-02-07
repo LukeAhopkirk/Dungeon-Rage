@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8167873623083820669}
   - component: {fileID: -5856583220651023352}
   - component: {fileID: 6739549836920817409}
+  - component: {fileID: 3530699447070940691}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -164,3 +165,24 @@ MonoBehaviour:
   skillPointManager: {fileID: 0}
   baseDamage: 35
   damage: 35
+--- !u!95 &3530699447070940691
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8335148672145143256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 743565f2a20bf4b0d8f0bca6bb306b54, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
