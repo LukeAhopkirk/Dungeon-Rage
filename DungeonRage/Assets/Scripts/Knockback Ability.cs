@@ -1,9 +1,13 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class KnockbackAbility : MonoBehaviour
 {
     public float knockbackForce = 10f;
     public float knockbackRadius = 3f;
+
+    public GameObject prefab;
 
     // Function to be called when using the knockback ability
     public void UseKnockbackAbility()
@@ -30,5 +34,33 @@ public class KnockbackAbility : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void explosionAnim()
+    {
+        Vector2 pos = transform.position;
+
+        Debug.Log(pos.y);
+        pos.y -= 0.2f;
+        Debug.Log(pos.y);
+        GameObject spell = Instantiate(prefab, pos, Quaternion.identity);
+
+        Animator animator = spell.GetComponent<Animator>();
+
+        //Destroy(spell, animator.GetCurrentAnimatorStateInfo(0).length);
+        StartCoroutine(WaitAndDestroy(animator.GetCurrentAnimatorStateInfo(0).length, spell, animator));
+    }
+
+    IEnumerator WaitAndDestroy(float duration, GameObject spellObject, Animator animat)
+    {
+        // Wait for the duration of the animation
+        yield return new WaitForSeconds(duration);
+
+        animat.enabled = false;
+        // Wait for additional time before destroying (adjust the duration as needed)
+        yield return new WaitForSeconds(2.0f);
+
+        // Destroy the spell GameObject after waiting
+        Destroy(spellObject);
     }
 }
