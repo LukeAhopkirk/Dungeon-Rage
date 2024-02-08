@@ -2381,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxEnemies
-      value: 6
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4999774864001598343, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: m_Size.x
@@ -34110,7 +34110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   knockbackRadius: 1
-  prefab: {fileID: 0}
+  prefab: {fileID: 1925040077887656220, guid: 4e3d37fe7988a40bbafdc75d003c74eb, type: 3}
 --- !u!114 &1934519688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34134,7 +34134,9 @@ MonoBehaviour:
   rage3Cooldown: {fileID: 87422280}
   rage2Active: {fileID: 680554808}
   rage3Active: {fileID: 12177724}
-  animator: {fileID: 0}
+  animator: {fileID: 1934519693}
+  originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  areaDamageFireballPrefab: {fileID: 4197112854746130634}
 --- !u!114 &1934519689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34155,6 +34157,8 @@ MonoBehaviour:
   imageCooldown: {fileID: 1031130797}
   cooldownAnimationTime: 0
   force: 6
+  originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  currentFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
 --- !u!61 &1934519690
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -35054,6 +35058,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00fba13260cda49fb9a67c861bd0011a, type: 3}
+--- !u!1001 &4197112854746130633
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.228
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679160449616227411, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651018945842816387, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+      propertyPath: m_Name
+      value: Fireball_Area
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+--- !u!1 &4197112854746130634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651018945842816387, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
+  m_PrefabInstance: {fileID: 4197112854746130633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5383681227305248879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35173,3 +35239,4 @@ SceneRoots:
   - {fileID: 2022066356}
   - {fileID: 1664851628}
   - {fileID: 5383681227305248879}
+  - {fileID: 4197112854746130633}

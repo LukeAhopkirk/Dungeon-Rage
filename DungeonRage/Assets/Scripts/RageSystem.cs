@@ -44,6 +44,10 @@ public class RageSystem : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject originalFireballPrefab;
+    public GameObject areaDamageFireballPrefab;
+    private GameObject currentFireballPrefab;
+
     void Start()
     {
         // Find the HUDManager script in the scene
@@ -53,6 +57,9 @@ public class RageSystem : MonoBehaviour
         knockbackAbility = FindObjectOfType<KnockbackAbility>();
         abilityBoost = FindObjectOfType<abilityBoost>();
         outburst = FindObjectOfType<Outburst>();
+
+        currentFireballPrefab = originalFireballPrefab;
+
 
         damageRageRatio = baseDamageRageRatio;
         foreach(var stat in skillPointManager.stats)
@@ -184,7 +191,8 @@ public class RageSystem : MonoBehaviour
         Debug.Log("Using Ability 2: Increased damage and attack speed");
         isAbility2Active = true;
 
-        // Activate Ability Boost
+        currentFireballPrefab = areaDamageFireballPrefab;
+
         abilityBoost.ActivateAbilityBoost();
 
         StartCoroutine(DrainRageOverTime(ability2DrainRate, DeactivateAbility2, true));
@@ -200,11 +208,16 @@ public class RageSystem : MonoBehaviour
         isAbility2Active = false;
         Debug.Log("Ability 2 deactivated");
 
-        // Deactivate Ability Boost
         abilityBoost.DeactivateAbilityBoost();
 
-        rage2Active.fillAmount = 0f;
+        currentFireballPrefab = originalFireballPrefab;
 
+        rage2Active.fillAmount = 0f;
+    }
+
+    public GameObject GetCurrentFireballPrefab()
+    {
+        return currentFireballPrefab;
     }
 
     void UseAbility3()

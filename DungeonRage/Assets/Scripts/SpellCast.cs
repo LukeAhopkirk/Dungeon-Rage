@@ -24,10 +24,19 @@ public class SpellCast : MonoBehaviour
 
     public float force = 10f;
 
+    public GameObject originalFireballPrefab; 
+    public GameObject currentFireballPrefab;
+
+    private RageSystem rageSystem; 
+
+
     private void Start()
     {
         imageCooldown.fillAmount = 0f;
         cooldownAnimationTime = cooldownLength;
+        currentFireballPrefab = originalFireballPrefab;
+        rageSystem = FindObjectOfType<RageSystem>();
+
     }
 
     // Update is called once per frame
@@ -114,8 +123,10 @@ public class SpellCast : MonoBehaviour
         //mousePos = PlayerMovement.cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        GameObject Spell = Instantiate(rageSystem.GetCurrentFireballPrefab(), SpellCastPos.position, Quaternion.identity);
+
+
         // Instantiate the spell object
-        GameObject Spell = Instantiate(SpellTypePrefab, SpellCastPos.position, Quaternion.identity);
 
         // Ignore collisions between the player and the spell
         Physics2D.IgnoreCollision(Spell.GetComponent<Collider2D>(), GetComponent<Collider2D>());

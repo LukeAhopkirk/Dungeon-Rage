@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillPointManager: {fileID: 0}
-  baseDamage: 35
-  damage: 35
+  baseDamage: 50
+  damage: 50
 --- !u!95 &3530699447070940691
 Animator:
   serializedVersion: 5
