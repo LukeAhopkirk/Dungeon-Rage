@@ -60,10 +60,6 @@ public class MonsterController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-<<<<<<< HEAD
-=======
-		//anim.SetFloat("health", health);
->>>>>>> f669a4fbaeeb7c8d52e0fb2837e713b5567cbe44
 
 		//Make enemy allways face target
 		faceTarget();
