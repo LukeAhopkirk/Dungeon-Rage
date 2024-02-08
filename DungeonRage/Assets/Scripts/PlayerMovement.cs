@@ -151,24 +151,30 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator Dash()
     {
-        //Gathers all the game objects tagged enemy to deal with the dashing collisions.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         isDashing = true;
 
-        //Goes through each enemy and ignores the collision during the dash.
+        // Goes through each enemy and ignores the collision during the dash.
         foreach (GameObject enemy in enemies)
         {
-            Physics2D.IgnoreCollision(rb.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+            // Check if the enemy GameObject is not null before attempting to access its components
+            if (enemy != null)
+            {
+                Collider2D playerCollider = rb.GetComponent<Collider2D>();
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+
+                if (playerCollider != null && enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, enemyCollider, true);
+                }
+            }
         }
 
-        // Normalize the movement vector to ensure consistent dash distance in all directions
         Vector2 dashDirection = movement.magnitude == 0 ? Vector2.zero : movement.normalized;
 
-        // Calculate the target position for the dash
         Vector2 dashTarget = (Vector2)transform.position + dashDirection * dashDistance;
 
-        // Specify the layer mask to only detect collisions with objects on the "Walls" layer
         LayerMask wallLayer = LayerMask.GetMask("Walls");
 
         // Perform a raycast to check for collisions in the dash direction
@@ -192,18 +198,24 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        // Reset the dash state
         isDashing = false;
 
-
-        //resets collisions back with enemys
+        // Resets collisions back with enemies
         foreach (GameObject enemy in enemies)
         {
-            Physics2D.IgnoreCollision(rb.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), false);
+            if (enemy != null)
+            {
+                Collider2D playerCollider = rb.GetComponent<Collider2D>();
+                Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+
+                if (playerCollider != null && enemyCollider != null)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, enemyCollider, false);
+                }
+            }
         }
-
-
     }
+
 
     private void Flip()
     {
