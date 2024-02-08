@@ -140,23 +140,27 @@ public class SpellCast : MonoBehaviour
         // Get the Rigidbody2D component of the spell object
         Rigidbody2D rb = Spell.GetComponent<Rigidbody2D>();
 
+        // Calculate the rotation angle in radians
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+        // Rotate the fireball to face the direction of the mouse
+        Spell.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // Add force in the direction of the mouse
         rb.AddForce(direction * force, ForceMode2D.Impulse);
 
 
-        if (direction.x < 0)
-        {
-            // Get the current scale of the spell
-            Vector3 scale = Spell.transform.localScale;
+        //if (direction.x < 0)
+        //{
+        //    // Get the current scale of the spell
+        //    Vector3 scale = Spell.transform.localScale;
 
-            // Flip the scale along the x-axis to reverse the rotation
-            scale.x *= -1;
+        //    // Flip the scale along the x-axis to reverse the rotation
+        //    scale.x *= -1;
 
-            // Apply the new scale to the spell
-            Spell.transform.localScale = scale;
-        }
+        //    // Apply the new scale to the spell
+        //    Spell.transform.localScale = scale;
+        //}
 
         //animator.SetTrigger("run");
 
