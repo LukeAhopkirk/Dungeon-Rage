@@ -51,12 +51,12 @@ public class KnockbackAbility : MonoBehaviour
         StartCoroutine(WaitAndDestroy(animator.GetCurrentAnimatorStateInfo(0).length, spell, animator));
     }
 
-    IEnumerator WaitAndDestroy(float duration, GameObject spellObject, Animator animat)
+    IEnumerator WaitAndDestroy(float duration, GameObject spellObject, Animator animator)
     {
         // Wait for the duration of the animation
         yield return new WaitForSeconds(duration);
 
-        animat.enabled = false;
+        animator.enabled = false;
         // Wait for additional time before destroying (adjust the duration as needed)
         yield return new WaitForSeconds(2.0f);
 
