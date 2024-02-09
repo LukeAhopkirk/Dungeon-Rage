@@ -32192,10 +32192,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.7937
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.4566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000000029802
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000000042841
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.7937
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.4566
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0145
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.251
+      objectReference: {fileID: 0}
     - target: {fileID: 8330968032917255229, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
       propertyPath: m_text
       value: Left Click to shoot a fireball. Hitting enemies builds rage! Use 1,2,3
         for special rage abilities!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742785947019579291, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.6263
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742785947019579291, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742785947019579291, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0031000376
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742785947019579291, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35867,7 +35915,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4555983992207772352, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
