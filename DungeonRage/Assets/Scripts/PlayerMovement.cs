@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float damageMultiplier;
 
     private Vector2 movement;
-    private bool isDashing = false;
+    public static bool isDashing = false;
     private float dashTime = 0.2f;
     private float dashDistance = 2f;
     public float dashCooldown = 3f; // Cooldown time for the dash 
