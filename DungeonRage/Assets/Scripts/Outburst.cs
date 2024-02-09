@@ -66,6 +66,9 @@ public class Outburst : MonoBehaviour
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             fireball.GetComponent<Rigidbody2D>().velocity = randomDirection * force;
 
+            float angle = Mathf.Atan2(randomDirection.y, randomDirection.x) * Mathf.Rad2Deg;
+            fireball.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
             Physics2D.IgnoreCollision(fireball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
