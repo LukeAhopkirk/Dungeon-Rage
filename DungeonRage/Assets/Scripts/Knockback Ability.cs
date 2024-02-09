@@ -14,23 +14,67 @@ public class KnockbackAbility : MonoBehaviour
     {
         // Find all objects with an Enemy tag
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
+        GameObject[] range = GameObject.FindGameObjectsWithTag("Range");
+        Debug.Log(tanks.Length);
 
-        foreach (GameObject enemy in enemies)
+        // Create a new array with a size that accommodates both arrays
+        GameObject[] allEnemies = new GameObject[tanks.Length + enemies.Length + range.Length];
+
+        // Copy the elements of the enemies array to the new array, starting after the tanks
+        enemies.CopyTo(allEnemies, 0);
+
+        // Copy the elements of the tanks array to the new array
+        tanks.CopyTo(allEnemies, enemies.Length);
+
+        // Copy the elements of the ranges array to the new array, starting after the tanks and enemies
+        range.CopyTo(allEnemies, tanks.Length + enemies.Length);
+
+        Debug.Log(allEnemies.Length);
+
+        foreach (GameObject enemy in allEnemies)
         {
             // Check if the enemy has the MonsterController component
             MonsterController monsterController = enemy.GetComponent<MonsterController>();
+            // Check if the enemy has the TankController component
+            TankController tankController = enemy.GetComponent<TankController>();
+            // Check if the enemy has the RangeController component
+            RangeController rangeController = enemy.GetComponent<RangeController>();
 
+            // Calculate the distance between the player and the enemy
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+
+            //If it is a monster enemy
             if (monsterController != null)
             {
-                // Calculate the distance between the player and the enemy
-                float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-
                 // Check if the enemy is within the knockback radius
                 if (distanceToEnemy <= knockbackRadius)
                 {
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                     monsterController.Knockback(knockbackDirection, knockbackForce);
+                }
+            }
+            //If it is a tank enemy
+            else if (tankController != null)
+            {
+                // Check if the enemy is within the knockback radius
+                if (distanceToEnemy <= knockbackRadius)
+                {
+                    // Apply knockback to the enemy with a uniform force
+                    Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+                    tankController.Knockback(knockbackDirection, knockbackForce);
+                }
+            }
+            //If its range enemy
+            else
+            {
+                // Check if the enemy is within the knockback radius
+                if (distanceToEnemy <= knockbackRadius)
+                {
+                    // Apply knockback to the enemy with a uniform force
+                    Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+                    rangeController.Knockback(knockbackDirection, knockbackForce);
                 }
             }
         }
@@ -40,9 +84,7 @@ public class KnockbackAbility : MonoBehaviour
     {
         Vector2 pos = transform.position;
 
-        Debug.Log(pos.y);
         pos.y -= 0.2f;
-        Debug.Log(pos.y);
         GameObject spell = Instantiate(prefab, pos, Quaternion.identity);
 
         Animator animator = spell.GetComponent<Animator>();

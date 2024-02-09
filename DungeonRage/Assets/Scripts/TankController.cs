@@ -13,6 +13,7 @@ public class TankController : MonoBehaviour
     public HUDManager hud;
 
     bool idle = false;
+    private bool isTouching;
 
     // Radius of the circle
     public float radius = 2f;
@@ -29,6 +30,10 @@ public class TankController : MonoBehaviour
     //Boolean variable to control whether enemy is chasing or not
     //intialised to false so monster doesnt start chasing straight away
     bool isChasing = false;
+
+    public float health = 200;
+
+
 
 
     // Start is called before the first frame update
@@ -68,13 +73,26 @@ public class TankController : MonoBehaviour
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
-        if (distanceToPlayer <= 1)
+        if (distanceToPlayer <= 0.75f)
         {
             animator.SetTrigger("attack");
         }
 
     }
 
+    public void Attack()
+    {
+        //Vector2 pos = transform.localPosition;
+        isChasing = false;
+
+        if (isTouching)
+        {
+            hud.DealDamage(20);
+        }
+
+        //transform.localPosition = pos;
+
+    }
     private bool targetCheck()
     {
         // Compute the angle between two triangles in the cricle
@@ -130,6 +148,63 @@ public class TankController : MonoBehaviour
         }
         transform.localScale = scale;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isTouching = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isTouching = false;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        //Debug.Log("Test");
+
+        if (health <= 0)
+        {
+            //animator.SetTrigger("death");
+            Destroy(gameObject);
+            hud.GetExperience(10);
+        }
+
+    }
+
+    public void Knockback(Vector2 direction, float force)
+    {
+        // Stop chasing
+        isChasing = false;
+
+        // Apply knockback force
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+
+        // Start a coroutine to simulate a knockback duration
+        StartCoroutine(KnockbackDuration());
+    }
+
+    private IEnumerator KnockbackDuration()
+    {
+        animator.enabled = false;
+        // Wait for a short duration to simulate knockback effect
+        yield return new WaitForSeconds(3f);
+
+        // Resume chasing after knockback duration
+        isChasing = true;
+        //animator.SetTrigger("run");
     }
 
 }

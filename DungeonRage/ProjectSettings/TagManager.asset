@@ -7,6 +7,8 @@ TagManager:
   - Walls
   - Enemy
   - HUD
+  - Tank
+  - Range
   layers:
   - Default
   - TransparentFX
