@@ -22,6 +22,7 @@ public class HUDManager : MonoBehaviour
 
     public SkillPointManager skillPointManager;
 
+    public CheckpointManager checkPoint;
 
 
     // Start is called before the first frame update
@@ -75,6 +76,13 @@ public class HUDManager : MonoBehaviour
         }
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
+
+        if(healthAmount <= 0)
+        {
+            // Player is dead
+            checkPoint.RespawnPlayer();
+            Debug.Log("Player is dead");
+        }
     }
 
     public void SetInvincibilityState(bool isInvincible)
