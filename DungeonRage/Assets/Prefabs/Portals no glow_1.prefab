@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8981513080181489901}
   - component: {fileID: 8916383541629483028}
   - component: {fileID: 6232823156638721257}
+  - component: {fileID: 7862407825437569661}
   m_Layer: 0
   m_Name: Portals no glow_1
   m_TagString: Untagged
@@ -120,3 +121,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.38, y: 0.58}
   m_Direction: 0
+--- !u!114 &7862407825437569661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947718836488285031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1df80385ddffb740849a263dbfb0c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

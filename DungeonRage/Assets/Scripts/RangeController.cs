@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class RangeController : MonoBehaviour
@@ -12,7 +14,7 @@ public class RangeController : MonoBehaviour
     //Instacne of the HUD manager
     public HUDManager hud;
 
-
+    private bool flip;
     //Instance of steering basics
     SteeringBasics steeringBasics;
 
@@ -42,7 +44,7 @@ public class RangeController : MonoBehaviour
     //Float to hold the force of the projectile.
     public float speed;
 
-
+    public GameObject FloatingTextPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -138,11 +140,13 @@ public class RangeController : MonoBehaviour
         {
             scale.x = Mathf.Abs(scale.x) * -1;
             //* (flip ? -1 : 1);
+            flip = true;
         }
         else
         {
             scale.x = Mathf.Abs(scale.x);
             //*(flip ? -1 : 1);
+            flip = false;
         }
         transform.localScale = scale;
 
@@ -155,11 +159,43 @@ public class RangeController : MonoBehaviour
 
         if (health <= 0)
         {
-            //animator.SetTrigger("death");
-            Destroy(gameObject);
+            animator.SetTrigger("death");
             hud.GetExperience(10);
         }
 
+        if (FloatingTextPrefab)
+        {
+            ShowFloatingText(damage.ToString());
+        }
+
+    }
+
+    public void death()
+    {
+        Destroy(gameObject);
+    }
+
+    void ShowFloatingText(string text)
+    {
+        var go = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        var textMeshPro = go.GetComponent<TextMeshProUGUI>();
+
+        if (textMeshPro == null)
+        {
+            // If TextMeshPro component is not found, try getting TextMeshPro - Text component
+            var textMeshProText = go.GetComponent<TextMeshPro>();
+            if (textMeshProText != null)
+            {
+                // Set text for TextMeshPro - Text component
+                textMeshProText.text = text;
+                if (flip)
+                {
+                    Vector3 scale = textMeshProText.transform.localScale;
+                    scale.x *= -1f;
+                    textMeshProText.transform.localScale = scale;
+                }
+            }
+        }
     }
     public void Knockback(Vector2 direction, float force)
     {

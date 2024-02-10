@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
-
+    public GameObject FloatingTextPrefab;
     // Target of the chase
     // (initialise via the Inspector Panel)
     public GameObject target;
@@ -37,7 +39,7 @@ public class TankController : MonoBehaviour
     //How much damage the enemy does to the player
     public float damage;
 
-
+    public bool flip;
 
 
     // Start is called before the first frame update
@@ -161,11 +163,13 @@ public class TankController : MonoBehaviour
         {
             scale.x = Mathf.Abs(scale.x) * -1;
             //* (flip ? -1 : 1);
+            flip = true;
         }
         else
         {
             scale.x = Mathf.Abs(scale.x);
             //*(flip ? -1 : 1);
+            flip = false;
         }
         transform.localScale = scale;
 
@@ -196,11 +200,42 @@ public class TankController : MonoBehaviour
 
         if (health <= 0)
         {
-            //animator.SetTrigger("death");
-            Destroy(gameObject);
+            animator.SetTrigger("death");
             hud.GetExperience(10);
         }
 
+        if (FloatingTextPrefab)
+        {
+            ShowFloatingText(damage.ToString());
+        }
+
+    }
+
+    public void death()
+    {
+        Destroy(gameObject);
+    }
+    void ShowFloatingText(string text)
+    {
+        var go = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        var textMeshPro = go.GetComponent<TextMeshProUGUI>();
+
+        if (textMeshPro == null)
+        {
+            // If TextMeshPro component is not found, try getting TextMeshPro - Text component
+            var textMeshProText = go.GetComponent<TextMeshPro>();
+            if (textMeshProText != null)
+            {
+                // Set text for TextMeshPro - Text component
+                textMeshProText.text = text;
+                if (flip)
+                {
+                    Vector3 scale = textMeshProText.transform.localScale;
+                    scale.x *= -1f;
+                    textMeshProText.transform.localScale = scale;
+                }
+            }
+        }
     }
 
     public void Knockback(Vector2 direction, float force)
