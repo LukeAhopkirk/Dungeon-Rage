@@ -28786,6 +28786,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: first level portal
       objectReference: {fileID: 0}
+    - target: {fileID: 7862407825437569661, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
+      propertyPath: teleportPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862407825437569661, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
+      propertyPath: teleportPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862407825437569661, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
+      propertyPath: teleportPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8916383541629483028, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -35067,7 +35079,7 @@ Transform:
   m_GameObject: {fileID: 1934519683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.959, y: -4.548, z: -1}
+  m_LocalPosition: {x: -23.23, y: -4.548, z: -1}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35148,7 +35160,7 @@ MonoBehaviour:
   rage3Active: {fileID: 12177724}
   animator: {fileID: 1934519693}
   originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
-  areaDamageFireballPrefab: {fileID: 0}
+  areaDamageFireballPrefab: {fileID: 4651018945842816387, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
 --- !u!114 &1934519689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35933,6 +35945,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034457466}
   m_CullTransparentMesh: 1
+--- !u!1001 &2076296263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1961106762847066796, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_Name
+      value: ShadowDudeTutorialInteracting (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2026345112213149508, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.2733
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.3566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000015229
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00835
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.2733
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.3733
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0014
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.2456
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330968032917255229, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_text
+      value: Walk into the portal when you're ready to avenge your village. Hehehe...
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
 --- !u!1 &2093485660
 GameObject:
   m_ObjectHideFlags: 0
@@ -36384,6 +36489,7 @@ SceneRoots:
   - {fileID: 1700938320}
   - {fileID: 1515051277}
   - {fileID: 171808523}
+  - {fileID: 2076296263}
   - {fileID: 5150133521341105661}
   - {fileID: 1376206778}
   - {fileID: 370717357}
