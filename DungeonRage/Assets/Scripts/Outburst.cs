@@ -27,7 +27,8 @@ public class Outburst : MonoBehaviour
         if (isRunning)
         {
             isRunning = false;
-            StopAllCoroutines();
+            StopCoroutine(SpawnRandomDirectionFireballsCoroutine());
+            StartCoroutine(SpawnTrackingFireballsCoroutine());
         }
     }
 
@@ -104,7 +105,8 @@ public class Outburst : MonoBehaviour
             foreach (Collider2D collider in colliders)
             {
                 // Check if the collider has the "Enemy" tag
-                if (collider.CompareTag("Enemy"))
+                if (collider.CompareTag("Enemy") || collider.CompareTag("Tank") || collider.CompareTag("Range"))
+
                 {
                     float distance = Vector2.Distance(transform.position, collider.transform.position);
 
