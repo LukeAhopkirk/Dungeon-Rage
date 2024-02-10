@@ -5,7 +5,7 @@ using UnityEngine;
 public class AreaDamageFireball : MonoBehaviour
 {
     public SkillPointManager skillPointManager;
-    public float baseDamage = 35f; // Base damage without multiplier
+    public float baseDamage = 20f; // Base damage without multiplier
     public float areaDamageRadius = 3f; // Radius for area damage
     public float damage;
 
