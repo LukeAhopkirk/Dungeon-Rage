@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 //using UnityMovementAI;
 
 public class MonsterController : MonoBehaviour
@@ -44,7 +45,7 @@ public class MonsterController : MonoBehaviour
 	//How much damage the enemy does to the player
 	public float damage;
 
-
+	public GameObject FloatingTextPrefab;
 
 	// Use this for initialization
 	void Start()
@@ -204,11 +205,13 @@ public class MonsterController : MonoBehaviour
 		if (target.transform.position.x < transform.position.x)
 		{
 			scale.x = Mathf.Abs(scale.x) * -1;
+			flip = true;
 			//* (flip ? -1 : 1);
 		}
 		else
 		{
 			scale.x = Mathf.Abs(scale.x);
+			flip = false;
 			//*(flip ? -1 : 1);
 		}
 		transform.localScale = scale;
@@ -226,7 +229,36 @@ public class MonsterController : MonoBehaviour
             hud.GetExperience(10);
 		}
 
+		//Trigger floating text
+		if (FloatingTextPrefab)
+		{
+			ShowFloatingText(damage.ToString());
+		}
+
     }
+
+	void ShowFloatingText(string text)
+	{
+		var go = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+		var textMeshPro = go.GetComponent<TextMeshProUGUI>();
+
+		if (textMeshPro == null)
+		{
+			// If TextMeshPro component is not found, try getting TextMeshPro - Text component
+			var textMeshProText = go.GetComponent<TextMeshPro>();
+			if (textMeshProText != null)
+			{
+				// Set text for TextMeshPro - Text component
+				textMeshProText.text = text;
+				if (flip)
+				{
+					Vector3 scale = textMeshProText.transform.localScale;
+					scale.x *= -1f;
+					textMeshProText.transform.localScale = scale;
+				}
+			}
+		}
+	}
 
 
     public void death()
