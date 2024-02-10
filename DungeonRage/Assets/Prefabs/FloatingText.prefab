@@ -185,3 +185,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyTime: 3
+  Offset: {x: 0, y: 0, z: 0}
+  RandomizeIntensity: {x: 0, y: 0.02, z: 0}
