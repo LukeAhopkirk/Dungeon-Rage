@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   hud: {fileID: 0}
-  radius: 2
   health: 150
   minShootInterval: 1
   maxShootInterval: 2
