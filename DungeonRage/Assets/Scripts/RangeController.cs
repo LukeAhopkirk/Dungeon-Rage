@@ -13,12 +13,6 @@ public class RangeController : MonoBehaviour
     public HUDManager hud;
 
 
-    // Radius of the circle
-    public float radius = 2f;
-
-    // Number of points on circle's circumference
-    int numPoints = 64;
-
     //Instance of steering basics
     SteeringBasics steeringBasics;
 
@@ -52,11 +46,7 @@ public class RangeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if (mainCamera == null)
-        //{
         mainCamera = Camera.main;
-        //}
-
 
         //Find game object with player tag and set to target
         target = GameObject.FindGameObjectWithTag("Player");

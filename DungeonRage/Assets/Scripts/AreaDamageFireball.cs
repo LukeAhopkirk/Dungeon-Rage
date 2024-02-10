@@ -15,7 +15,8 @@ public class AreaDamageFireball : MonoBehaviour
         {
             DealAreaDamage();
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
         {
             DealAreaDamage();
         }
@@ -36,24 +37,34 @@ public class AreaDamageFireball : MonoBehaviour
 
             foreach (Collider2D collider in colliders)
             {
-                if (collider.CompareTag("Enemy"))
+                if (collider.CompareTag("Enemy") || collider.CompareTag("Tank") || collider.CompareTag("Range"))
                 {
-                    MonsterController enemy = collider.GetComponent<MonsterController>();
 
-                    // Deal damage to the enemy
-                    if (enemy != null)
+                    // Check if the enemy has the MonsterController component
+                    MonsterController monsterController = collider.GetComponent<MonsterController>();
+                    // Check if the enemy has the TankController component
+                    TankController tankController = collider.GetComponent<TankController>();
+                    // Check if the enemy has the RangeController component
+                    RangeController rangeController = collider.GetComponent<RangeController>();
+
+                    RageSystem rageSystem = FindObjectOfType<RageSystem>();
+                    if (rageSystem != null)
                     {
-                        enemy.TakeDamage(totalDamage);
+                        rageSystem.DealDamage(totalDamage);
+                    }
 
-                        // Access and apply damage to the RageSystem
-                        RageSystem rageSystem = FindObjectOfType<RageSystem>();
-                        if (rageSystem != null)
-                        {
-                            rageSystem.DealDamage(totalDamage);
-                        }
+                    if (monsterController!= null)
+                    {
+                        monsterController.TakeDamage(totalDamage);
+                    }
 
-                        // Show debug log for damage dealt
-                        Debug.Log($"AreaDamageFireball dealt {totalDamage} damage to {enemy.gameObject.name}");
+                    else if(tankController != null)
+                    {
+                        tankController.TakeDamage(totalDamage);
+                    }
+                    else if(rangeController != null)
+                    {
+                        rangeController.TakeDamage(totalDamage);
                     }
                 }
             }
