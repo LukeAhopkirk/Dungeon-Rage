@@ -200,15 +200,20 @@ public class TankController : MonoBehaviour
 
         if (health <= 0)
         {
-            //animator.SetTrigger("death");
-            Destroy(gameObject);
+            animator.SetTrigger("death");
             hud.GetExperience(10);
         }
+
         if (FloatingTextPrefab)
         {
             ShowFloatingText(damage.ToString());
         }
 
+    }
+
+    public void death()
+    {
+        Destroy(gameObject);
     }
     void ShowFloatingText(string text)
     {

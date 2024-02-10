@@ -159,8 +159,7 @@ public class RangeController : MonoBehaviour
 
         if (health <= 0)
         {
-            //animator.SetTrigger("death");
-            Destroy(gameObject);
+            animator.SetTrigger("death");
             hud.GetExperience(10);
         }
 
@@ -170,6 +169,12 @@ public class RangeController : MonoBehaviour
         }
 
     }
+
+    public void death()
+    {
+        Destroy(gameObject);
+    }
+
     void ShowFloatingText(string text)
     {
         var go = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
