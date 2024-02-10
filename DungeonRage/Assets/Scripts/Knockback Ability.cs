@@ -6,6 +6,8 @@ public class KnockbackAbility : MonoBehaviour
 {
     public float knockbackForce = 10f;
     public float knockbackRadius = 3f;
+    public float tankForceMultiplier = 2;
+    public float rangeForceMultiplier = 2;
 
     public GameObject prefab;
 
@@ -14,9 +16,10 @@ public class KnockbackAbility : MonoBehaviour
     {
         // Find all objects with an Enemy tag
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // Find all objects with an Tank tag
         GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
+        // Find all objects with an Range tag
         GameObject[] range = GameObject.FindGameObjectsWithTag("Range");
-        Debug.Log(tanks.Length);
 
         // Create a new array with a size that accommodates both arrays
         GameObject[] allEnemies = new GameObject[tanks.Length + enemies.Length + range.Length];
@@ -30,8 +33,6 @@ public class KnockbackAbility : MonoBehaviour
         // Copy the elements of the ranges array to the new array, starting after the tanks and enemies
         range.CopyTo(allEnemies, tanks.Length + enemies.Length);
 
-        Debug.Log(allEnemies.Length);
-
         foreach (GameObject enemy in allEnemies)
         {
             // Check if the enemy has the MonsterController component
@@ -44,6 +45,7 @@ public class KnockbackAbility : MonoBehaviour
             // Calculate the distance between the player and the enemy
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
 
+            Debug.Log(rangeController == null);
             //If it is a monster enemy
             if (monsterController != null)
             {
@@ -61,20 +63,23 @@ public class KnockbackAbility : MonoBehaviour
                 // Check if the enemy is within the knockback radius
                 if (distanceToEnemy <= knockbackRadius)
                 {
+                    float force = knockbackForce * tankForceMultiplier;
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
-                    tankController.Knockback(knockbackDirection, knockbackForce);
+                    tankController.Knockback(knockbackDirection, force);
                 }
             }
             //If its range enemy
             else
             {
+                Debug.Log("inside loop");
                 // Check if the enemy is within the knockback radius
                 if (distanceToEnemy <= knockbackRadius)
                 {
+                    float force = knockbackForce * rangeForceMultiplier;
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
-                    rangeController.Knockback(knockbackDirection, knockbackForce);
+                    rangeController.Knockback(knockbackDirection, force);
                 }
             }
         }

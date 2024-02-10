@@ -106,8 +106,10 @@ MonoBehaviour:
   hud: {fileID: 0}
   radius: 2
   health: 150
-  minShootInterval: 3
-  maxShootInterval: 5
+  minShootInterval: 1
+  maxShootInterval: 2
+  projectilePrefab: {fileID: 3956905942916544818, guid: f1d05a38e9fda4aa8bd167aef80b2a93, type: 3}
+  speed: 3
 --- !u!95 &647911303245299593
 Animator:
   serializedVersion: 5
@@ -160,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db36412f2353e49829954497b13c961d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 3.5
+  maxVelocity: 1.5
   maxAcceleration: 10
   turnSpeed: 20
   targetRadius: 0.005

@@ -12,7 +12,6 @@ public class RangeController : MonoBehaviour
     //Instacne of the HUD manager
     public HUDManager hud;
 
-    bool idle = false;
 
     // Radius of the circle
     public float radius = 2f;
@@ -28,19 +27,37 @@ public class RangeController : MonoBehaviour
 
     //Boolean variable to control whether enemy is chasing or not
     //intialised to false so monster doesnt start chasing straight away
-    bool isChasing = false;
+    bool isChasing = true;
 
+    //Health of enemy
     public float health = 150;
 
-    public float minShootInterval = 3f;
-    public float maxShootInterval = 5f;
+    //after enemy is on screen shots at random interval between these two values
+    public float minShootInterval;
+    public float maxShootInterval;
 
+    //varaible to keep track so the first time the enemy is on screen it starts shooting
+    private bool isEnemyVisible = false;
 
+    //Referene to the camera to check if the enemy is on screen
+    private Camera mainCamera;
+
+    //Reference to the enemy shot
+    public GameObject projectilePrefab;
+
+    //Float to hold the force of the projectile.
+    public float speed;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //if (mainCamera == null)
+        //{
+        mainCamera = Camera.main;
+        //}
+
+
         //Find game object with player tag and set to target
         target = GameObject.FindGameObjectWithTag("Player");
 
@@ -58,10 +75,11 @@ public class RangeController : MonoBehaviour
     {
         faceTarget();
 
-        if (idle == false)
+        if(!isEnemyVisible && IsVisibleOnScreen())
         {
-            isChasing = targetCheck();
-
+            isEnemyVisible = true;
+            Debug.Log("starting routine");
+            StartCoroutine(AttackPlayerCoroutine());
         }
 
         if (steeringBasics != null && isChasing)
@@ -73,43 +91,53 @@ public class RangeController : MonoBehaviour
         }
     }
 
-    private bool targetCheck()
+    IEnumerator AttackPlayerCoroutine()
     {
-        // Compute the angle between two triangles in the cricle
-        float delta = 2f * Mathf.PI / (float)(numPoints - 1);
-        // Stat with angle of 0
-        float alpha = 0f;
-
-        // Specify the layer mast for ray casting - ray casting will
-        // interact with layer 8 (player) and 9 (walls)
-        int layerMask = 1 << 8 | 1 << 9;
-
-        //Cast rays in circle around monster
-        for (int i = 1; i <= numPoints; i++)
+        while (true)
         {
-            //Radius and alpha give a position of a point around
-            //the circle in spherical coordinates 
-
-            // Compute position x from spherical coordinates
-            float x = radius * Mathf.Cos(alpha);
-            // Compute position y from spherical coordinates
-            float y = radius * Mathf.Sin(alpha);
-
-            // Create a ray
-            Vector2 ray = new Vector2(x, y);
-            ray.x *= transform.lossyScale.x;
-            ray.y *= transform.lossyScale.y;
-
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, ray.magnitude, layerMask);
-            if (hit.collider != null && hit.collider.tag == "Player")
-            {
-                return true;
-            }
-            alpha += delta;
+            yield return new WaitForSeconds(Random.Range(minShootInterval, maxShootInterval));
+            animator.SetTrigger("attack");
         }
-
-        return false;
     }
+
+    private bool IsVisibleOnScreen()
+    {
+        Vector3 playerViewportPos = mainCamera.WorldToViewportPoint(transform.position);
+        return playerViewportPos.x >= 0 && playerViewportPos.x <= 1 &&
+               playerViewportPos.y >= 0 && playerViewportPos.y <= 1;
+
+    }
+
+    public void shot()
+    {
+        // Instantiate the enemyProjectile object
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        // Get the Rigidbody2D component of the spell object
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+
+        //Ignore the collision between the 
+        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+        //Create a vector for the position of the projectile
+        Vector2 pos = new Vector2(projectile.transform.position.x, projectile.transform.position.y);
+
+        //Create a 2d vector to hold the targets position
+        Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.y);
+
+        // Calculate the direction from the SpellCastPos to the mouse position
+        Vector2 direction = (targetPos - pos).normalized;
+
+        // Calculate the rotation angle in radians
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Rotate the projectile to face the direction of the mouse
+        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        // Add force in the direction of the mouse
+        rb.AddForce(direction * speed, ForceMode2D.Impulse);
+    }
+
 
     private void faceTarget()
     {
@@ -159,13 +187,12 @@ public class RangeController : MonoBehaviour
 
     private IEnumerator KnockbackDuration()
     {
-        animator.enabled = false;
         // Wait for a short duration to simulate knockback effect
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         // Resume chasing after knockback duration
         isChasing = true;
-        //animator.SetTrigger("run");
+        //anim.SetTrigger("run");
     }
 
 }

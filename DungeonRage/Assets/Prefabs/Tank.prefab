@@ -127,6 +127,7 @@ MonoBehaviour:
   hud: {fileID: 0}
   radius: 2
   health: 200
+  damage: 20
 --- !u!114 &3810386528054817288
 MonoBehaviour:
   m_ObjectHideFlags: 0
