@@ -31,7 +31,11 @@ public class TankController : MonoBehaviour
     //intialised to false so monster doesnt start chasing straight away
     bool isChasing = false;
 
+    //The health of the enemy
     public float health = 200;
+
+    //How much damage the enemy does to the player
+    public float damage;
 
 
 
@@ -58,7 +62,11 @@ public class TankController : MonoBehaviour
 
         if (idle == false)
         {
-            isChasing = targetCheck(); 
+            isChasing = targetCheck();
+            if (isChasing)
+            {
+                idle = true;
+            }
 
         }
 
@@ -73,25 +81,38 @@ public class TankController : MonoBehaviour
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
-        if (distanceToPlayer <= 0.75f)
-        {
-            animator.SetTrigger("attack");
-        }
+        //if (distanceToPlayer <= 0.75f)
+        //{
+        //    animator.SetTrigger("attack");
+        //}
+        animator.SetFloat("attack1", distanceToPlayer);
+        //animator.SetFloat("Speed", movement.sqrMagnitude);
 
     }
 
+    public void chasingOff()
+    {
+        isChasing = false;
+
+    }
     public void Attack()
     {
         //Vector2 pos = transform.localPosition;
-        isChasing = false;
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
 
         if (isTouching)
         {
-            hud.DealDamage(20);
+            hud.DealDamage(damage);
         }
 
-        //transform.localPosition = pos;
+        //animator.SetTrigger("walk");
 
+    }
+
+    public void chasingOn()
+    {
+        isChasing = true;
     }
     private bool targetCheck()
     {
@@ -198,13 +219,12 @@ public class TankController : MonoBehaviour
 
     private IEnumerator KnockbackDuration()
     {
-        animator.enabled = false;
         // Wait for a short duration to simulate knockback effect
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         // Resume chasing after knockback duration
         isChasing = true;
-        //animator.SetTrigger("run");
+        //anim.SetTrigger("run");
     }
 
 }

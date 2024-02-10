@@ -123,15 +123,13 @@ public class SpellCast : MonoBehaviour
         //mousePos = PlayerMovement.cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        GameObject Spell = Instantiate(rageSystem.GetCurrentFireballPrefab(), SpellCastPos.position, Quaternion.identity);
-
-
         // Instantiate the spell object
+        GameObject Spell = Instantiate(rageSystem.GetCurrentFireballPrefab(), SpellCastPos.position, Quaternion.identity);
 
         // Ignore collisions between the player and the spell
         Physics2D.IgnoreCollision(Spell.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-
+        //Create a vector for the position of the spell
         Vector2 pos = new Vector2(SpellCastPos.position.x, SpellCastPos.position.y);
 
         // Calculate the direction from the SpellCastPos to the mouse position

@@ -151,12 +151,29 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator Dash()
     {
+        // Find all objects with an Enemy tag
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        // Find all objects with an Tank tag
+        GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
+        // Find all objects with an Range tag
+        GameObject[] range = GameObject.FindGameObjectsWithTag("Range");
+
+        // Create a new array with a size that accommodates both arrays
+        GameObject[] allEnemies = new GameObject[tanks.Length + enemies.Length + range.Length];
+
+        // Copy the elements of the enemies array to the new array, starting after the tanks
+        enemies.CopyTo(allEnemies, 0);
+
+        // Copy the elements of the tanks array to the new array
+        tanks.CopyTo(allEnemies, enemies.Length);
+
+        // Copy the elements of the ranges array to the new array, starting after the tanks and enemies
+        range.CopyTo(allEnemies, tanks.Length + enemies.Length);
 
         isDashing = true;
 
         // Goes through each enemy and ignores the collision during the dash.
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in allEnemies)
         {
             // Check if the enemy GameObject is not null before attempting to access its components
             if (enemy != null)
@@ -201,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
 
         // Resets collisions back with enemies
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in allEnemies)
         {
             if (enemy != null)
             {

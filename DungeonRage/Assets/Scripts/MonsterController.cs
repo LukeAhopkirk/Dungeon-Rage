@@ -38,7 +38,12 @@ public class MonsterController : MonoBehaviour
 	//Bool to declare if monster is flipped or not
 	private bool flip;
 
+	//Health of monster
 	public float health = 100f;
+
+	//How much damage the enemy does to the player
+	public float damage;
+
 
 
 	// Use this for initialization
@@ -68,6 +73,10 @@ public class MonsterController : MonoBehaviour
 		if (idle == false)
 		{
 			isEnraged = targetCheck();
+			if (isEnraged)
+			{
+				idle = true;
+			}
 
 		}
 		//Debug.Log("Enraged: " + isEnraged);
@@ -173,7 +182,7 @@ public class MonsterController : MonoBehaviour
 
         if (isTouching)
         {
-			hud.DealDamage(5);
+			hud.DealDamage(damage);
         }
 
         //transform.localPosition = pos;
