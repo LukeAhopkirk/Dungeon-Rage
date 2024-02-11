@@ -27,8 +27,9 @@ public class SpellCast : MonoBehaviour
     public GameObject originalFireballPrefab; 
     public GameObject currentFireballPrefab;
 
-    private RageSystem rageSystem; 
+    private RageSystem rageSystem;
 
+    [SerializeField] private AudioSource fireballSound;
 
     private void Start()
     {
@@ -55,6 +56,7 @@ public class SpellCast : MonoBehaviour
             }
             if (spellReady && Input.GetButtonDown("Fire1"))
             {
+                fireballSound.Play();
                 if (PlayerMovement.isMoving)
                 {
                     animator.SetTrigger("shot1");
