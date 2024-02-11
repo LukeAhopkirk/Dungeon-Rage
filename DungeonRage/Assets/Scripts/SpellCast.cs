@@ -64,7 +64,7 @@ public class SpellCast : MonoBehaviour
                     animator.SetTrigger("shot2");
                 }
 
-                imageCooldown.fillAmount = 1.0f;
+                imageCooldown.fillAmount = .5f;
                 spellReady = false;
                 lastFireballTime = Time.time;
 

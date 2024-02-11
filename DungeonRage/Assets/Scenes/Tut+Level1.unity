@@ -35799,13 +35799,11 @@ MonoBehaviour:
   SpellCastPos: {fileID: 1366289561}
   SpellTypePrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   animator: {fileID: 1934519693}
-  spellReady: 1
-  cooldownLength: 1
   imageCooldown: {fileID: 1031130797}
-  cooldownAnimationTime: 0
   force: 6
   originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   currentFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  cooldownLength: 0.5
 --- !u!61 &1934519690
 BoxCollider2D:
   m_ObjectHideFlags: 0
