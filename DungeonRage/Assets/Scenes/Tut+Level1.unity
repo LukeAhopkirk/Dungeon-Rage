@@ -35204,7 +35204,6 @@ Transform:
   - {fileID: 1228543116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &1919775079
 GameObject:
   m_ObjectHideFlags: 0
@@ -35349,13 +35348,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-=======
 --- !u!1 &1917326776 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   m_PrefabInstance: {fileID: 445069290}
   m_PrefabAsset: {fileID: 0}
->>>>>>> 13f5f730738bdf84d6e334526bf83f1403491f81
 --- !u!1 &1926439991
 GameObject:
   m_ObjectHideFlags: 0
@@ -37068,11 +37065,8 @@ SceneRoots:
   - {fileID: 1357368176}
   - {fileID: 7744153648420173504}
   - {fileID: 1057779878}
-<<<<<<< HEAD
   - {fileID: 2010581476}
-=======
   - {fileID: 1457286483}
   - {fileID: 1217997802}
   - {fileID: 563179567}
   - {fileID: 759933687}
->>>>>>> 13f5f730738bdf84d6e334526bf83f1403491f81
