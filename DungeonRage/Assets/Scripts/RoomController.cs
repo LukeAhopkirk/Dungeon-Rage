@@ -4,33 +4,52 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public Collider2D roomCollider;
-    public int maxEnemies = 50;
-    private int enemyCount = 0;
+    [System.Serializable]
+    public class EnemyType
+    {
+        public GameObject prefab;
+        public int maxEnemies;
 
+        private int _enemyCount; // private field for enemy count
+
+        public int EnemyCount // public property with a getter
+        {
+            get { return _enemyCount; }
+        }
+
+        public void IncrementEnemyCount()
+        {
+            _enemyCount++;
+        }
+    }
+
+    public Collider2D roomCollider;
     public float minSpawnInterval = 1f;
     public float maxSpawnInterval = 3f;
+
+    public List<EnemyType> enemyTypes;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(SpawnEnemiesCoroutine());
+            foreach (var enemyType in enemyTypes)
+            {
+                StartCoroutine(SpawnEnemiesCoroutine(enemyType));
+            }
         }
     }
 
-
-    private IEnumerator SpawnEnemiesCoroutine()
+    private IEnumerator SpawnEnemiesCoroutine(EnemyType enemyType)
     {
         Bounds bounds = roomCollider.bounds;
 
-        while (enemyCount < maxEnemies)
+        while (enemyType.EnemyCount < enemyType.maxEnemies)
         {
             // Spawn an enemy
             Vector2 spawnPosition = GetRandomSpawnPosition(bounds);
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            enemyCount++;
+            Instantiate(enemyType.prefab, spawnPosition, Quaternion.identity);
+            enemyType.IncrementEnemyCount(); // Increment the private enemy count
 
             // Random interval before spawning the next enemy
             float spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
@@ -47,5 +66,3 @@ public class RoomController : MonoBehaviour
         return spawnPosition;
     }
 }
-
-

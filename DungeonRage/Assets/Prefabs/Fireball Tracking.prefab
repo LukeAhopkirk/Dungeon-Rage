@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7065046853307119960, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 32570641, guid: b338ca2d909e64fa0bf818b1acaf7973, type: 3}
     - target: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
       propertyPath: m_Name
       value: Fireball Tracking

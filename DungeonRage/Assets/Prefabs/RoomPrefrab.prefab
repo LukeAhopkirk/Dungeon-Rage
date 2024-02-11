@@ -90,8 +90,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+  enemyPrefab1: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+  enemyPrefab2: {fileID: 8578203095531965538, guid: 9fa810daedfc14652ac9d3008a77498e, type: 3}
+  enemyPrefab3: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 4999774864001598343}
-  maxEnemies: 1
+  maxEnemiesPrefab1Wave1: 3
+  maxEnemiesPrefab2Wave1: 5
+  maxEnemiesPrefab3Wave1: 10
+  maxEnemiesPrefab1Wave2: 4
+  maxEnemiesPrefab2Wave2: 5
+  maxEnemiesPrefab3Wave2: 20
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  enableSecondWave: 1
