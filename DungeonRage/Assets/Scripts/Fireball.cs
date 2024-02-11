@@ -7,12 +7,12 @@ public class Fireball : MonoBehaviour
     public SkillPointManager skillPointManager;
     public float baseDamage = 35f; // Base damage without multiplier
     public float damage;
-    public GameObject hitParticlesPrefab; // Reference to the Particle System prefab
-
+    [SerializeField] private ParticleSystem particleSystem = default;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
+            SpawnHitParticles(transform.position);
             DestroyFireball();
         }
         else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
@@ -72,9 +72,11 @@ public class Fireball : MonoBehaviour
     void SpawnHitParticles(Vector3 position)
     {
         // Instantiate the hit particles prefab at the collision point
-        if (hitParticlesPrefab != null)
+        Debug.Log("Spawning hit particles");
+
+        if (particleSystem != null)
         {
-            Instantiate(hitParticlesPrefab, position, Quaternion.identity);
+            Instantiate(particleSystem, position, Quaternion.identity);
         }
     }
 

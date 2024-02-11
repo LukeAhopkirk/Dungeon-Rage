@@ -165,7 +165,7 @@ MonoBehaviour:
   skillPointManager: {fileID: 0}
   baseDamage: 35
   damage: 35
-  hitParticlesPrefab: {fileID: 665141543618704466, guid: 80bed3c48b09a4a99b66b5f0093d655f, type: 3}
+  particleSystem: {fileID: 8218075076651814986, guid: 80bed3c48b09a4a99b66b5f0093d655f, type: 3}
 --- !u!95 &3530699447070940691
 Animator:
   serializedVersion: 5

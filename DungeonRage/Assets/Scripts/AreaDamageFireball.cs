@@ -9,10 +9,14 @@ public class AreaDamageFireball : MonoBehaviour
     public float areaDamageRadius = 3f; // Radius for area damage
     public float damage;
 
+    [SerializeField] private ParticleSystem particleSystem = default;
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
+            SpawnHitParticles(transform.position);
             DealAreaDamage();
         }
 
@@ -69,7 +73,18 @@ public class AreaDamageFireball : MonoBehaviour
                 }
             }
         }
-
+        SpawnHitParticles(transform.position);
         Destroy(gameObject);
+    }
+
+    void SpawnHitParticles(Vector3 position)
+    {
+        // Instantiate the hit particles prefab at the collision point
+        Debug.Log("Spawning hit particles");
+
+        if (particleSystem != null)
+        {
+            Instantiate(particleSystem, position, Quaternion.identity);
+        }
     }
 }
