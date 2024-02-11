@@ -35684,6 +35684,7 @@ GameObject:
   - component: {fileID: 1934519687}
   - component: {fileID: 1934519686}
   - component: {fileID: 1934519685}
+  - component: {fileID: 1934519696}
   m_Layer: 8
   m_Name: protagonist
   m_TagString: Player
@@ -35822,7 +35823,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 3
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -35838,7 +35839,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0015419014, y: -0.010793224}
+  m_Offset: {x: -0.0015418977, y: -0.008454502}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -35849,7 +35850,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18431368, y: 0.29841354}
+  m_Size: {x: 0.18431368, y: 0.303091}
   m_EdgeRadius: 0
 --- !u!61 &1934519691
 BoxCollider2D:
@@ -35883,7 +35884,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1158803}
+  m_Offset: {x: 0, y: -0.11120287}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -35894,7 +35895,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.08823939}
+  m_Size: {x: 0.18, y: 0.097594246}
   m_EdgeRadius: 0
 --- !u!50 &1934519692
 Rigidbody2D:
@@ -36018,6 +36019,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &1934519696
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934519683}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_SortAtRoot: 0
 --- !u!1 &1947983807
 GameObject:
   m_ObjectHideFlags: 0
