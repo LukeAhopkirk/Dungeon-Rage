@@ -57,14 +57,17 @@ public class SpellCast : MonoBehaviour
 
             if (spellReady && Input.GetButtonDown("Fire1"))
             {
-                fireballSound.Play();
+                //fireballSound.Play();
                 if (PlayerMovement.isMoving)
                 {
                     animator.SetTrigger("shot1");
+                    fireballSound.Play();
+
                 }
                 else
                 {
                     animator.SetTrigger("shot2");
+                    fireballSound.Play();
                 }
 
                 imageCooldown.fillAmount = 1f; // Set fill amount to full at the start of cooldown
