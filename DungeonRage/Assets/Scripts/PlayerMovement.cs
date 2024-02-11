@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine cooldownCoroutine;
 
     public static bool isMoving;
+    [SerializeField] private ParticleSystem particleSystem = default;
 
     public SkillPointManager skillPointManager;
     private void Start()
@@ -78,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastDashTime > dashCooldown)
             {
+                SpawnHitParticles(transform.position);
                 StartCoroutine(Dash());
                 lastDashTime = Time.time;
                 imageCooldown.fillAmount = 1.0f;
@@ -113,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 isMoving = true;
             }
 
+            
 
             // Update animator
             animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -233,6 +236,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void SpawnHitParticles(Vector3 position)
+    {
+        // Instantiate the hit particles prefab at the collision point
+        Debug.Log("Spawning hit particles");
+
+        if (particleSystem != null)
+        {
+            Instantiate(particleSystem, position, Quaternion.identity);
+        }
+    }
 
     private void Flip()
     {

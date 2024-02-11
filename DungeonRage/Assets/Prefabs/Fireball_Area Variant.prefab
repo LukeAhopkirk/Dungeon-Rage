@@ -95,3 +95,4 @@ MonoBehaviour:
   baseDamage: 60
   areaDamageRadius: 1
   damage: 20
+  particleSystem: {fileID: 11178024618071399, guid: e92f0eeba2d384432820f97885b320fd, type: 3}

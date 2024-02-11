@@ -5,11 +5,13 @@ using UnityEngine;
 public class FireballNoRB : MonoBehaviour
 {
     public int baseDamage = 30; // Base damage without multiplier
+    [SerializeField] private ParticleSystem particleSystem = default;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
+            SpawnHitParticles(transform.position);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
@@ -56,7 +58,21 @@ public class FireballNoRB : MonoBehaviour
                 }
             }
 
+            SpawnHitParticles(transform.position);
+
+
             Destroy(gameObject);
+        }
+    }
+
+    void SpawnHitParticles(Vector3 position)
+    {
+        // Instantiate the hit particles prefab at the collision point
+        Debug.Log("Spawning hit particles");
+
+        if (particleSystem != null)
+        {
+            Instantiate(particleSystem, position, Quaternion.identity);
         }
     }
 }
