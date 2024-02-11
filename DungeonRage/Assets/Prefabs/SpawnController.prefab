@@ -90,11 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 8572627250705915240}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &1048566320993871974
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,11 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 3026439301250616252}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &1874397787188477936
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,11 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 6090442675267532295}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &2335694616100164869
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,11 +375,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
   roomCollider: {fileID: 5031007558578083450}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 1
+  enemyTypes: []
 --- !u!1 &3123548346074591885
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,11 +512,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 271486448484315894}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &4357743201386467813
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,11 +607,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 6119725693653261785}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &4410438127091867464
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,11 +702,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 306588770860464899}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &5377664878548299011
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,11 +797,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 7908747652053939096}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &7486503774388653615
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,11 +892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 7373679931573475271}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1 &7677034490519961162
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,11 +987,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fe6dd25fdc8428187af9e0e550d2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
   roomCollider: {fileID: 998687829449854421}
-  maxEnemies: 10
   minSpawnInterval: 1
   maxSpawnInterval: 3
+  isBoss: 0
+  enemyTypes: []
 --- !u!1001 &4617274855480229050
 PrefabInstance:
   m_ObjectHideFlags: 0

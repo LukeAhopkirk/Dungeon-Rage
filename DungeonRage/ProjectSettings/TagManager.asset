@@ -10,6 +10,8 @@ TagManager:
   - Tank
   - Range
   - Checkpoint
+  - Boss
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Enemies
   - Player
   - Walls
-  - 
+  - Boss
   - 
   - 
   - 

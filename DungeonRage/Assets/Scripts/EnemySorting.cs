@@ -9,7 +9,7 @@ public class EnemySorting : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player"); 
-        sortingGroup = GetComponent<SortingGroup>();
+        //sortingGroup = GetComponent<SortingGroup>();
     }
 
     private void Update()

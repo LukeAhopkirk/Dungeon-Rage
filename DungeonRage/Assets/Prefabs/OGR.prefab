@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7561358973304239225}
   - component: {fileID: 7192637399456867203}
   - component: {fileID: 6278375200577619660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OGR
   m_TagString: Range
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578203095531965538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8653e51651b42e89bce876eaf79fef, type: 3}
   m_Name: 
@@ -253,7 +253,7 @@ SortingGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578203095531965538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

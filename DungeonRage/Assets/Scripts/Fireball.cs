@@ -10,12 +10,12 @@ public class Fireball : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem = default;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
+        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield"))
         {
             SpawnHitParticles(transform.position);
             DestroyFireball();
         }
-        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range") || collision.gameObject.CompareTag("Boss"))
         {
             // Access the PlayerMovement script
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
@@ -26,6 +26,8 @@ public class Fireball : MonoBehaviour
             TankController tankController = collision.gameObject.GetComponent<TankController>();
             // Check if the enemy has the RangeController component
             RangeController rangeController = collision.gameObject.GetComponent<RangeController>();
+            //Check if the boss has the bossController script
+            BossController bossController = collision.gameObject.GetComponent <BossController>();
 
             float totalDamage = 0;
 
@@ -58,8 +60,14 @@ public class Fireball : MonoBehaviour
             {
                 rangeController.TakeDamage(totalDamage);
             }
+            // If its a boss
+            else if(bossController != null)
+            {
+                //Debug.Log("test");
+                bossController.TakeDamage(totalDamage);
+            }
 
-            Debug.Log($"Total damage {totalDamage}");
+            //Debug.Log($"Total damage {totalDamage}");
 
             // Spawn hit particles at the collision point
             SpawnHitParticles(transform.position);

@@ -9,7 +9,7 @@ public class FireballNoRB : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
+        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield"))
         {
             SpawnHitParticles(transform.position);
             Destroy(gameObject);

@@ -27,15 +27,26 @@ public class RoomController : MonoBehaviour
     public float minSpawnInterval = 1f;
     public float maxSpawnInterval = 3f;
 
+    public bool isBoss = false;
+
     public List<EnemyType> enemyTypes;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            foreach (var enemyType in enemyTypes)
+            //Debug.Log("Trigger player test");
+            if (isBoss)
             {
-                StartCoroutine(SpawnEnemiesCoroutine(enemyType));
+                //Debug.Log("Trigger player is boss test");
+                BossController.setAttacking();
+            }
+            else
+            {
+                foreach (var enemyType in enemyTypes)
+                {
+                    StartCoroutine(SpawnEnemiesCoroutine(enemyType));
+                }
             }
         }
     }
