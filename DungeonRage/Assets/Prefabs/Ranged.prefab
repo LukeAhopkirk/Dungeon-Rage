@@ -111,7 +111,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3956905942916544818, guid: f1d05a38e9fda4aa8bd167aef80b2a93, type: 3}
   speed: 3
   FloatingTextPrefab: {fileID: 4531463296473750074, guid: 41fe561a9d49bd84ea19c1bfd52cfbe7, type: 3}
-  attackSound: {fileID: 8169676995527589571}
+  audioSource: {fileID: 8169676995527589571}
 --- !u!95 &647911303245299593
 Animator:
   serializedVersion: 5
