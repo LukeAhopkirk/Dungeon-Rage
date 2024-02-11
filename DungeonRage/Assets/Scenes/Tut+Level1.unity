@@ -10862,11 +10862,11 @@ PrefabInstance:
     - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: hud
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 152875185}
     - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1934519683}
     - target: {fileID: 6366369067683611977, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: m_Name
       value: CheckpointManager (3)
@@ -53447,11 +53447,11 @@ PrefabInstance:
     - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: hud
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 152875185}
     - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1934519683}
     - target: {fileID: 6366369067683611977, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: m_Name
       value: CheckpointManager (2)
@@ -55429,7 +55429,7 @@ Transform:
   m_GameObject: {fileID: 1934519683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.8, y: -17.1, z: -1}
+  m_LocalPosition: {x: -22.97, y: -4.57, z: -1}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
