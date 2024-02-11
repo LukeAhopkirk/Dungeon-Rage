@@ -9,7 +9,7 @@ public class AreaDamageFireball : MonoBehaviour
     public float areaDamageRadius = 3f; // Radius for area damage
     public float damage;
 
-    [SerializeField] private ParticleSystem particleSystem = default;
+    [SerializeField] private new ParticleSystem particleSystem = default;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
