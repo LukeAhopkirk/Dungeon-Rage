@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireballNoRB : MonoBehaviour
 {
     public int baseDamage = 30; // Base damage without multiplier
-    [SerializeField] private ParticleSystem particleSystem = default;
+    [SerializeField] private new ParticleSystem particleSystem = default;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

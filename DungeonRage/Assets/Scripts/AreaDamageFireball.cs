@@ -9,12 +9,12 @@ public class AreaDamageFireball : MonoBehaviour
     public float areaDamageRadius = 3f; // Radius for area damage
     public float damage;
 
-    [SerializeField] private ParticleSystem particleSystem = default;
+    [SerializeField] private new ParticleSystem particleSystem = default;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield"))
+        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield") || collision.gameObject.CompareTag("Checkpoint"))
         {
             SpawnHitParticles(transform.position);
             DealAreaDamage();
@@ -41,7 +41,7 @@ public class AreaDamageFireball : MonoBehaviour
 
             foreach (Collider2D collider in colliders)
             {
-                if (collider.CompareTag("Enemy") || collider.CompareTag("Tank") || collider.CompareTag("Range"))
+                if (collider.CompareTag("Enemy") || collider.CompareTag("Tank") || collider.CompareTag("Range") || collider.CompareTag("Boss"))
                 {
 
                     // Check if the enemy has the MonsterController component
@@ -50,6 +50,8 @@ public class AreaDamageFireball : MonoBehaviour
                     TankController tankController = collider.GetComponent<TankController>();
                     // Check if the enemy has the RangeController component
                     RangeController rangeController = collider.GetComponent<RangeController>();
+
+                    BossController bossController = collider.GetComponent<BossController>();
 
                     RageSystem rageSystem = FindObjectOfType<RageSystem>();
                     if (rageSystem != null)
@@ -69,6 +71,9 @@ public class AreaDamageFireball : MonoBehaviour
                     else if(rangeController != null)
                     {
                         rangeController.TakeDamage(totalDamage);
+                    }else if (bossController != null)
+                    {
+                        bossController.TakeDamage(totalDamage);
                     }
                 }
             }

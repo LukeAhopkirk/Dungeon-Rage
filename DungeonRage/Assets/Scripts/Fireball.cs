@@ -7,10 +7,10 @@ public class Fireball : MonoBehaviour
     public SkillPointManager skillPointManager;
     public float baseDamage = 35f; // Base damage without multiplier
     public float damage;
-    [SerializeField] private ParticleSystem particleSystem = default;
+    [SerializeField] private new ParticleSystem particleSystem = default;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield"))
+        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Shield") || collision.gameObject.CompareTag("Checkpoint"))
         {
             SpawnHitParticles(transform.position);
             DestroyFireball();
@@ -85,6 +85,7 @@ public class Fireball : MonoBehaviour
         if (particleSystem != null)
         {
             Instantiate(particleSystem, position, Quaternion.identity);
+
         }
     }
 

@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine cooldownCoroutine;
 
     public static bool isMoving;
-    [SerializeField] private ParticleSystem particleSystem = default;
+    [SerializeField] private new ParticleSystem particleSystem = default;
 
     public SkillPointManager skillPointManager;
 

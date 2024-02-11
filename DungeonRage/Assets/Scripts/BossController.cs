@@ -30,10 +30,6 @@ public class BossController : MonoBehaviour
     Animator animator;
 
 
-    //time between boss attacks
-    public float minInterval;
-    public float maxInterval;
-
     //Health of enemy
     public float health = 1000;
     private float maxHealth;
@@ -103,6 +99,8 @@ public class BossController : MonoBehaviour
         //Debug.Log(attacking == true);
         if (attacking)
         {
+            Debug.Log("Stopping all routines");
+            StopAllCoroutines();
             Debug.Log("Starting routine");
             StartCoroutine(AttackCoroutine());
             attacking = false;
@@ -173,7 +171,6 @@ public class BossController : MonoBehaviour
     {
         while (true)
         {
-            //yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
             yield return new WaitForSeconds(2);
             if (spawningNext)
             {
@@ -199,7 +196,7 @@ public class BossController : MonoBehaviour
         for (int rounds = 0; rounds <= roundsShooting; rounds++)
         {
             //Create fire fireballs
-            for(int noBalls = 0; noBalls<=3; noBalls++)
+            for(int noBalls = 0; noBalls<=4; noBalls++)
             {
                 GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
