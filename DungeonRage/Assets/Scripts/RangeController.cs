@@ -47,14 +47,18 @@ public class RangeController : MonoBehaviour
     public GameObject FloatingTextPrefab;
     // Start is called before the first frame update
 
-    [SerializeField] private AudioSource attackSound;
+    [SerializeField] private AudioSource audioSource ;
     void Start()
     {
         mainCamera = Camera.main;
 
         //Find game object with player tag and set to target
         target = GameObject.FindGameObjectWithTag("Player");
-
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
         // Initialise the reference to the Animator component
         animator = GetComponent<Animator>();
 
@@ -92,7 +96,7 @@ public class RangeController : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minShootInterval, maxShootInterval));
             animator.SetTrigger("attack");
             yield return new WaitForSeconds(1f);
-            attackSound.Play();
+            audioSource.Play();
         }
     }
 
