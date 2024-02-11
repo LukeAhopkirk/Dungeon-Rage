@@ -1714,9 +1714,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.3567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.377
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000073466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368195073106149503, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000000065193
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.3567
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.377
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139682088891516744, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.222
+      objectReference: {fileID: 0}
     - target: {fileID: 8330968032917255229, guid: 80ed60f9075f18345bf8f81280975b19, type: 3}
       propertyPath: m_text
-      value: Walk up to the scroll to read it.
+      value: Walk up to that page to read it... looks like its been torn from a journal...
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
