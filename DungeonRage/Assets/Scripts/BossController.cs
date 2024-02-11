@@ -170,7 +170,6 @@ public class BossController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
-                animator.SetTrigger("charge");
             if (spawningNext)
             {
                 isChasing = false;
