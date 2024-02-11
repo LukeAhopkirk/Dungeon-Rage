@@ -208,7 +208,7 @@ public class TankController : MonoBehaviour
         {
             if (health <= 0)
             {
-                anim.SetTrigger("death");
+                animator.SetTrigger("death");
                 dying = true;
                 if (dying)
                 {
