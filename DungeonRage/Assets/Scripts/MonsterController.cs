@@ -47,6 +47,8 @@ public class MonsterController : MonoBehaviour
 
 	public GameObject FloatingTextPrefab;
 
+	[SerializeField] private AudioSource attackSound;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -180,7 +182,7 @@ public class MonsterController : MonoBehaviour
 	{
 		//Vector2 pos = transform.localPosition;
 		isChasing = false;
-
+		attackSound.Play();
         if (isTouching)
         {
 			hud.DealDamage(damage);
