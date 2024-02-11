@@ -63,7 +63,7 @@ public class HUDManager : MonoBehaviour
         Debug.Log($"New Endurance: {newEndurance}");
 
         // Calculate healthAmount based on baseHealthAmount and newEndurance
-        healthAmount = baseHealthAmount + newEndurance * 5f;
+        healthAmount = baseHealthAmount + newEndurance + 10f;
 
         // Update the healthBar fill amount based on the calculated healthAmount
         healthBar.fillAmount = healthAmount / 100f;

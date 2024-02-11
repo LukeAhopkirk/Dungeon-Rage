@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using TMPro;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -40,6 +41,8 @@ public class TankController : MonoBehaviour
     public float damage;
 
     public bool flip;
+
+    private bool dying = false;
 
     [SerializeField] private AudioSource attackSound;
 
@@ -197,17 +200,26 @@ public class TankController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        //Debug.Log("Test");
-
-        if (health <= 0)
+        if (dying)
         {
-            animator.SetTrigger("death");
-            hud.GetExperience(10);
+            return;
         }
-
-        if (FloatingTextPrefab)
+        else
         {
-            ShowFloatingText(damage.ToString());
+            if (health <= 0)
+            {
+                animator.SetTrigger("death");
+                dying = true;
+                if (dying)
+                {
+                    hud.GetExperience(10);
+                }
+            }
+            //Trigger floating text
+            if (FloatingTextPrefab)
+            {
+                ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+            }
         }
 
     }

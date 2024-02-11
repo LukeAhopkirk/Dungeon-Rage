@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateDamageMultiplier(float intelligence)
     {
-        damageMultiplier = baseDamageMultiplier + intelligence * 0.005f;
+        damageMultiplier = baseDamageMultiplier + intelligence * 0.008f;
     }
     void UpdateMoveSpeed(float newAgility)
     {

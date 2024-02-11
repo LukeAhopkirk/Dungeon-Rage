@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 //using UnityMovementAI;
 
 public class MonsterController : MonoBehaviour
@@ -21,6 +22,8 @@ public class MonsterController : MonoBehaviour
     bool isEnraged = false;
 
 	bool idle = false;
+
+	private bool dying = false;
 
 	// Radius of the circle
 	public float radius = 2f;
@@ -224,19 +227,28 @@ public class MonsterController : MonoBehaviour
 	public void TakeDamage(float damage)
     {
 		health -= damage;
-
-        if (health <= 0)
-        {
-			anim.SetTrigger("death");
-            hud.GetExperience(10);
-		}
-
-		//Trigger floating text
-		if (FloatingTextPrefab)
+		if (dying)
 		{
-			ShowFloatingText(damage.ToString());
+			return;
 		}
-
+		else
+		{
+			if (health <= 0)
+			{
+				anim.SetTrigger("death");
+				dying = true;
+				if (dying)
+				{
+					hud.GetExperience(10);
+				}
+			}
+			//Trigger floating text
+			if (FloatingTextPrefab)
+			{
+				ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+			}
+		}
+   
     }
 
 	void ShowFloatingText(string text)
