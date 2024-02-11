@@ -18,7 +18,7 @@ public class RageSystem : MonoBehaviour
     private bool isAbility2Active = false;
     private bool isAbility3Active = false;
 
-    private float ability2DrainRate = 10f;
+    private float ability2DrainRate = 20f;
     private float ability3DrainRate = 15f;
 
     // Flag to prevent gaining rage during ability drain

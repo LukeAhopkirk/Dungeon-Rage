@@ -12,22 +12,37 @@ public class FireballNoRB : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
         {
+            // Access the corresponding enemy script based on the tag
             MonsterController enemy = collision.gameObject.GetComponent<MonsterController>();
+            TankController tankEnemy = collision.gameObject.GetComponent<TankController>();
+            RangeController rangeEnemy = collision.gameObject.GetComponent<RangeController>();
 
-            if (enemy != null)
+            if (enemy != null || tankEnemy != null || rangeEnemy != null)
             {
                 // Access the PlayerMovement script
                 PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
 
                 if (playerMovement != null)
                 {
-                    // Apply the damage multiplier
-                    int totalDamage = Mathf.RoundToInt(baseDamage * playerMovement.damageMultiplier);
-
-                    // Deal damage to the enemy
-                    enemy.TakeDamage(totalDamage);
+                    // Choose the appropriate enemy type and apply the damage multiplier
+                    int totalDamage = 0;
+                    if (enemy != null)
+                    {
+                        totalDamage = Mathf.RoundToInt(baseDamage * playerMovement.damageMultiplier);
+                        enemy.TakeDamage(totalDamage);
+                    }
+                    else if (tankEnemy != null)
+                    {
+                        totalDamage = Mathf.RoundToInt(baseDamage * playerMovement.damageMultiplier);
+                        tankEnemy.TakeDamage(totalDamage);
+                    }
+                    else if (rangeEnemy != null)
+                    {
+                        totalDamage = Mathf.RoundToInt(baseDamage * playerMovement.damageMultiplier);
+                        rangeEnemy.TakeDamage(totalDamage);
+                    }
 
                     // Access and apply damage to the RageSystem
                     RageSystem rageSystem = FindObjectOfType<RageSystem>();
@@ -37,7 +52,7 @@ public class FireballNoRB : MonoBehaviour
                     }
 
                     // Show debug log for damage dealt
-                    Debug.Log($"Fireball dealt {totalDamage} damage to {enemy.gameObject.name}");
+                    Debug.Log($"Fireball dealt {totalDamage} damage to {collision.gameObject.name}");
                 }
             }
 

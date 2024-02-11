@@ -32267,7 +32267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxEnemiesPrefab1Wave1
@@ -32311,7 +32311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.data[1].maxEnemies
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.data[2].maxEnemies
@@ -35328,8 +35328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcb15aa3c3454b74838522f52e1998b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  fireballPrefab: {fileID: 4651018945842816387, guid: 329507ce80aee4bc393eb4fafe251f15, type: 3}
   fireballTrackingPrefab: {fileID: 954419719457976841, guid: 56487ed59a3e649fb9868876197c69af, type: 3}
+  YourTrackingFireballSprite: {fileID: 32570641, guid: b338ca2d909e64fa0bf818b1acaf7973, type: 3}
   trackingFireballRadius: 5
   force: 10
 --- !u!114 &1934519686
@@ -35360,10 +35361,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b6e79e71cbb40268ce0e0beb56353d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 5
-  knockbackRadius: 1
-  tankForceMultiplier: 2
+  knockbackForce: 10
+  knockbackRadius: 2
+  tankForceMultiplier: 20
   rangeForceMultiplier: 2
+  damageAmount: 25
   prefab: {fileID: 1925040077887656220, guid: 4e3d37fe7988a40bbafdc75d003c74eb, type: 3}
 --- !u!114 &1934519688
 MonoBehaviour:

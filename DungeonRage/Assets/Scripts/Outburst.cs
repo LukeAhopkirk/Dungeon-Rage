@@ -5,6 +5,7 @@ public class Outburst : MonoBehaviour
 {
     public GameObject fireballPrefab;  // Reference to the fireball prefab
     public GameObject fireballTrackingPrefab;
+    public Sprite TrackingFireballSprite;
     public float trackingFireballRadius = 5f;  // Radius for tracking fireballs
     public float force = 10f;  // Force applied to fireballs
 
@@ -87,9 +88,17 @@ public class Outburst : MonoBehaviour
             TrackingFireball trackingFireball = fireball.GetComponent<TrackingFireball>();
             trackingFireball.SetTarget(nearestEnemy.transform); // Pass the Transform
 
+            // Set the sprite for the tracking fireball (assuming you have a SpriteRenderer component)
+            SpriteRenderer spriteRenderer = fireball.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = TrackingFireballSprite;
+            }
+
             Physics2D.IgnoreCollision(fireball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
+
 
     GameObject FindNearestEnemy()
     {

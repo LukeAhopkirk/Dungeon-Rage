@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ public class KnockbackAbility : MonoBehaviour
     public float knockbackRadius = 3f;
     public float tankForceMultiplier = 2;
     public float rangeForceMultiplier = 2;
+
+    public int damageAmount = 50;
 
     public GameObject prefab;
 
@@ -55,6 +56,9 @@ public class KnockbackAbility : MonoBehaviour
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                     monsterController.Knockback(knockbackDirection, knockbackForce);
+
+                    // Deal damage to the enemy
+                    monsterController.TakeDamage(damageAmount);
                 }
             }
             //If it is a tank enemy
@@ -67,12 +71,14 @@ public class KnockbackAbility : MonoBehaviour
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                     tankController.Knockback(knockbackDirection, force);
+
+                    // Deal damage to the enemy
+                    tankController.TakeDamage(damageAmount);
                 }
             }
             //If its range enemy
             else
             {
-                Debug.Log("inside loop");
                 // Check if the enemy is within the knockback radius
                 if (distanceToEnemy <= knockbackRadius)
                 {
@@ -80,6 +86,9 @@ public class KnockbackAbility : MonoBehaviour
                     // Apply knockback to the enemy with a uniform force
                     Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                     rangeController.Knockback(knockbackDirection, force);
+
+                    // Deal damage to the enemy
+                    rangeController.TakeDamage(damageAmount);
                 }
             }
         }

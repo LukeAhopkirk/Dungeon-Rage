@@ -94,4 +94,4 @@ MonoBehaviour:
   skillPointManager: {fileID: 0}
   baseDamage: 60
   areaDamageRadius: 1
-  damage: 25
+  damage: 20
