@@ -180,31 +180,19 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator Dash()
     {
-        // Find all objects with an Enemy tag
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        // Find all objects with an Tank tag
         GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
-        // Find all objects with an Range tag
         GameObject[] range = GameObject.FindGameObjectsWithTag("Range");
 
-        // Create a new array with a size that accommodates both arrays
         GameObject[] allEnemies = new GameObject[tanks.Length + enemies.Length + range.Length];
-
-        // Copy the elements of the enemies array to the new array, starting after the tanks
         enemies.CopyTo(allEnemies, 0);
-
-        // Copy the elements of the tanks array to the new array
         tanks.CopyTo(allEnemies, enemies.Length);
-
-        // Copy the elements of the ranges array to the new array, starting after the tanks and enemies
         range.CopyTo(allEnemies, tanks.Length + enemies.Length);
 
         isDashing = true;
 
-        // Goes through each enemy and ignores the collision during the dash.
         foreach (GameObject enemy in allEnemies)
         {
-            // Check if the enemy GameObject is not null before attempting to access its components
             if (enemy != null)
             {
                 Collider2D playerCollider = rb.GetComponent<Collider2D>();
@@ -218,17 +206,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 dashDirection = movement.magnitude == 0 ? Vector2.zero : movement.normalized;
-
         Vector2 dashTarget = (Vector2)transform.position + dashDirection * dashDistance;
 
-        LayerMask wallLayer = LayerMask.GetMask("Walls");
-
-        // Perform a raycast to check for collisions in the dash direction
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, dashDirection, dashDistance, wallLayer);
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, dashDirection, dashDistance, LayerMask.GetMask("Walls"));
 
         if (hit.collider != null && hit.collider.CompareTag("Walls"))
         {
-            // If there's a wall, reduce dash distance to avoid collision
             Vector2 closestPoint = hit.collider.ClosestPoint(rb.position);
             dashTarget = closestPoint + (closestPoint - (Vector2)transform.position).normalized * playerOffset;
         }
@@ -236,7 +219,6 @@ public class PlayerMovement : MonoBehaviour
         float startTime = Time.time;
         float elapsedTime = 0f;
 
-        // Move the player towards the dash target over time
         while (elapsedTime < dashTime)
         {
             rb.MovePosition(Vector2.Lerp(rb.position, dashTarget, elapsedTime / dashTime));
@@ -246,7 +228,6 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = false;
 
-        // Resets collisions back with enemies
         foreach (GameObject enemy in allEnemies)
         {
             if (enemy != null)
@@ -261,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 
     void SpawnHitParticles(Vector3 position)
     {
