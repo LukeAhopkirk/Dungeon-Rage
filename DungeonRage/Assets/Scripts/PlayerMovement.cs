@@ -113,7 +113,14 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            bool isMoving = movement.magnitude > 0;
+            if(movement.magnitude > 0)
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }   
 
             if (isMoving && !isPlayingRunSound)
             {

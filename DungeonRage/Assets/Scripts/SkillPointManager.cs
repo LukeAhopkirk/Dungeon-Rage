@@ -30,6 +30,7 @@ public class SkillPointManager : MonoBehaviour
 
     public GameObject levelUpPanel;
     private float levelNotifDuration = 2f;
+    [SerializeField] private AudioSource levelUpSound;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class SkillPointManager : MonoBehaviour
         playerLevel++;
         UpdateTotalSkillPoints();
         UpdatePlayerLevel();
+        levelUpSound.Play();
         StartCoroutine(ShowLevelUpPanel());
     }
 
