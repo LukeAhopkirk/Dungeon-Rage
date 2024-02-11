@@ -60,10 +60,13 @@ public class BossController : MonoBehaviour
     //Reference to the boss shot
     public GameObject projectilePrefab;
 
+    //float for how many rounds the enemy shoots
+    public float roundsShooting = 3;
+
     //Float to hold the force of the projectile.
     public float speed;
 
-    private bool isChasing = true;
+    private bool isChasing = false;
 
     //Settor method for to start the boss attacking
     public static void setAttacking()
@@ -103,6 +106,7 @@ public class BossController : MonoBehaviour
             Debug.Log("Starting routine");
             StartCoroutine(AttackCoroutine());
             attacking = false;
+            isChasing = true;
         }
 
         if (steeringBasics != null && isChasing)
@@ -169,104 +173,103 @@ public class BossController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            //yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            yield return new WaitForSeconds(2);
             if (spawningNext)
             {
-                isChasing = false;
-                Rigidbody2D rb = GetComponent<Rigidbody2D>();
-                rb.velocity = Vector2.zero;
-                GameObject sheild = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
-                spawnEnemies();
-                yield return new WaitForSeconds(3);
-                Destroy(sheild);
+                yield return SpawnEnemies();
                 spawningNext = false;
-                isChasing = true;
             }
             else
             {
-                animator.SetTrigger("charge");
+                //animator.SetTrigger("charge");
+                yield return Fire();
                 spawningNext = true;
+                animator.SetTrigger("decharge");
+            }
+        }
+    }
+
+    IEnumerator Fire()
+    {
+        animator.SetTrigger("charge");
+        //Wait for charge animation to finsh as its only .4 seconds long
+        yield return new WaitForSeconds(0.4f);
+        List<GameObject> fireballs = new List<GameObject>();
+        for (int rounds = 0; rounds <= roundsShooting; rounds++)
+        {
+            //Create fire fireballs
+            for(int noBalls = 0; noBalls<=3; noBalls++)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+                // Get the Rigidbody2D component of the spell object
+                Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+
+                // Ignore the collision between the projectile and the caster
+                Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+                // Create a vector for the position of the projectile
+                Vector2 pos = new Vector2(projectile.transform.position.x, projectile.transform.position.y);
+
+                // Create a vector to hold the player's position
+                Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.y);
+
+                // Calculate the direction from the player to the target
+                Vector2 directionToPlayer = (targetPos - pos).normalized;
+
+                // Calculate a random offset within a radius around the player
+                float randomOffsetX = Random.Range(-0.2f, 0.2f);
+                float randomOffsetY = Random.Range(-0.2f, 0.2f);
+
+                // Apply the random offset to the direction
+                Vector2 direction = directionToPlayer + new Vector2(randomOffsetX, randomOffsetY);
+                rb.AddForce(direction * speed, ForceMode2D.Impulse);
+            }
+
+            // Add force in the direction
+            yield return new WaitForSeconds(1.5f);
+        }
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        //Stop enemie from accelerating to target
+        isChasing = false;
+
+        //Set rigid body speed to 0
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+
+        //Create the shield game object
+        GameObject sheild = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+
+        //Spawn enemeies
+        foreach(var enemytype in enemyTypes)
+        {
+            float noSpawn = 0;
+            while (noSpawn < maxEnemies)
+            {
+                // Generate a random angle in radians
+                float angle = Random.Range(0f, Mathf.PI * 2f); // 0 to 2π
+
+                // Calculate random position within the radius
+                float radius = Random.Range(0f, 2f); // Within 0 to 2 units
+                float spawnX = transform.position.x + radius * Mathf.Cos(angle);
+                float spawnY = transform.position.y + radius * Mathf.Sin(angle);
+
+                Vector2 spawnPosition = new Vector2(spawnX, spawnY);
+
+                Instantiate(enemytype, spawnPosition, Quaternion.identity);
+                noSpawn++;
+
+                yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             }
         }
 
-
-    }
-    //Method to spawn enemies
-    private void spawnEnemies()
-    {
-        Debug.Log("spawning");
-        //Create shield game object around player
-
-
-        //spawn enemies
-        foreach (var enemyType in enemyTypes)
-        {
-            spawnEnemyType(enemyType);
-        }
-    }
-
-
-    private void spawnEnemyType(GameObject enemyType)
-    {
-        float noSpawn = 0;
-        while(noSpawn < maxEnemies)
-        {
-            // Generate a random angle in radians
-            float angle = Random.Range(0f, Mathf.PI * 2f); // 0 to 2π
-
-            // Calculate random position within the radius
-            float radius = Random.Range(0f, 2f); // Within 0 to 2 units
-            float spawnX = transform.position.x + radius * Mathf.Cos(angle);
-            float spawnY = transform.position.y + radius * Mathf.Sin(angle);
-
-            Vector2 spawnPosition = new Vector2(spawnX, spawnY);
-
-            Instantiate(enemyType, spawnPosition, Quaternion.identity);
-            noSpawn++;
-        }
-    }
-
-    //Method that shoots outburst(like rage ability 3)
-    private void fire()
-    {
-        for(int rounds = 0; rounds <=3; rounds++)
-        {
-            StartCoroutine(FireCoroutine());
-        }
-        animator.SetTrigger("decharge");
-    }
-
-    private IEnumerator FireCoroutine()
-    {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-
-            // Get the Rigidbody2D component of the spell object
-            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-
-            // Ignore the collision between the projectile and the caster
-            Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-            // Create a vector for the position of the projectile
-            Vector2 pos = new Vector2(projectile.transform.position.x, projectile.transform.position.y);
-
-            // Create a vector to hold the player's position
-            Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.y);
-
-            // Calculate the direction from the player to the target
-            Vector2 directionToPlayer = (targetPos - pos).normalized;
-
-            // Calculate a random offset within a radius around the player
-            float randomOffsetX = Random.Range(-0.2f, 0.2f);
-            float randomOffsetY = Random.Range(-0.2f, 0.2f);
-
-            // Apply the random offset to the direction
-            Vector2 direction = directionToPlayer + new Vector2(randomOffsetX, randomOffsetY);
-
-
-            // Add force in the direction
-            rb.AddForce(direction * speed, ForceMode2D.Impulse);
-
         yield return new WaitForSeconds(1);
+        Destroy(sheild);
+        isChasing = true;
 
     }
 
