@@ -113,7 +113,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3956905942916544818, guid: f1d05a38e9fda4aa8bd167aef80b2a93, type: 3}
   speed: 3
   FloatingTextPrefab: {fileID: 4531463296473750074, guid: 41fe561a9d49bd84ea19c1bfd52cfbe7, type: 3}
-  attackSound: {fileID: 0}
+  audioSource: {fileID: -3307750946969268392}
 --- !u!95 &647911303245299593
 Animator:
   serializedVersion: 5
@@ -273,7 +273,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ea5953dfed12d934f902796760443e78, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.24
-  m_Pitch: 1
+  m_Pitch: 2.06
   Loop: 0
   Mute: 0
   Spatialize: 0

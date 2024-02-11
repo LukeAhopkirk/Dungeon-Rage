@@ -48,7 +48,7 @@ public class SkillPointManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        availableSkillPoints += 5;
+        availableSkillPoints += 10;
         playerLevel++;
         UpdateTotalSkillPoints();
         UpdatePlayerLevel();
