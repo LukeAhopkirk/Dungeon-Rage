@@ -1179,6 +1179,7 @@ MonoBehaviour:
   rageAmount: 0
   skillPointManager: {fileID: 0}
   checkPoint: {fileID: 2010581475}
+  animator: {fileID: 1934519693}
 --- !u!114 &152875186
 MonoBehaviour:
   m_ObjectHideFlags: 0
