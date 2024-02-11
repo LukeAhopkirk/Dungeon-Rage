@@ -48,6 +48,8 @@ public class RangeController : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private AudioSource audioSource ;
+
+    private bool dying = false;
     void Start()
     {
         mainCamera = Camera.main;
@@ -163,17 +165,26 @@ public class RangeController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        //Debug.Log("Test");
-
-        if (health <= 0)
+        if (dying)
         {
-            animator.SetTrigger("death");
-            hud.GetExperience(10);
+            return;
         }
-
-        if (FloatingTextPrefab)
+        else
         {
-            ShowFloatingText(damage.ToString());
+            if (health <= 0)
+            {
+                animator.SetTrigger("death");
+                dying = true;
+                if (dying)
+                {
+                    hud.GetExperience(10);
+                }
+            }
+            //Trigger floating text
+            if (FloatingTextPrefab)
+            {
+                ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+            }
         }
 
     }
