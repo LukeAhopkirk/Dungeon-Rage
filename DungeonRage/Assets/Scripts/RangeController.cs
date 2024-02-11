@@ -46,6 +46,8 @@ public class RangeController : MonoBehaviour
 
     public GameObject FloatingTextPrefab;
     // Start is called before the first frame update
+
+    [SerializeField] private AudioSource attackSound;
     void Start()
     {
         mainCamera = Camera.main;
@@ -89,6 +91,8 @@ public class RangeController : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minShootInterval, maxShootInterval));
             animator.SetTrigger("attack");
+            yield return new WaitForSeconds(1f);
+            attackSound.Play();
         }
     }
 
