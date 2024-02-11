@@ -23,6 +23,9 @@ public class HUDManager : MonoBehaviour
     public SkillPointManager skillPointManager;
 
     public CheckpointManager checkPoint;
+    public Animator animator;
+
+    private bool isDying = false;
 
 
     // Start is called before the first frame update
@@ -77,12 +80,33 @@ public class HUDManager : MonoBehaviour
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
 
-        if(healthAmount <= 0)
+        if(healthAmount <= 0 && !isDying)
         {
+            isDying = true;
             // Player is dead
-            checkPoint.RespawnPlayer();
+            TriggerDeathAnimation();
             Debug.Log("Player is dead");
         }
+        else
+        {
+            return;
+        }
+    }
+
+    private void TriggerDeathAnimation()
+    {
+        animator.SetTrigger("Death");
+        StartCoroutine(RespawnAfterDeathAnimation());
+    }
+
+    private IEnumerator RespawnAfterDeathAnimation()
+    {
+        float deathAnimationDuration = 1.03f;
+        animator.SetTrigger("Respawned");
+        yield return new WaitForSeconds(deathAnimationDuration);
+
+        checkPoint.RespawnPlayer();
+        isDying = false;
     }
 
     public void SetInvincibilityState(bool isInvincible)
