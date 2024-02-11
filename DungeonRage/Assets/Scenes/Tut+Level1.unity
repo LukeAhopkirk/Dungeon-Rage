@@ -2458,6 +2458,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 152875185}
+    - target: {fileID: 1210665011441697140, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1934519683}
     - target: {fileID: 6366369067683611977, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: m_Name
       value: CheckpointManager (1)
@@ -38039,3 +38047,9 @@ SceneRoots:
   - {fileID: 1337852055}
   - {fileID: 1926479276}
   - {fileID: 1881458194}
+  - {fileID: 1212275931}
+  - {fileID: 374239497}
+  - {fileID: 1539805900}
+  - {fileID: 365655611}
+  - {fileID: 1082744281}
+  - {fileID: 1063220346}
