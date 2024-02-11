@@ -50,10 +50,11 @@ public class SpellCast : MonoBehaviour
                 Timer += Time.deltaTime;
                 if (Timer > cooldownLength)
                 {
-                   spellReady = true;
-                   Timer = 0;
+                    spellReady = true;
+                    Timer = 0;
                 }
             }
+
             if (spellReady && Input.GetButtonDown("Fire1"))
             {
                 fireballSound.Play();
@@ -66,50 +67,44 @@ public class SpellCast : MonoBehaviour
                     animator.SetTrigger("shot2");
                 }
 
-                imageCooldown.fillAmount = .5f;
+                imageCooldown.fillAmount = 1f; // Set fill amount to full at the start of cooldown
                 spellReady = false;
                 lastFireballTime = Time.time;
 
-                if (Time.time - lastFireballTime < cooldownLength)
-                {
-                    Timer = Time.time - lastFireballTime;
-                    imageCooldown.fillAmount = 1 - Timer / cooldownLength;
+                // Start the cooldown fill animation coroutine
+                cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
+            }
 
-                    if (Timer > 0f && cooldownCoroutine == null)
-                    {
-                        cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
-                    }
+            if (!spellReady)
+            {
+                float remainingCooldown = Time.time - lastFireballTime;
+                if (remainingCooldown < cooldownLength)
+                {
+                    imageCooldown.fillAmount = 1 - remainingCooldown / cooldownLength;
                 }
                 else
                 {
                     imageCooldown.fillAmount = 0.0f;
-
-                    if (cooldownCoroutine != null)
-                    {
-                        StopCoroutine(cooldownCoroutine);
-                        cooldownCoroutine = null;
-                    }
+                    spellReady = true; // Reset spell readiness when cooldown is complete
                 }
             }
         }
     }
 
-
     IEnumerator CooldownFillAnimation()
     {
         float startTime = Time.time;
         float elapsedTime = 0f;
-        float startFill = imageCooldown.fillAmount;
+        float startFill = 1f; // Start fill amount at full
 
-        while (elapsedTime < cooldownAnimationTime)
+        while (elapsedTime < cooldownLength)
         {
-            imageCooldown.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / cooldownAnimationTime);
+            imageCooldown.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / cooldownLength);
             elapsedTime = Time.time - startTime;
             yield return null;
         }
 
         imageCooldown.fillAmount = 0f;
-        cooldownCoroutine = null;
     }
 
 
