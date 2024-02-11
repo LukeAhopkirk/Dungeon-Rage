@@ -28,6 +28,9 @@ public class SkillPointManager : MonoBehaviour
     public float playerLevel = 0;
     public TextMeshProUGUI playerLevelText;
 
+    public GameObject levelUpPanel;
+    private float levelNotifDuration = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,7 @@ public class SkillPointManager : MonoBehaviour
         }
         UpdatePlayerLevel();
         UpdateTotalSkillPoints();
+        levelUpPanel.SetActive(false);
     }
     public void LevelUp()
     {
@@ -47,6 +51,14 @@ public class SkillPointManager : MonoBehaviour
         playerLevel++;
         UpdateTotalSkillPoints();
         UpdatePlayerLevel();
+        StartCoroutine(ShowLevelUpPanel());
+    }
+
+    private IEnumerator ShowLevelUpPanel()
+    {
+        levelUpPanel.SetActive(true);
+        yield return new WaitForSeconds(levelNotifDuration);
+        levelUpPanel.SetActive(false);
     }
     void AllocatePoint(StatInfo stat)
     {
