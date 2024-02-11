@@ -3216,7 +3216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxSpawnInterval
-      value: 3
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.size
@@ -30327,6 +30327,10 @@ PrefabInstance:
       value: RoomPrefrab
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
+      propertyPath: maxSpawnInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -33131,11 +33135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxSpawnInterval
-      value: 0.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: minSpawnInterval
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxMonstersPrefab1
@@ -33151,7 +33155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: maxEnemiesPrefab1Wave1
@@ -33191,7 +33195,7 @@ PrefabInstance:
       objectReference: {fileID: 8578203095531965538, guid: 9fa810daedfc14652ac9d3008a77498e, type: 3}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.data[0].maxEnemies
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2316648435580069142, guid: aa17aa20d8e43417ea831e0eb8c1da81, type: 3}
       propertyPath: enemyTypes.Array.data[1].maxEnemies
