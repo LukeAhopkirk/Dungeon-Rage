@@ -7,11 +7,13 @@ public class Fireball : MonoBehaviour
     public SkillPointManager skillPointManager;
     public float baseDamage = 35f; // Base damage without multiplier
     public float damage;
+    public GameObject hitParticlesPrefab; // Reference to the Particle System prefab
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
-            Destroy(gameObject);
+            DestroyFireball();
         }
         else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Tank") || collision.gameObject.CompareTag("Range"))
         {
@@ -32,7 +34,6 @@ public class Fireball : MonoBehaviour
                 // Apply the damage multiplier
                 totalDamage = damage * playerMovement.damageMultiplier;
 
-
                 // Access and apply damage to the RageSystem
                 RageSystem rageSystem = FindObjectOfType<RageSystem>();
                 if (rageSystem != null)
@@ -41,28 +42,44 @@ public class Fireball : MonoBehaviour
                 }
 
             }
-            //if its a basic monster
-            if(monsterController!= null)
+
+            // If it's a basic monster
+            if (monsterController != null)
             {
                 monsterController.TakeDamage(totalDamage);
             }
-            //if its a tank enemy
-            else if(tankController != null)
+            // If it's a tank enemy
+            else if (tankController != null)
             {
                 tankController.TakeDamage(totalDamage);
             }
-            //if its a ranged enemy
+            // If it's a ranged enemy
             else if (rangeController != null)
             {
                 rangeController.TakeDamage(totalDamage);
             }
 
-                Debug.Log($"Total damage {totalDamage}");
-            // Show debug log for damage dealt
-            //Debug.Log($"Fireball dealt {totalDamage} damage to {enemy.gameObject.name}");
+            Debug.Log($"Total damage {totalDamage}");
 
+            // Spawn hit particles at the collision point
+            SpawnHitParticles(transform.position);
 
-            Destroy(gameObject);
+            // Destroy the fireball
+            DestroyFireball();
         }
+    }
+
+    void SpawnHitParticles(Vector3 position)
+    {
+        // Instantiate the hit particles prefab at the collision point
+        if (hitParticlesPrefab != null)
+        {
+            Instantiate(hitParticlesPrefab, position, Quaternion.identity);
+        }
+    }
+
+    void DestroyFireball()
+    {
+        Destroy(gameObject);
     }
 }
