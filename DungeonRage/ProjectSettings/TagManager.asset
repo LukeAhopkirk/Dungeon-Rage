@@ -9,6 +9,7 @@ TagManager:
   - HUD
   - Tank
   - Range
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

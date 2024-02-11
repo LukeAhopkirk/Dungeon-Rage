@@ -12,7 +12,7 @@ public class PortalController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Get the player's current position
-            Vector3 newPosition = other.transform.position;
+            Vector2 newPosition = other.transform.position;
 
             // Set the x and y components of the player's position to the teleport position
             newPosition.x = teleportPosition.x;

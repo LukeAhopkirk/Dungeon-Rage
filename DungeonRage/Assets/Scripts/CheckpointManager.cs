@@ -6,19 +6,17 @@ public class CheckpointManager : MonoBehaviour
 {
     // This method will be called when the player's health reaches zero
     public GameObject player;
-    public GameObject checkpoint;
     private static Vector3 lastCheckpointPosition;
+    public HUDManager hud;
 
     public void Start()
     {
         lastCheckpointPosition = player.transform.position;
     }
-    public void OnCollision2D(Collider2D collision)
+
+    public void UpdateLastCheckpointPosition(Vector3 position)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            lastCheckpointPosition = collision.gameObject.transform.position;
-        }
+        lastCheckpointPosition = position;
     }
 
     public void RespawnPlayer()
@@ -27,7 +25,9 @@ public class CheckpointManager : MonoBehaviour
         {
             // Respawn the player at the last checkpoint
             player.transform.position = lastCheckpointPosition;
-            HUDManager.healthAmount = HUDManager.baseHealthAmount;
+
+            // Reset the player's health
+            hud.Heal(10000000);
         }
     }
 }
