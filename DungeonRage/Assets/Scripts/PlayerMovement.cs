@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using Unity.Jobs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem = default;
 
     public SkillPointManager skillPointManager;
+
+    [SerializeField] private AudioSource dashSoundEffect;
+    [SerializeField] private AudioSource runSoundEffect;
+    [SerializeField] private bool isPlayingRunSound = false;
+
     private void Start()
     {
 
@@ -80,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastDashTime > dashCooldown)
             {
                 SpawnHitParticles(transform.position);
+                dashSoundEffect.Play();
                 StartCoroutine(Dash());
                 lastDashTime = Time.time;
                 imageCooldown.fillAmount = 1.0f;
@@ -106,15 +113,18 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (horizontalInput == 0 && verticalInput == 0)
-            {
-                isMoving = false;
-            }
-            else
-            {
-                isMoving = true;
-            }
+            bool isMoving = movement.magnitude > 0;
 
+            if (isMoving && !isPlayingRunSound)
+            {
+                PlayRunEffect();
+                isPlayingRunSound = true;
+            }
+            else if (!isMoving && isPlayingRunSound)
+            {
+                StopRunEffect();
+                isPlayingRunSound = false;
+            }
             
 
             // Update animator
@@ -122,8 +132,17 @@ public class PlayerMovement : MonoBehaviour
 
             // Flip character if needed
             Flip();
-
         }
+    }
+    private void PlayRunEffect()
+    {
+        Debug.Log("Playing run sound effect");
+        runSoundEffect.Play();
+    }
+    private void StopRunEffect()
+    {
+        Debug.Log("Stopping run sound effect");
+        runSoundEffect.Stop();
     }
 
     IEnumerator CooldownFillAnimation()
