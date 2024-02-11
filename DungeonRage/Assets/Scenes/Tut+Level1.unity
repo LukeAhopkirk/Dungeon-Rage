@@ -32064,6 +32064,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329152229}
   m_CullTransparentMesh: 1
+--- !u!1001 &1337852055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.47811
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9330876
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: ...must seal myself away.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &1344767247
 GameObject:
   m_ObjectHideFlags: 0
@@ -35403,6 +35464,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876660209}
   m_CullTransparentMesh: 1
+--- !u!1001 &1881458194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 46.424118
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.83942
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: my family... I must protect them
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &1913245804
 GameObject:
   m_ObjectHideFlags: 0
@@ -35589,6 +35711,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926439991}
   m_CullTransparentMesh: 1
+--- !u!1001 &1926479276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.390188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3474355
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: I don't know how much longer I can resist it...
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &1932785278
 GameObject:
   m_ObjectHideFlags: 0
@@ -35799,11 +35982,13 @@ MonoBehaviour:
   SpellCastPos: {fileID: 1366289561}
   SpellTypePrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   animator: {fileID: 1934519693}
+  spellReady: 1
+  cooldownLength: 0.5
   imageCooldown: {fileID: 1031130797}
+  cooldownAnimationTime: 0
   force: 6
   originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   currentFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
-  cooldownLength: 0.5
 --- !u!61 &1934519690
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36873,6 +37058,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3369837705097960245, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3.0903
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369837705097960245, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.2785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369837705097960245, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369837705097960245, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.2291
+      objectReference: {fileID: 0}
     - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
       propertyPath: m_Name
       value: Lore_ScrollTutorial
@@ -36916,6 +37117,10 @@ PrefabInstance:
     - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: .. the madness is getting to me.
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4555983992207772352, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
@@ -37123,3 +37328,6 @@ SceneRoots:
   - {fileID: 759933687}
   - {fileID: 1225990298}
   - {fileID: 112807963}
+  - {fileID: 1337852055}
+  - {fileID: 1926479276}
+  - {fileID: 1881458194}

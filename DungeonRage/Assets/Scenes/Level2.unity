@@ -2255,6 +2255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   fireballTrackingPrefab: {fileID: 954419719457976841, guid: 56487ed59a3e649fb9868876197c69af, type: 3}
+  TrackingFireballSprite: {fileID: 0}
   trackingFireballRadius: 5
   force: 10
 --- !u!114 &423886934
@@ -2287,6 +2288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   knockbackRadius: 1
+  tankForceMultiplier: 2
+  rangeForceMultiplier: 2
+  damageAmount: 50
   prefab: {fileID: 0}
 --- !u!114 &423886936
 MonoBehaviour:
@@ -2312,6 +2316,8 @@ MonoBehaviour:
   rage2Active: {fileID: 687815637}
   rage3Active: {fileID: 1005553710}
   animator: {fileID: 0}
+  originalFireballPrefab: {fileID: 0}
+  areaDamageFireballPrefab: {fileID: 0}
 --- !u!114 &423886937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2332,6 +2338,8 @@ MonoBehaviour:
   imageCooldown: {fileID: 286027968}
   cooldownAnimationTime: 0
   force: 6
+  originalFireballPrefab: {fileID: 0}
+  currentFireballPrefab: {fileID: 0}
 --- !u!61 &423886938
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14077,6 +14085,67 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &556568887
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: it's getting stronger...
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &559323037
 GameObject:
   m_ObjectHideFlags: 0
@@ -20875,6 +20944,67 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &803449130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.269577
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27119577
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: I hope no one ever finds me here...
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &815827561
 GameObject:
   m_ObjectHideFlags: 0
@@ -21574,7 +21704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1020347287
 Transform:
   m_ObjectHideFlags: 0
@@ -22317,909 +22447,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1020347292}
-    m_ColliderPaths:
-    - - X: 13799999
-        Y: 112049992
-      - X: 13799999
-        Y: 112799984
-      - X: 13199999
-        Y: 113999984
-      - X: 11249999
-        Y: 113999984
-      - X: 10200000
-        Y: 113549984
-      - X: 10200000
-        Y: 111599992
-      - X: 10500000
-        Y: 111299992
-      - X: 13349999
-        Y: 111299992
-    - - X: -24599998
-        Y: 112049992
-      - X: -24599998
-        Y: 112799984
-      - X: -25200000
-        Y: 113999984
-      - X: -27150000
-        Y: 113999984
-      - X: -28200000
-        Y: 113549984
-      - X: -28200000
-        Y: 111599992
-      - X: -27900000
-        Y: 111299992
-      - X: -25049998
-        Y: 111299992
-    - - X: 85350000
-        Y: 106799992
-      - X: 85949992
-        Y: 107249992
-      - X: 85949992
-        Y: 108449992
-      - X: 85800000
-        Y: 109049984
-      - X: 83549992
-        Y: 109049984
-      - X: 82800000
-        Y: 108749992
-      - X: 82649992
-        Y: 108449992
-      - X: 82649992
-        Y: 106799992
-      - X: 83099992
-        Y: 106649992
-      - X: 84900000
-        Y: 106649992
-    - - X: 138600000
-        Y: 102450000
-      - X: 138600000
-        Y: 103200000
-      - X: 138000000
-        Y: 104399992
-      - X: 136050000
-        Y: 104399992
-      - X: 135000000
-        Y: 103949992
-      - X: 135000000
-        Y: 102000000
-      - X: 135300000
-        Y: 101700000
-      - X: 138150000
-        Y: 101700000
-    - - X: 80549992
-        Y: 102000000
-      - X: 81150000
-        Y: 102450000
-      - X: 81150000
-        Y: 103650000
-      - X: 80999992
-        Y: 104249992
-      - X: 78749992
-        Y: 104249992
-      - X: 78000000
-        Y: 103949992
-      - X: 77850000
-        Y: 103650000
-      - X: 77850000
-        Y: 102000000
-      - X: 78299992
-        Y: 101849992
-      - X: 80099992
-        Y: 101849992
-    - - X: 143100000
-        Y: 97350000
-      - X: 143100000
-        Y: 100049992
-      - X: 142200000
-        Y: 100499992
-      - X: 140250000
-        Y: 100499992
-      - X: 139500000
-        Y: 99000000
-      - X: 139500000
-        Y: 96899992
-      - X: 139650000
-        Y: 96749992
-      - X: 139950000
-        Y: 95999992
-      - X: 142050000
-        Y: 95999992
-    - - X: -5399999
-        Y: 97499992
-      - X: -5100000
-        Y: 98099992
-      - X: -5100000
-        Y: 98699992
-      - X: -5700000
-        Y: 99299992
-      - X: -6749999
-        Y: 99299992
-      - X: -7799999
-        Y: 99000000
-      - X: -8550000
-        Y: 98549992
-      - X: -8550000
-        Y: 97799984
-      - X: -7949999
-        Y: 96899992
-      - X: -6900000
-        Y: 96899992
-    - - X: 100349992
-        Y: 91799992
-      - X: 100349992
-        Y: 95099992
-      - X: 100049992
-        Y: 95850000
-      - X: 97049992
-        Y: 95850000
-      - X: 96599992
-        Y: 95700000
-      - X: 96449992
-        Y: 93300000
-      - X: 96449992
-        Y: 91200000
-      - X: 100049992
-        Y: 91200000
-    - - X: 147750000
-        Y: 92400000
-      - X: 148349984
-        Y: 92850000
-      - X: 148349984
-        Y: 94050000
-      - X: 148200000
-        Y: 94649992
-      - X: 145950000
-        Y: 94649992
-      - X: 145200000
-        Y: 94349992
-      - X: 145049984
-        Y: 94050000
-      - X: 145049984
-        Y: 92400000
-      - X: 145500000
-        Y: 92249992
-      - X: 147300000
-        Y: 92249992
-    - - X: -10200000
-        Y: 92699992
-      - X: -9899999
-        Y: 93300000
-      - X: -9899999
-        Y: 93899992
-      - X: -10500000
-        Y: 94500000
-      - X: -11550000
-        Y: 94500000
-      - X: -12599999
-        Y: 94200000
-      - X: -13349999
-        Y: 93750000
-      - X: -13349999
-        Y: 92999992
-      - X: -12750000
-        Y: 92100000
-      - X: -11700000
-        Y: 92100000
-    - - X: 104699992
-        Y: 87750000
-      - X: 104699992
-        Y: 90449992
-      - X: 103800000
-        Y: 90899992
-      - X: 101849992
-        Y: 90899992
-      - X: 101100000
-        Y: 89399992
-      - X: 101100000
-        Y: 87299992
-      - X: 101250000
-        Y: 87149992
-      - X: 101550000
-        Y: 86399992
-      - X: 103650000
-        Y: 86399992
-    - - X: 100499992
-        Y: 89699992
-      - X: 100349992
-        Y: 90599992
-      - X: 97049992
-        Y: 90599992
-      - X: 96599992
-        Y: 89699992
-      - X: 96599992
-        Y: 87899992
-      - X: 99149992
-        Y: 86999992
-      - X: 100499992
-        Y: 86999992
-    - - X: 229350000
-        Y: 82800000
-      - X: 229949984
-        Y: 83250000
-      - X: 229949984
-        Y: 84450000
-      - X: 229800000
-        Y: 85049992
-      - X: 227549984
-        Y: 85049992
-      - X: 226799984
-        Y: 84749992
-      - X: 226649984
-        Y: 84450000
-      - X: 226649984
-        Y: 82800000
-      - X: 227099984
-        Y: 82649992
-      - X: 228900000
-        Y: 82649992
-    - - X: 225299984
-        Y: 80099992
-      - X: 225150000
-        Y: 80999992
-      - X: 221850000
-        Y: 80999992
-      - X: 221400000
-        Y: 80099992
-      - X: 221400000
-        Y: 78299992
-      - X: 223950000
-        Y: 77400000
-      - X: 225299984
-        Y: 77400000
-    - - X: 229800000
-        Y: 78450000
-      - X: 229800000
-        Y: 79199992
-      - X: 229200000
-        Y: 80400000
-      - X: 227249984
-        Y: 80400000
-      - X: 226199984
-        Y: 79949992
-      - X: 226199984
-        Y: 78000000
-      - X: 226500000
-        Y: 77699992
-      - X: 229350000
-        Y: 77699992
-    - - X: -25049998
-        Y: 78000000
-      - X: -24450000
-        Y: 78450000
-      - X: -24450000
-        Y: 79650000
-      - X: -24599998
-        Y: 80250000
-      - X: -26850000
-        Y: 80250000
-      - X: -27599998
-        Y: 79949992
-      - X: -27749998
-        Y: 79650000
-      - X: -27749998
-        Y: 78000000
-      - X: -27299998
-        Y: 77850000
-      - X: -25500000
-        Y: 77850000
-    - - X: -24450000
-        Y: 72600000
-      - X: -24450000
-        Y: 75900000
-      - X: -24750000
-        Y: 76649992
-      - X: -27749998
-        Y: 76649992
-      - X: -28200000
-        Y: 76500000
-      - X: -28349998
-        Y: 74099992
-      - X: -28349998
-        Y: 72000000
-      - X: -24750000
-        Y: 72000000
-    - - X: 225150000
-        Y: 72600000
-      - X: 225150000
-        Y: 75900000
-      - X: 224850000
-        Y: 76649992
-      - X: 221850000
-        Y: 76649992
-      - X: 221400000
-        Y: 76500000
-      - X: 221250000
-        Y: 74099992
-      - X: 221250000
-        Y: 72000000
-      - X: 224850000
-        Y: 72000000
-    - - X: 13649999
-        Y: 75300000
-      - X: 13199999
-        Y: 76199992
-      - X: 10649999
-        Y: 76199992
-      - X: 10500000
-        Y: 75149992
-      - X: 10500000
-        Y: 72750000
-      - X: 10649999
-        Y: 72600000
-      - X: 13649999
-        Y: 72600000
-    - - X: 229949984
-        Y: 75750000
-      - X: 229800000
-        Y: 76049992
-      - X: 226349984
-        Y: 76049992
-      - X: 226050000
-        Y: 75750000
-      - X: 226050000
-        Y: 73049992
-      - X: 226199984
-        Y: 72449992
-      - X: 229949984
-        Y: 72449992
-    - - X: -20249998
-        Y: 73200000
-      - X: -19650000
-        Y: 73650000
-      - X: -19650000
-        Y: 74850000
-      - X: -19799998
-        Y: 75449992
-      - X: -22050000
-        Y: 75449992
-      - X: -22799998
-        Y: 75149992
-      - X: -22949998
-        Y: 74850000
-      - X: -22949998
-        Y: 73200000
-      - X: -22499998
-        Y: 73049992
-      - X: -20700000
-        Y: 73049992
-    - - X: 11849999
-        Y: 74250000
-      - X: 11999999
-        Y: 74399992
-      - X: 12299999
-        Y: 74250000
-      - X: 12149999
-        Y: 73949992
-    - - X: 13499999
-        Y: 68550000
-      - X: 13499999
-        Y: 71250000
-      - X: 12599999
-        Y: 71700000
-      - X: 10649999
-        Y: 71700000
-      - X: 9899999
-        Y: 70200000
-      - X: 9899999
-        Y: 68100000
-      - X: 10049999
-        Y: 67950000
-      - X: 10350000
-        Y: 67200000
-      - X: 12449999
-        Y: 67200000
-    - - X: 225299984
-        Y: 70500000
-      - X: 225150000
-        Y: 71400000
-      - X: 221850000
-        Y: 71400000
-      - X: 221400000
-        Y: 70500000
-      - X: 221400000
-        Y: 68700000
-      - X: 223950000
-        Y: 67800000
-      - X: 225299984
-        Y: 67800000
-    - - X: 8850000
-        Y: 70500000
-      - X: 8400000
-        Y: 71400000
-      - X: 5850000
-        Y: 71400000
-      - X: 5700000
-        Y: 70350000
-      - X: 5700000
-        Y: 67950000
-      - X: 5850000
-        Y: 67800000
-      - X: 8850000
-        Y: 67800000
-    - - X: 229800000
-        Y: 68850000
-      - X: 229800000
-        Y: 69600000
-      - X: 229200000
-        Y: 70800000
-      - X: 227249984
-        Y: 70800000
-      - X: 226199984
-        Y: 70350000
-      - X: 226199984
-        Y: 68400000
-      - X: 226500000
-        Y: 68100000
-      - X: 229350000
-        Y: 68100000
-    - - X: 7050000
-        Y: 69450000
-      - X: 7199999
-        Y: 69600000
-      - X: 7499999
-        Y: 69450000
-      - X: 7349999
-        Y: 69150000
-    - - X: 104850000
-        Y: 65699996
-      - X: 104399992
-        Y: 66599992
-      - X: 101849992
-        Y: 66599992
-      - X: 101700000
-        Y: 65549992
-      - X: 101700000
-        Y: 63149996
-      - X: 101849992
-        Y: 62999996
-      - X: 104850000
-        Y: 62999996
-    - - X: 229350000
-        Y: 63599996
-      - X: 229949984
-        Y: 64049996
-      - X: 229949984
-        Y: 65249996
-      - X: 229800000
-        Y: 65849996
-      - X: 227549984
-        Y: 65849996
-      - X: 226799984
-        Y: 65549992
-      - X: 226649984
-        Y: 65249996
-      - X: 226649984
-        Y: 63599996
-      - X: 227099984
-        Y: 63449992
-      - X: 228900000
-        Y: 63449992
-    - - X: 103049992
-        Y: 64649996
-      - X: 103200000
-        Y: 64799996
-      - X: 103499992
-        Y: 64649996
-      - X: 103350000
-        Y: 64349996
-    - - X: 105300000
-        Y: 62399996
-      - X: 101250000
-        Y: 62399996
-      - X: 100800000
-        Y: 60600000
-      - X: 100800000
-        Y: 58350000
-      - X: 105300000
-        Y: 58350000
-    - - X: 100049992
-        Y: 60900000
-      - X: 99599992
-        Y: 61800000
-      - X: 97049992
-        Y: 61800000
-      - X: 96899992
-        Y: 60750000
-      - X: 96899992
-        Y: 58350000
-      - X: 97049992
-        Y: 58200000
-      - X: 100049992
-        Y: 58200000
-    - - X: 98249992
-        Y: 59850000
-      - X: 98399992
-        Y: 60000000
-      - X: 98699992
-        Y: 59850000
-      - X: 98549992
-        Y: 59550000
-    - - X: 95700000
-        Y: 56100000
-      - X: 95549992
-        Y: 57000000
-      - X: 92249992
-        Y: 57000000
-      - X: 91799992
-        Y: 56100000
-      - X: 91799992
-        Y: 54300000
-      - X: 94349992
-        Y: 53400000
-      - X: 95700000
-        Y: 53400000
-    - - X: -38700000
-        Y: 22499998
-      - X: -38850000
-        Y: 23400000
-      - X: -42150000
-        Y: 23400000
-      - X: -42599996
-        Y: 22499998
-      - X: -42599996
-        Y: 20700000
-      - X: -40050000
-        Y: 19799998
-      - X: -38700000
-        Y: 19799998
-    - - X: 18900002
-        Y: 19200000
-      - X: 14850001
-        Y: 19200000
-      - X: 14400001
-        Y: 17400000
-      - X: 14400001
-        Y: 15150001
-      - X: 18900002
-        Y: 15150001
-    - - X: -39450000
-        Y: 15600001
-      - X: -38850000
-        Y: 16050000
-      - X: -38850000
-        Y: 17250000
-      - X: -39000000
-        Y: 17850000
-      - X: -41250000
-        Y: 17850000
-      - X: -42000000
-        Y: 17550002
-      - X: -42150000
-        Y: 17250000
-      - X: -42150000
-        Y: 15600001
-      - X: -41700000
-        Y: 15450001
-      - X: -39900000
-        Y: 15450001
-    - - X: -35550000
-        Y: 15600001
-      - X: -35550000
-        Y: 16950000
-      - X: -35700000
-        Y: 17700002
-      - X: -37650000
-        Y: 17700002
-      - X: -37650000
-        Y: 16350001
-      - X: -37050000
-        Y: 15300001
-      - X: -36300000
-        Y: 15300001
-    - - X: 22949998
-        Y: 10799999
-      - X: 23549998
-        Y: 11249999
-      - X: 23549998
-        Y: 12449999
-      - X: 23400000
-        Y: 13049999
-      - X: 21149998
-        Y: 13049999
-      - X: 20400000
-        Y: 12750000
-      - X: 20249998
-        Y: 12449999
-      - X: 20249998
-        Y: 10799999
-      - X: 20700000
-        Y: 10649999
-      - X: 22499998
-        Y: 10649999
-    - - X: -20249998
-        Y: 5999999
-      - X: -19650000
-        Y: 6450000
-      - X: -19650000
-        Y: 7650000
-      - X: -19799998
-        Y: 8250000
-      - X: -22050000
-        Y: 8250000
-      - X: -22799998
-        Y: 7949999
-      - X: -22949998
-        Y: 7650000
-      - X: -22949998
-        Y: 5999999
-      - X: -22499998
-        Y: 5850000
-      - X: -20700000
-        Y: 5850000
-    - - X: 138600000
-        Y: 1649999
-      - X: 138600000
-        Y: 2400000
-      - X: 138000000
-        Y: 3599999
-      - X: 136050000
-        Y: 3599999
-      - X: 135000000
-        Y: 3150000
-      - X: 135000000
-        Y: 1200000
-      - X: 135300000
-        Y: 900000
-      - X: 138150000
-        Y: 900000
-    - - X: 142950000
-        Y: 1200000
-      - X: 143550000
-        Y: 1649999
-      - X: 143550000
-        Y: 2850000
-      - X: 143400000
-        Y: 3450000
-      - X: 141150000
-        Y: 3450000
-      - X: 140400000
-        Y: 3150000
-      - X: 140250000
-        Y: 2850000
-      - X: 140250000
-        Y: 1200000
-      - X: 140700000
-        Y: 1050000
-      - X: 142500000
-        Y: 1050000
-    - - X: 176699984
-        Y: 1050000
-      - X: 176699984
-        Y: 2550000
-      - X: 175199984
-        Y: 2550000
-      - X: 174599984
-        Y: 2250000
-      - X: 174599984
-        Y: 900000
-      - X: 174899984
-        Y: 450000
-      - X: 175649984
-        Y: 450000
-    - - X: 138150000
-        Y: -3599999
-      - X: 138750000
-        Y: -3150000
-      - X: 138750000
-        Y: -1949999
-      - X: 138600000
-        Y: -1349999
-      - X: 136350000
-        Y: -1349999
-      - X: 135600000
-        Y: -1649999
-      - X: 135450000
-        Y: -1949999
-      - X: 135450000
-        Y: -3599999
-      - X: 135900000
-        Y: -3750000
-      - X: 137700000
-        Y: -3750000
-    - - X: 166050000
-        Y: -8400000
-      - X: 166050000
-        Y: -7050000
-      - X: 165900000
-        Y: -6300000
-      - X: 163949984
-        Y: -6300000
-      - X: 163949984
-        Y: -7650000
-      - X: 164550000
-        Y: -8699999
-      - X: 165299984
-        Y: -8699999
-    - - X: -19650000
-        Y: -13799999
-      - X: -19650000
-        Y: -10500000
-      - X: -19949998
-        Y: -9749999
-      - X: -22949998
-        Y: -9749999
-      - X: -23400000
-        Y: -9899999
-      - X: -23549998
-        Y: -12299999
-      - X: -23549998
-        Y: -14399999
-      - X: -19949998
-        Y: -14399999
-    - - X: 13349999
-        Y: -13199999
-      - X: 13950000
-        Y: -12750000
-      - X: 13950000
-        Y: -11550000
-      - X: 13799999
-        Y: -10949999
-      - X: 11550000
-        Y: -10949999
-      - X: 10799999
-        Y: -11249999
-      - X: 10649999
-        Y: -11550000
-      - X: 10649999
-        Y: -13199999
-      - X: 11099999
-        Y: -13349999
-      - X: 12900000
-        Y: -13349999
-    - - X: -25049998
-        Y: -13199999
-      - X: -24450000
-        Y: -12750000
-      - X: -24450000
-        Y: -11550000
-      - X: -24599998
-        Y: -10949999
-      - X: -26850000
-        Y: -10949999
-      - X: -27599998
-        Y: -11249999
-      - X: -27749998
-        Y: -11550000
-      - X: -27749998
-        Y: -13199999
-      - X: -27299998
-        Y: -13349999
-      - X: -25500000
-        Y: -13349999
-    - - X: -19799998
-        Y: -17550002
-      - X: -19799998
-        Y: -16800000
-      - X: -20400000
-        Y: -15600001
-      - X: -22349998
-        Y: -15600001
-      - X: -23400000
-        Y: -16050000
-      - X: -23400000
-        Y: -18000000
-      - X: -23100000
-        Y: -18300000
-      - X: -20249998
-        Y: -18300000
-    - - X: 138300000
-        Y: -22949998
-      - X: 138300000
-        Y: -21449998
-      - X: 136800000
-        Y: -21449998
-      - X: 136200000
-        Y: -21750000
-      - X: 136200000
-        Y: -23100000
-      - X: 136500000
-        Y: -23549998
-      - X: 137250000
-        Y: -23549998
-    - - X: 177299984
-        Y: -28799998
-      - X: 173249984
-        Y: -28799998
-      - X: 172799984
-        Y: -30600000
-      - X: 172799984
-        Y: -32849998
-      - X: 177299984
-        Y: -32849998
-    - - X: -34200000
-        Y: -31950000
-      - X: -34200000
-        Y: -31199998
-      - X: -34800000
-        Y: -30000000
-      - X: -36750000
-        Y: -30000000
-      - X: -37800000
-        Y: -30449998
-      - X: -37800000
-        Y: -32399998
-      - X: -37500000
-        Y: -32700000
-      - X: -34650000
-        Y: -32700000
-    - - X: -39000000
-        Y: -31950000
-      - X: -39000000
-        Y: -31199998
-      - X: -39600000
-        Y: -30000000
-      - X: -41549996
-        Y: -30000000
-      - X: -42599996
-        Y: -30449998
-      - X: -42599996
-        Y: -32399998
-      - X: -42300000
-        Y: -32700000
-      - X: -39450000
-        Y: -32700000
-    - - X: 146850000
-        Y: -32399998
-      - X: 146850000
-        Y: -31049998
-      - X: 146699984
-        Y: -30300000
-      - X: 144750000
-        Y: -30300000
-      - X: 144750000
-        Y: -31650000
-      - X: 145350000
-        Y: -32700000
-      - X: 146100000
-        Y: -32700000
-    - - X: 172499984
-        Y: -33600000
-      - X: 168450000
-        Y: -33600000
-      - X: 168000000
-        Y: -35400000
-      - X: 168000000
-        Y: -37650000
-      - X: 172499984
-        Y: -37650000
-    - - X: 177299984
-        Y: -33600000
-      - X: 173249984
-        Y: -33600000
-      - X: 172799984
-        Y: -35400000
-      - X: 172799984
-        Y: -37650000
-      - X: 177299984
-        Y: -37650000
-    - - X: -38700000
-        Y: -33600000
-      - X: -42750000
-        Y: -33600000
-      - X: -43199996
-        Y: -35400000
-      - X: -43199996
-        Y: -37650000
-      - X: -38700000
-        Y: -37650000
-    - - X: -34200000
-        Y: -36750000
-      - X: -34200000
-        Y: -36000000
-      - X: -34800000
-        Y: -34800000
-      - X: -36750000
-        Y: -34800000
-      - X: -37800000
-        Y: -35250000
-      - X: -37800000
-        Y: -37199996
-      - X: -37500000
-        Y: -37500000
-      - X: -34650000
-        Y: -37500000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 1.3349849, y: 11.129999}
@@ -26654,6 +25882,8 @@ MonoBehaviour:
   experienceAmount: 0
   rageAmount: 0
   skillPointManager: {fileID: 0}
+  checkPoint: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &1583708179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27083,6 +26313,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650535454}
   m_CullTransparentMesh: 1
+--- !u!1001 &1676773734
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3640690655732684205, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_Name
+      value: Lore_Scroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.092121
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.4033566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100211114498337540, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748071796559111007, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
+      propertyPath: m_text
+      value: who... am I?
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0f6d013ab926ae4f9db0faf8f8812c6, type: 3}
 --- !u!1 &1819059574
 GameObject:
   m_ObjectHideFlags: 0
@@ -28768,3 +28059,6 @@ SceneRoots:
   - {fileID: 744467148}
   - {fileID: 304880362}
   - {fileID: 605144690}
+  - {fileID: 1676773734}
+  - {fileID: 556568887}
+  - {fileID: 803449130}
