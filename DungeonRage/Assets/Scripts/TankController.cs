@@ -41,6 +41,7 @@ public class TankController : MonoBehaviour
 
     public bool flip;
 
+    [SerializeField] private AudioSource attackSound;
 
     // Start is called before the first frame update
     void Start()
@@ -102,7 +103,7 @@ public class TankController : MonoBehaviour
         //Vector2 pos = transform.localPosition;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
-
+        attackSound.Play();
         if (isTouching)
         {
             hud.DealDamage(damage);
