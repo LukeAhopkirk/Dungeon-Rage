@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 //using UnityMovementAI;
 
 public class MonsterController : MonoBehaviour
@@ -234,7 +235,7 @@ public class MonsterController : MonoBehaviour
 		//Trigger floating text
 		if (FloatingTextPrefab)
 		{
-			ShowFloatingText(damage.ToString());
+			ShowFloatingText(Mathf.RoundToInt(damage).ToString());
 		}
 
     }
