@@ -36598,7 +36598,7 @@ RectTransform:
   m_GameObject: {fileID: 1031130794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 924023302}
@@ -51324,6 +51324,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 6533007444161440797, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 152875185}
+    - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1934519683}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

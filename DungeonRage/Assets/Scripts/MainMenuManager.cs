@@ -18,7 +18,8 @@ public class MainMenuManager : MonoBehaviour
     public void StartGame()
     {
         // Play the cutscene before loading the level
-        PlayCutscene();
+        //PlayCutscene();
+        SceneManager.LoadScene("Tut+Level1");
     }
 
     public void OpenOptions()
@@ -36,23 +37,23 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void PlayCutscene()
-    {
+    //public void PlayCutscene()
+    //{
         // Set the video to play
-        cutscenePlayer.Play();
+       // cutscenePlayer.Play();
 
         // Hide the canvas
-        mainMenuCanvas.enabled = false;
+        //mainMenuCanvas.enabled = false;
 
         // Wait for the cutscene to finish playing (convert double to float)
-        StartCoroutine(LoadLevelAfterCutscene((float)cutscenePlayer.clip.length));
-    }
+        //StartCoroutine(LoadLevelAfterCutscene((float)cutscenePlayer.clip.length));
+    //}
 
-    IEnumerator LoadLevelAfterCutscene(float delay)
-    {
-        yield return new WaitForSeconds(delay);
+    //IEnumerator LoadLevelAfterCutscene(float delay)
+    //{
+        //yield return new WaitForSeconds(delay);
 
         // Load the game level
-        SceneManager.LoadScene("Tut+Level1");
-    }
+        //SceneManager.LoadScene("Tut+Level1");
+    //}
 }
