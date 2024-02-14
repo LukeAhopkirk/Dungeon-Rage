@@ -17,9 +17,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Play the cutscene before loading the level
-        //PlayCutscene();
-        SceneManager.LoadScene("Tut+Level1");
+        
+        SceneManager.LoadScene("Cutscene");
     }
 
     public void OpenOptions()
