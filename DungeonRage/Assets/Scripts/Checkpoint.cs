@@ -5,6 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     public CheckpointManager checkpointManager;
+    public SpriteRenderer spriteRenderer;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +13,8 @@ public class Checkpoint : MonoBehaviour
         {
             checkpointManager.UpdateLastCheckpointPosition(transform.position);
             Debug.Log("Checkpoint reached!");
+
+            checkpointManager.ActivateCheckpoint(spriteRenderer);
         }
     }
 }
