@@ -12,7 +12,7 @@ public class StatInfo
     public Button plusButton;
     public Button minusButton;
 
-    public int assignedPoints = 0;
+    public int assignedPoints = 20;
 
     public int statMultiplier = 1;
 
