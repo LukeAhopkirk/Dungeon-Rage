@@ -9,6 +9,9 @@ public class CheckpointManager : MonoBehaviour
     private static Vector3 lastCheckpointPosition;
     public HUDManager hud;
 
+    public Sprite activatedCheckpointSprite;
+    private SpriteRenderer spriteRendererCheckpoint;  
+    
     public void Start()
     {
         lastCheckpointPosition = player.transform.position;
@@ -19,6 +22,11 @@ public class CheckpointManager : MonoBehaviour
         lastCheckpointPosition = position;
     }
 
+    public void ActivateCheckpoint(SpriteRenderer spriteRenderer)
+    {
+        spriteRendererCheckpoint = spriteRenderer;
+        spriteRenderer.sprite = activatedCheckpointSprite;
+    }
     public void RespawnPlayer()
     {
         if (player != null)

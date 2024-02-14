@@ -6518,7 +6518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20.305, y: 0.0441}
+  m_AnchoredPosition: {x: 20.305, y: -0.149}
   m_SizeDelta: {x: 1.539, y: 0.4681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &113049241
@@ -8307,16 +8307,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 47, y: 15, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 9
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -6, y: 16, z: 0}
     second:
       serializedVersion: 2
@@ -8497,8 +8487,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 2c46147449159cb49882628eacc27677, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: d414cb0b748baf34cbcfe2530e7c477c, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 7e13066f8e41e3240aa316b05b667e96, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 9b7df0041f061cb42b69d4f62991d5b7, type: 2}
   m_TileSpriteArray:
@@ -8520,12 +8510,12 @@ Tilemap:
     m_Data: {fileID: -1253385213, guid: dcda9b7a0a71ea34c84152a8f3cda328, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: -1014000317, guid: dcda9b7a0a71ea34c84152a8f3cda328, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -17631051, guid: dcda9b7a0a71ea34c84152a8f3cda328, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 1063863190, guid: dcda9b7a0a71ea34c84152a8f3cda328, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 54
+  - m_RefCount: 53
     m_Data:
       e00: 1
       e01: 0
@@ -8544,7 +8534,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 54
+  - m_RefCount: 53
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -48799,7 +48789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7303223692305428990, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.412724
+      value: -5.713
       objectReference: {fileID: 0}
     - target: {fileID: 7303223692305428990, guid: 9b73d31483d24e645844ce760ffc3653, type: 3}
       propertyPath: m_LocalPosition.z
