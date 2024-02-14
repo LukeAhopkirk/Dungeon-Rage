@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    // This method will be called when the player's health reaches zero
     public GameObject player;
     private static Vector3 lastCheckpointPosition;
     public HUDManager hud;
 
     public Sprite activatedCheckpointSprite;
-    private SpriteRenderer spriteRendererCheckpoint;  
-    
-    public void Start()
+    private SpriteRenderer spriteRendererCheckpoint;
+
+    void Start()
     {
         lastCheckpointPosition = player.transform.position;
+    }
+
+    void Update()
+    {
+        // Check for the shortcut key press
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RespawnPlayer();
+        }
     }
 
     public void UpdateLastCheckpointPosition(Vector3 position)
@@ -27,6 +35,7 @@ public class CheckpointManager : MonoBehaviour
         spriteRendererCheckpoint = spriteRenderer;
         spriteRenderer.sprite = activatedCheckpointSprite;
     }
+
     public void RespawnPlayer()
     {
         if (player != null)
