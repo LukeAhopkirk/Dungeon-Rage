@@ -155,7 +155,7 @@ public class SpellCast : MonoBehaviour
                 Spell = Instantiate(LightningPrefab, SpellCastPos.position, Quaternion.identity);
                 break;
             default:
-                Spell = Instantiate(FireballPrefab, SpellCastPos.position, Quaternion.identity);
+                Spell = Instantiate(rageSystem.GetCurrentFireballPrefab(), SpellCastPos.position, Quaternion.identity);
                 // Ignore collisions between the player and the spell
                 Physics2D.IgnoreCollision(Spell.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
