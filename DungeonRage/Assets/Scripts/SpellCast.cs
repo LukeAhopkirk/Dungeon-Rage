@@ -8,8 +8,13 @@ public class SpellCast : MonoBehaviour
 {
 
     public Transform SpellCastPos;
-    public GameObject SpellTypePrefab;
+    //public GameObject SpellTypePrefab;
+    public GameObject FireballPrefab;
+    public GameObject LightningPrefab;
     public Animator animator;
+    public GameObject Spell;
+
+    private int spellType = 1;
 
     public bool spellReady = true;
     private float Timer = 0f;
@@ -28,6 +33,8 @@ public class SpellCast : MonoBehaviour
     public GameObject currentFireballPrefab;
 
     private RageSystem rageSystem;
+
+    private IceSpell IceSpell;
 
     [SerializeField] private AudioSource fireballSound;
 
@@ -54,6 +61,19 @@ public class SpellCast : MonoBehaviour
                     Timer = 0;
                 }
             }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                spellType = 1;
+            }
+            /*else if (Input.GetKeyDown(KeyCode.E))
+            {
+                spellType = 2;
+            }*/
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                spellType = 3;
+            }
+
 
             if (spellReady && Input.GetButtonDown("Fire1"))
             {
@@ -124,48 +144,39 @@ public class SpellCast : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Instantiate the spell object
-        GameObject Spell = Instantiate(rageSystem.GetCurrentFireballPrefab(), SpellCastPos.position, Quaternion.identity);
+        switch (spellType)
+        {
+            case 2:
+                //IceSpell.UseFreezeAbility();
+                //Debug.Log("Ice spell cast");
+                break;
+            case 3:
+                // Instantiate the lightning spell only when spellType is 3 (lightning spell)
+                Spell = Instantiate(LightningPrefab, SpellCastPos.position, Quaternion.identity);
+                break;
+            default:
+                Spell = Instantiate(FireballPrefab, SpellCastPos.position, Quaternion.identity);
+                // Ignore collisions between the player and the spell
+                Physics2D.IgnoreCollision(Spell.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-        // Ignore collisions between the player and the spell
-        Physics2D.IgnoreCollision(Spell.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                //Create a vector for the position of the spell
+                Vector2 pos = new Vector2(SpellCastPos.position.x, SpellCastPos.position.y);
 
-        //Create a vector for the position of the spell
-        Vector2 pos = new Vector2(SpellCastPos.position.x, SpellCastPos.position.y);
+                // Calculate the direction from the SpellCastPos to the mouse position
+                Vector2 direction = (mousePos - pos).normalized;
 
-        // Calculate the direction from the SpellCastPos to the mouse position
-        Vector2 direction = (mousePos - pos).normalized;
+                // Get the Rigidbody2D component of the spell object
+                Rigidbody2D rb = Spell.GetComponent<Rigidbody2D>();
 
-        // Get the Rigidbody2D component of the spell object
-        Rigidbody2D rb = Spell.GetComponent<Rigidbody2D>();
+                // Calculate the rotation angle in radians
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Calculate the rotation angle in radians
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                // Rotate the fireball to face the direction of the mouse
+                Spell.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // Rotate the fireball to face the direction of the mouse
-        Spell.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        // Add force in the direction of the mouse
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
-
-
-        //if (direction.x < 0)
-        //{
-        //    // Get the current scale of the spell
-        //    Vector3 scale = Spell.transform.localScale;
-
-        //    // Flip the scale along the x-axis to reverse the rotation
-        //    scale.x *= -1;
-
-        //    // Apply the new scale to the spell
-        //    Spell.transform.localScale = scale;
-        //}
-
-        //animator.SetTrigger("run");
-
-
-
-        //GameObject Spell = Instantiate(SpellTypePrefab, SpellCastPos.position, SpellCastPos.rotation);
-        //Rigidbody2D rb = Spell.GetComponent<Rigidbody2D>();
-        //rb.AddForce(SpellCastPos.up * force, ForceMode2D.Impulse);
+                // Add force in the direction of the mouse
+                rb.AddForce(direction * force, ForceMode2D.Impulse);
+                break;
+        }
     }
 }

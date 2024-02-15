@@ -305,4 +305,28 @@ public class MonsterController : MonoBehaviour
         anim.SetTrigger("run");
     }
 
+	public void Freeze(Vector2 direction)
+	{
+		// Stop chasing
+		isChasing = false;
+
+		// Apply free
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		rb.velocity = Vector2.zero;
+		anim.enabled = false;
+
+		// Start a coroutine to simulate a Freeze duration
+		StartCoroutine(FreezeDuration());
+	}
+
+	private IEnumerator FreezeDuration()
+	{
+		// Wait for a short duration to simulate Freeze effect
+		yield return new WaitForSeconds(2f);
+
+		// Resume chasing after Freeze duration
+		isChasing = true;
+		anim.SetTrigger("run");
+		anim.enabled = true;
+	}
 }
