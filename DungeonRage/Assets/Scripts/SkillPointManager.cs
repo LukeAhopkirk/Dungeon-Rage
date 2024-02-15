@@ -63,7 +63,11 @@ public class SkillPointManager : MonoBehaviour
     private IEnumerator ShowLevelUpPanel()
     {
         levelUpPanel.SetActive(true);
-        yield return new WaitForSeconds(levelNotifDuration);
+        while(!HUDManager.isPaused && levelNotifDuration > 0)
+        {
+            yield return null;
+            levelNotifDuration -= Time.deltaTime;
+        }
         levelUpPanel.SetActive(false);
     }
     void AllocatePoint(StatInfo stat)
