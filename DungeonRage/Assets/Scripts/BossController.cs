@@ -22,7 +22,6 @@ public class BossController : MonoBehaviour
     public GameObject rangedEnemy;
 
 
-
     ////Instance of steering basics
     SteeringBasics steeringBasics;
 
@@ -64,6 +63,8 @@ public class BossController : MonoBehaviour
 
     private bool isChasing = false;
 
+    public GameObject roomPrefab;
+    private Collider2D roomCollider;
     //Settor method for to start the boss attacking
     public static void setAttacking()
     {
@@ -89,6 +90,8 @@ public class BossController : MonoBehaviour
 
         ////Set the HUD to to the obejct with hud Tag
         hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDManager>();
+
+        roomCollider = roomPrefab.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -241,33 +244,54 @@ public class BossController : MonoBehaviour
         //Create the shield game object
         GameObject sheild = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
 
+        //Bounds of the room
+        Bounds bounds = roomCollider.bounds;
+
         //Spawn enemeies
-        foreach(var enemytype in enemyTypes)
+        foreach (var enemytype in enemyTypes)
         {
             float noSpawn = 0;
             while (noSpawn < maxEnemies)
             {
-                // Generate a random angle in radians
-                float angle = Random.Range(0f, Mathf.PI * 2f); // 0 to 2π
+                Vector2 spawnPosition;
+                while (true)
+                {
+                    // Generate a random angle in radians
+                    float angle = Random.Range(0f, Mathf.PI * 2f); // 0 to 2π
 
-                // Calculate random position within the radius
-                float radius = Random.Range(0f, 2f); // Within 0 to 2 units
-                float spawnX = transform.position.x + radius * Mathf.Cos(angle);
-                float spawnY = transform.position.y + radius * Mathf.Sin(angle);
+                    // Calculate random position within the radius
+                    float radius = Random.Range(0f, 2f); // Within 0 to 2 units
+                    float spawnX = transform.position.x + radius * Mathf.Cos(angle);
+                    float spawnY = transform.position.y + radius * Mathf.Sin(angle);
 
-                Vector2 spawnPosition = new Vector2(spawnX, spawnY);
-
+                    // Check if the spawn position is within the bounds of the room
+                    if (spawnX >= bounds.min.x && spawnX <= bounds.max.x && spawnY >= bounds.min.y && spawnY <= bounds.max.y)
+                    {
+                        // Spawn position is within the bounds of the room
+                        spawnPosition = new Vector2(spawnX, spawnY);
+                        break; // Exit the loop
+                    }
+                }
                 Instantiate(enemytype, spawnPosition, Quaternion.identity);
                 noSpawn++;
-
                 yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             }
         }
+
 
         yield return new WaitForSeconds(1);
         Destroy(sheild);
         isChasing = true;
 
+    }
+
+    private Vector2 GetRandomSpawnPosition(Bounds bounds)
+    {
+        float randomX = Random.Range(bounds.min.x, bounds.max.x);
+        float randomY = Random.Range(bounds.min.y, bounds.max.y);
+
+        Vector2 spawnPosition = new Vector2(randomX, randomY);
+        return spawnPosition;
     }
 
     private void faceTarget()

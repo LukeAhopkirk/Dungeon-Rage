@@ -50,6 +50,10 @@ public class ChainLightning : MonoBehaviour
 
                 // Deal damage to the enemy
                 MonsterController enemy = collision.gameObject.GetComponent<MonsterController>();
+                // Check if the enemy has the TankController component
+                TankController tankController = enemy.GetComponent<TankController>();
+                // Check if the enemy has the RangeController component
+                RangeController rangeController = enemy.GetComponent<RangeController>();
                 if (enemy != null)
                 {
                     // Access the PlayerMovement script
@@ -73,8 +77,48 @@ public class ChainLightning : MonoBehaviour
                         Debug.Log($"Lightning dealt {totalDamage} damage to {enemy.gameObject.name}");
                     }
                 }
+                else if (tankController != null)
+                {
+                    // Access the PlayerMovement script
+                    PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+                    // Apply the damage multiplier
+                    float totalDamage = damage * playerMovement.damageMultiplier;
 
-                animations.StopPlayback();
+                    // Deal damage to the enemy
+                    tankController.TakeDamage(totalDamage);
+
+                    // Access and apply damage to the RageSystem
+                    RageSystem rageSystem = FindObjectOfType<RageSystem>();
+                    if (rageSystem != null)
+                    {
+                        rageSystem.DealDamage(totalDamage);
+                    }
+
+                    // Show debug log for damage dealt
+                    Debug.Log($"Lightning dealt {totalDamage} damage to {enemy.gameObject.name}");
+                }else
+                {
+                    // Access the PlayerMovement script
+                    PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+                    // Apply the damage multiplier
+                    float totalDamage = damage * playerMovement.damageMultiplier;
+
+                    // Deal damage to the enemy
+                    rangeController.TakeDamage(totalDamage);
+
+                    // Access and apply damage to the RageSystem
+                    RageSystem rageSystem = FindObjectOfType<RageSystem>();
+                    if (rageSystem != null)
+                    {
+                        rageSystem.DealDamage(totalDamage);
+                    }
+
+                    // Show debug log for damage dealt
+                    Debug.Log($"Lightning dealt {totalDamage} damage to {enemy.gameObject.name}");
+                }
+            
+
+            animations.StopPlayback();
                 coll.enabled = false;
                 spawns--;
                 Particles.Play();
