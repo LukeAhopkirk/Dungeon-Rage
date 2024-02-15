@@ -32,6 +32,8 @@ public class SkillPointManager : MonoBehaviour
     private float levelNotifDuration = 2f;
     [SerializeField] private AudioSource levelUpSound;
 
+    private HUDManager HUDManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class SkillPointManager : MonoBehaviour
         UpdatePlayerLevel();
         UpdateTotalSkillPoints();
         levelUpPanel.SetActive(false);
+        HUDManager = GameObject.FindObjectOfType<HUDManager>();
     }
     public void LevelUp()
     {
@@ -53,6 +56,7 @@ public class SkillPointManager : MonoBehaviour
         UpdateTotalSkillPoints();
         UpdatePlayerLevel();
         levelUpSound.Play();
+        HUDManager.Heal(1000000);
         StartCoroutine(ShowLevelUpPanel());
     }
 

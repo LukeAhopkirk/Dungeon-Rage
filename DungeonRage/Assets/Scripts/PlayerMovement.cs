@@ -67,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateDamageMultiplier(float intelligence)
     {
-        damageMultiplier = baseDamageMultiplier + intelligence * 0.008f;
+        damageMultiplier = baseDamageMultiplier + intelligence * 0.01f;
     }
     void UpdateMoveSpeed(float newAgility)
     {
-        Debug.Log(newAgility);
+        //Agility cap
         if(newAgility > 50 && newAgility > oldAgility)
         {
             oldAgility = newAgility;

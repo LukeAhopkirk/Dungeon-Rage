@@ -12,6 +12,7 @@ public class HUDManager : MonoBehaviour
 
     public static float baseHealthAmount = 100f;
     public static float healthAmount;
+    private static float maxHealth;
     public float experienceAmount = 0f;
     public float rageAmount = 0f;
 
@@ -28,6 +29,7 @@ public class HUDManager : MonoBehaviour
     private bool isDying = false;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class HUDManager : MonoBehaviour
         rageBar.fillAmount = rageAmount / 100f;
 
         healthAmount = baseHealthAmount;
+        maxHealth = healthAmount;
 
         skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
         foreach(var stat in skillPointManager.stats)
@@ -64,12 +67,12 @@ public class HUDManager : MonoBehaviour
         Debug.Log($"New Endurance: {newEndurance}");
 
         // Calculate healthAmount based on baseHealthAmount and newEndurance
-        healthAmount = baseHealthAmount + newEndurance + 10f;
+        maxHealth = baseHealthAmount + newEndurance + 10f;
 
         // Update the healthBar fill amount based on the calculated healthAmount
-        healthBar.fillAmount = healthAmount / 100f;
+        healthBar.fillAmount = baseHealthAmount / maxHealth;
 
-        Debug.Log($"Updated healthAmount: {healthAmount}");
+        Debug.Log($"Updated healthAmount: {maxHealth}");
     }
 
     public void DealDamage(float damage)
@@ -79,7 +82,7 @@ public class HUDManager : MonoBehaviour
             return;
         }
         healthAmount -= damage;
-        healthBar.fillAmount = healthAmount / 100f;
+        healthBar.fillAmount = healthAmount / maxHealth;
 
         if(healthAmount <= 0 && !isDying)
         {
@@ -118,9 +121,9 @@ public class HUDManager : MonoBehaviour
     public void Heal(float healingAmount)
     {
         healthAmount += healingAmount;
-        healthAmount = Mathf.Clamp(healthAmount, 0f, 100f);
+        healthAmount = Mathf.Clamp(healthAmount, 0f, maxHealth);
 
-        healthBar.fillAmount = healthAmount / 100f;
+        healthBar.fillAmount = healthAmount / maxHealth;
     }
 
     public void GetExperience(float experience)

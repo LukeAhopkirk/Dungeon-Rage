@@ -58885,8 +58885,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellCastPos: {fileID: 1366289561}
-  SpellTypePrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  FireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
+  LightningPrefab: {fileID: 0}
   animator: {fileID: 1934519693}
+  Spell: {fileID: 0}
   spellReady: 1
   cooldownLength: 0.5
   imageCooldown: {fileID: 1031130797}
