@@ -14,7 +14,7 @@ public class StatInfo
 
     public int assignedPoints = 0;
 
-    public int statMultiplier = 1;
+    public float statMultiplier = 1f;
 
     public System.Action<float> OnStatChanged;
 }
@@ -23,7 +23,7 @@ public class SkillPointManager : MonoBehaviour
 {
     public StatInfo[] stats;
     public TextMeshProUGUI availableSkillPointsText;
-    private int availableSkillPoints;
+    private int availableSkillPoints = 20;
 
     public float playerLevel = 0;
     public TextMeshProUGUI playerLevelText;
@@ -68,7 +68,7 @@ public class SkillPointManager : MonoBehaviour
         {
             stat.assignedPoints++;
             availableSkillPoints--;
-            stat.statMultiplier++;
+            stat.statMultiplier += 0.5f;
 
             UpdateUI(stat);
             UpdateTotalSkillPoints();
@@ -82,7 +82,7 @@ public class SkillPointManager : MonoBehaviour
         {
             stat.assignedPoints--;
             availableSkillPoints++;
-            stat.statMultiplier--;
+            stat.statMultiplier -= 0.5f;
 
             UpdateUI(stat);
             UpdateTotalSkillPoints();
@@ -105,7 +105,7 @@ public class SkillPointManager : MonoBehaviour
         availableSkillPointsText.text = $"{availableSkillPoints}";
     }
 
-    public int GetStatValue(string statName)
+    public float GetStatValue(string statName)
     {
         foreach (var stat in stats)
         {
