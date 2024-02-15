@@ -188,6 +188,7 @@ public class RageSystem : MonoBehaviour
 
     void UseAbility2()
     {
+        animator.SetBool("isRaged", true);
         Debug.Log("Using Ability 2: Increased damage and attack speed");
         isAbility2Active = true;
 
@@ -206,6 +207,7 @@ public class RageSystem : MonoBehaviour
     void DeactivateAbility2()
     {
         isAbility2Active = false;
+        animator.SetBool("isRaged", false);
         Debug.Log("Ability 2 deactivated");
 
         abilityBoost.DeactivateAbilityBoost();
