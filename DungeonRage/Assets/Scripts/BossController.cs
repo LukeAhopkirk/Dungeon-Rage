@@ -143,7 +143,7 @@ public class BossController : MonoBehaviour
 
         if (FloatingTextPrefab)
         {
-            ShowFloatingText(damage.ToString());
+            ShowFloatingText(Mathf.RoundToInt(damage).ToString());
         }
     }
 
