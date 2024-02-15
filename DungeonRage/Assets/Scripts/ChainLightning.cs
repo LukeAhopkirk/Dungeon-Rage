@@ -51,9 +51,9 @@ public class ChainLightning : MonoBehaviour
                 // Deal damage to the enemy
                 MonsterController enemy = collision.gameObject.GetComponent<MonsterController>();
                 // Check if the enemy has the TankController component
-                TankController tankController = enemy.GetComponent<TankController>();
+                TankController tankController = collision.gameObject.GetComponent<TankController>();
                 // Check if the enemy has the RangeController component
-                RangeController rangeController = enemy.GetComponent<RangeController>();
+                RangeController rangeController = collision.gameObject.GetComponent<RangeController>();
                 if (enemy != null)
                 {
                     // Access the PlayerMovement script
