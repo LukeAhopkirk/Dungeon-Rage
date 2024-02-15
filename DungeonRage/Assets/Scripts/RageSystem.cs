@@ -226,6 +226,7 @@ public class RageSystem : MonoBehaviour
     {
         Debug.Log("Using Ability 3: Invincibility and more powerful attack");
         isAbility3Active = true;
+        animator.SetBool("isRaged", true);
         hudManager.SetInvincibilityState(true);
         outburst.StartOutburst();
         StartCoroutine(DrainRageOverTime(ability3DrainRate, DeactivateAbility3, true));
@@ -238,6 +239,7 @@ public class RageSystem : MonoBehaviour
     void DeactivateAbility3()
     {
         isAbility3Active = false;
+        animator.SetBool("isRaged", false);
         hudManager.SetInvincibilityState(false);
         outburst.StopOutburst();
         Debug.Log("Ability 3 deactivated");
