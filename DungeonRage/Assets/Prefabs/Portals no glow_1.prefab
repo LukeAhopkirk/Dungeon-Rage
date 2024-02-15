@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8916383541629483028}
   - component: {fileID: 6232823156638721257}
   - component: {fileID: 7862407825437569661}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Portals no glow_1
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1df80385ddffb740849a263dbfb0c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportPosition: {x: 0, y: 0}

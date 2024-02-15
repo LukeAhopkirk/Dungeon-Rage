@@ -41265,6 +41265,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: first level portal
       objectReference: {fileID: 0}
+    - target: {fileID: 4947718836488285031, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947718836488285031, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
+      propertyPath: m_TagString
+      value: Walls
+      objectReference: {fileID: 0}
     - target: {fileID: 7862407825437569661, guid: 74f8dcf7088e54e4084b117dee4ff6d6, type: 3}
       propertyPath: teleportPosition.x
       value: 20
