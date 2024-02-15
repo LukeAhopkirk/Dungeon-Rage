@@ -18112,7 +18112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &918667585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53176,7 +53176,7 @@ PrefabInstance:
       objectReference: {fileID: 152875185}
     - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
       propertyPath: health
-      value: 3000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
       propertyPath: target
@@ -56314,7 +56314,7 @@ Transform:
   m_GameObject: {fileID: 1934519683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23, y: -4.51, z: -1}
+  m_LocalPosition: {x: 99.1, y: -16.6, z: -1}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

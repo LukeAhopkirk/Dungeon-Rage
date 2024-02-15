@@ -32,6 +32,7 @@ public class BossController : MonoBehaviour
     //Health of enemy
     public float health = 1000;
     private float maxHealth;
+    private bool dying = false;
 
     //prefab to spawn around boss
     public GameObject shieldPrefab;
@@ -97,26 +98,34 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        faceTarget();
+        if (dying)
+        {
+            StopAllCoroutines();
+            return;
+        }
+        else
+        {
+            faceTarget();
+            if (attacking)
+            {
+                Debug.Log("Stopping all routines");
+                StopAllCoroutines();
+                Debug.Log("Starting routine");
+                StartCoroutine(AttackCoroutine());
+                attacking = false;
+                isChasing = true;
+            }
+
+            if (steeringBasics != null && isChasing)
+            {
+                //Travel towards the target object at certain speed.
+                Vector3 accel = steeringBasics.Arrive(target.transform.position);
+
+                steeringBasics.Steer(accel);
+            }
+        }
         //the attacking varaible is set the first time the player enters the room in room controller
         //Debug.Log(attacking == true);
-        if (attacking)
-        {
-            Debug.Log("Stopping all routines");
-            StopAllCoroutines();
-            Debug.Log("Starting routine");
-            StartCoroutine(AttackCoroutine());
-            attacking = false;
-            isChasing = true;
-        }
-
-        if (steeringBasics != null && isChasing)
-        {
-            //Travel towards the target object at certain speed.
-            Vector3 accel = steeringBasics.Arrive(target.transform.position);
-
-            steeringBasics.Steer(accel);
-        }
     }
 
     public void TakeDamage(float damage)
@@ -124,27 +133,39 @@ public class BossController : MonoBehaviour
         health -= damage;
         Debug.Log($"boss taken damage {damage} health left {health}");
 
+        if (dying)
+        {
+            return;
+        }
+        else 
+        {
+            if (health <= 0)
+            {
+                dying = true;
+                Debug.Log("dead");
+                animator.SetTrigger("dead");
+                //Destroy(gameObject);
+                return;
+            } 
+            else if (health < 2f / 3f * maxHealth)
+            {
+                enemyTypes.Add(tankEnemy);
+                return;
+            }
+            else if (health < 1f / 3f * maxHealth)
+            {
+                enemyTypes.Add(rangedEnemy);
+                return;
+            }
 
-        if (health <= 0)
-        {
-            Debug.Log("dead");
-            Destroy(gameObject);
-            //animator.SetTrigger("death");
-            hud.GetExperience(10);
+            if (FloatingTextPrefab)
+            {
+                ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+            }
         }
-        if (health < 2f / 3f * maxHealth)
-        {
-            enemyTypes.Add(tankEnemy);
-        }
-        if (health < 1f / 3f * maxHealth)
-        {
-            enemyTypes.Add(rangedEnemy);
-        }
+      
 
-        if (FloatingTextPrefab)
-        {
-            ShowFloatingText(Mathf.RoundToInt(damage).ToString());
-        }
+
     }
 
     void ShowFloatingText(string text)
@@ -172,7 +193,7 @@ public class BossController : MonoBehaviour
 
     private IEnumerator AttackCoroutine()
     {
-        while (true)
+        while (!dying)
         {
             yield return new WaitForSeconds(2);
             if (spawningNext)
@@ -265,12 +286,14 @@ public class BossController : MonoBehaviour
                     float spawnY = transform.position.y + radius * Mathf.Sin(angle);
 
                     // Check if the spawn position is within the bounds of the room
-                    if (spawnX >= bounds.min.x && spawnX <= bounds.max.x && spawnY >= bounds.min.y && spawnY <= bounds.max.y)
-                    {
-                        // Spawn position is within the bounds of the room
-                        spawnPosition = new Vector2(spawnX, spawnY);
-                        break; // Exit the loop
-                    }
+                    //if (spawnX >= bounds.min.x && spawnX <= bounds.max.x && spawnY >= bounds.min.y && spawnY <= bounds.max.y)
+                    //{
+                    //    // Spawn position is within the bounds of the room
+                    //    spawnPosition = new Vector2(spawnX, spawnY);
+                    //    break; // Exit the loop
+                    //}
+                    spawnPosition = new Vector2(spawnX, spawnY);
+                    break;
                 }
                 Instantiate(enemytype, spawnPosition, Quaternion.identity);
                 noSpawn++;
