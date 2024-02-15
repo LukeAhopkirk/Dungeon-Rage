@@ -994,6 +994,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Respawned
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isRaged
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2034785840932271669}
   m_Solo: 0
