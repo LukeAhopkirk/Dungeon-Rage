@@ -68,7 +68,7 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private Vector2 GetRandomSpawnPosition(Bounds bounds)
+    public Vector2 GetRandomSpawnPosition(Bounds bounds)
     {
         float randomX = Random.Range(bounds.min.x, bounds.max.x);
         float randomY = Random.Range(bounds.min.y, bounds.max.y);
