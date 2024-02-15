@@ -38,6 +38,7 @@ public class HUDManager : MonoBehaviour
         rageBar.fillAmount = rageAmount / 100f;
 
         healthAmount = baseHealthAmount;
+
         skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
         foreach(var stat in skillPointManager.stats)
         {

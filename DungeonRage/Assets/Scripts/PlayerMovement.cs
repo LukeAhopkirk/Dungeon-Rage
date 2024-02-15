@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioSource runSoundEffect;
     [SerializeField] private bool isPlayingRunSound = false;
 
+    private float oldAgility = 0f;
+
     private void Start()
     {
 
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (stat.statName == "Agility")
             {
-                stat.OnStatChanged += UpdateMoveSpeed;
+               stat.OnStatChanged += UpdateMoveSpeed;
             }
             if(stat.statName == "Intelligence")
             {
@@ -69,7 +71,18 @@ public class PlayerMovement : MonoBehaviour
     }
     void UpdateMoveSpeed(float newAgility)
     {
-        moveSpeed = baseMoveSpeed + newAgility * 0.05f;
+        Debug.Log(newAgility);
+        if(newAgility > 50 && newAgility > oldAgility)
+        {
+            oldAgility = newAgility;
+            return;
+        } 
+        else if (newAgility < 50)
+        {
+            oldAgility = newAgility;
+            moveSpeed = baseMoveSpeed + newAgility * 0.05f;
+        }
+       
     }
     void Update()
     {
