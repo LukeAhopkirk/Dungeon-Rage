@@ -32,8 +32,8 @@ public class SpellCast : MonoBehaviour
     private Coroutine cooldownCoroutine;
     private float lastFireballTime = 0f;
 
-
-
+    public Image fireballSelected; 
+    public Image lightningSelected;
 
     public float force = 10f;
 
@@ -54,6 +54,8 @@ public class SpellCast : MonoBehaviour
         cooldownAnimationTime = cooldownLength;
         currentFireballPrefab = originalFireballPrefab;
         rageSystem = FindObjectOfType<RageSystem>();
+        fireballSelected.gameObject.SetActive(true);
+        lightningSelected.gameObject.SetActive(false);
 
     }
 
@@ -87,10 +89,14 @@ public class SpellCast : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 spellType = 1;
+                lightningSelected.gameObject.SetActive(false);
+                fireballSelected.gameObject.SetActive(true);
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
                 spellType = 2;
+                fireballSelected.gameObject.SetActive(false);
+                lightningSelected.gameObject.SetActive(true);
             }
 
             if (spellReady && Input.GetButtonDown("Fire1") && spellType == 1)
