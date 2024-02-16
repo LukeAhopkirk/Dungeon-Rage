@@ -200,6 +200,7 @@ public class TankController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        ScoreManager.score += (int)damage;
         if (dying)
         {
             return;
@@ -212,7 +213,8 @@ public class TankController : MonoBehaviour
                 dying = true;
                 if (dying)
                 {
-                    hud.GetExperience(10);
+                    hud.GetExperience(30);
+                    ScoreManager.score += 300;
                 }
             }
             //Trigger floating text

@@ -80,7 +80,7 @@ public class Fireball : MonoBehaviour
     void SpawnHitParticles(Vector3 position)
     {
         // Instantiate the hit particles prefab at the collision point
-        Debug.Log("Spawning hit particles");
+        //Debug.Log("Spawning hit particles");
 
         if (particleSystem != null)
         {

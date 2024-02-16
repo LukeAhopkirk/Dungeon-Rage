@@ -35,9 +35,21 @@ public class WaveController : MonoBehaviour
     private BoxCollider2D spawnCollider; // Reference to the BoxCollider2D for spawn radius
     private bool playerEntered = false;
 
+    // Event to notify when the WaveManager is activated
+    public static event System.Action WaveManagerActivated = delegate { };
+    private ScoreManager scoreManager;
+
     void Start()
     {
-        spawnCollider = GetComponent<BoxCollider2D>();
+        spawnCollider = GetComponent <BoxCollider2D>();
+        scoreManager = FindObjectOfType<ScoreManager>(); // Direct reference to ScoreManager
+    }
+
+    public void ResetController()
+    {
+        StopAllCoroutines(); // Stop any running coroutines
+        currentWaveIndex = 0; // Reset the wave index
+        playerEntered = false; // Reset the playerEntered flag
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -45,6 +57,13 @@ public class WaveController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerEntered = true;
+
+            // Notify that the WaveManager is activated
+            if (WaveManagerActivated != null)
+            {
+                WaveManagerActivated.Invoke();
+            }
+
             StartCoroutine(SpawnWavesCoroutine());
         }
     }

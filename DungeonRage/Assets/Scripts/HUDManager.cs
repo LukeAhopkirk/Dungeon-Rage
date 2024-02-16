@@ -1,6 +1,8 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+
 
 public class HUDManager : MonoBehaviour
 {
@@ -22,18 +24,18 @@ public class HUDManager : MonoBehaviour
     private bool isInvincible = false;
 
     public SkillPointManager skillPointManager;
+    public string resetSceneName = "EndlessMode";
+    public string gameOverSceneName = "GameOverScene"; // Name of the GameOverScene
 
     public CheckpointManager checkPoint;
     public Animator animator;
 
     private bool isDying = false;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
-        SetPauseMenuActive(false);       
+        SetPauseMenuActive(false);
 
         healthBar.fillAmount = baseHealthAmount / 100f;
         experienceBar.fillAmount = experienceAmount / 100f;
@@ -43,15 +45,13 @@ public class HUDManager : MonoBehaviour
         maxHealth = healthAmount;
 
         skillPointManager = GameObject.FindObjectOfType<SkillPointManager>();
-        foreach(var stat in skillPointManager.stats)
+        foreach (var stat in skillPointManager.stats)
         {
             if (stat.statName == "Endurance")
             {
                 stat.OnStatChanged += UpdateHealthAmount;
             }
         }
-
- 
 
         for (int i = 0; i < spellButtons.Length; i++)
         {
@@ -62,6 +62,7 @@ public class HUDManager : MonoBehaviour
         // Subscribe to the DealDamageEvent
         RageSystem.DealDamageEvent += HandleDealDamageEvent;
     }
+
     void UpdateHealthAmount(float newEndurance)
     {
         Debug.Log($"New Endurance: {newEndurance}");
@@ -77,19 +78,29 @@ public class HUDManager : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        if(isInvincible)
+        if (isInvincible)
         {
             return;
         }
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / maxHealth;
 
-        if(healthAmount <= 0 && !isDying)
+        if (healthAmount <= 0 && !isDying)
         {
             isDying = true;
+
             // Player is dead
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+
+            if (SceneManager.GetActiveScene().name == resetSceneName)
+            {
+                ScoreManager.score = 0;
+            }
             TriggerDeathAnimation();
             Debug.Log("Player is dead");
+
+            // Load the GameOverScene
+            SceneManager.LoadScene(gameOverSceneName);
         }
         else
         {
@@ -128,7 +139,7 @@ public class HUDManager : MonoBehaviour
 
     public void GetExperience(float experience)
     {
-        if(experienceAmount >= 100f)
+        if (experienceAmount >= 100f)
         {
             experienceAmount = 0f;
             skillPointManager.LevelUp();
@@ -183,8 +194,27 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateRageBar()
     {
-        rageBar.fillAmount = rageAmount / 100f;
-        //Debug.Log($"Updated Rage Bar. Rage Amount: {rageAmount}");
+        // Check if the rageBar object is not null and is active in the hierarchy
+        if (rageBar != null && rageBar.gameObject != null && rageBar.gameObject.activeInHierarchy)
+        {
+            // Check if the Image component is not null
+            Image imageComponent = rageBar.GetComponent<Image>();
+            if (imageComponent != null)
+            {
+                imageComponent.fillAmount = rageAmount / 100f;
+                //Debug.Log($"Updated Rage Bar. Rage Amount: {rageAmount}");
+            }
+            else
+            {
+                // Handle the case where Image component is null
+                Debug.LogWarning("Image component is null. Unable to update fillAmount.");
+            }
+        }
+        else
+        {
+            // Handle the case where rageBar object is null or not active
+            Debug.LogWarning("RageBar object is null or not active. Unable to update fillAmount.");
+        }
     }
 
     private void HandleDealDamageEvent(float damage)
