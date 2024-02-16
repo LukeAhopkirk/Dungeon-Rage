@@ -38,6 +38,8 @@ public class BossController : MonoBehaviour
     //prefab to spawn around boss
     public GameObject shieldPrefab;
 
+    public GameObject ShadowBossPrefab;
+
     //List to hold all the different enemeis
     HashSet<GameObject> enemyTypes = new HashSet<GameObject>();
 
@@ -347,30 +349,16 @@ public class BossController : MonoBehaviour
 
     }
 
-    public void Death()
-    {
-        Debug.Log("Death Method called");
-        StartCoroutine(DeathSequence());
-    }
-
-    private void ShowDeathText()
+    public void ShowDeathText()
     {
         deathText.SetActive(true);
     }
 
-    private void HideDeathText()
+    public void DeathSequence()
     {
         deathText.SetActive(false);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 0.8f, -2f);
+        Instantiate(ShadowBossPrefab, spawnPosition, Quaternion.identity);
     }
 
-    IEnumerator DeathSequence()
-    {
-        Debug.Log("Death sequence started");
-        yield return new WaitForSeconds(2);
-        Debug.Log("Death Panel");
-        ShowDeathText();
-        yield return new WaitForSeconds(20);
-        Debug.Log("No more Death Panel");
-        HideDeathText();
-    }
 }

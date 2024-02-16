@@ -53122,6 +53122,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1224899982752200525, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4458696511034661803, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 111.31
@@ -53176,7 +53180,7 @@ PrefabInstance:
       objectReference: {fileID: 152875185}
     - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
       propertyPath: health
-      value: 1
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 8367709732262862434, guid: f44dadcc959474c239f8e0d5bf1fd8f1, type: 3}
       propertyPath: target
@@ -56314,7 +56318,7 @@ Transform:
   m_GameObject: {fileID: 1934519683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 99.1, y: -16.6, z: -1}
+  m_LocalPosition: {x: -22.8, y: -4.5, z: -1}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56417,12 +56421,16 @@ MonoBehaviour:
   Spell: {fileID: 0}
   spellReady: 1
   cooldownLength: 0.5
+  LightningTimer: 0
+  LightningCooldown: 8
+  LastLightningTime: 0
   imageCooldown: {fileID: 1031130797}
   cooldownAnimationTime: 0
   force: 6
   originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   currentFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
   fireballSound: {fileID: 1934519699}
+  LightningSound: {fileID: 0}
 --- !u!61 &1934519690
 BoxCollider2D:
   m_ObjectHideFlags: 0
