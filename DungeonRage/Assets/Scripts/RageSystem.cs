@@ -31,7 +31,7 @@ public class RageSystem : MonoBehaviour
     private abilityBoost abilityBoost;
     private Outburst outburst;
 
-    public float baseDamageRageRatio = 0.05f;
+    public float baseDamageRageRatio = 0.1f;
     public static float damageRageRatio;
     public SkillPointManager skillPointManager;
 

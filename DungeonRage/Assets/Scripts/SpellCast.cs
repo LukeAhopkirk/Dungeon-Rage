@@ -21,8 +21,7 @@ public class SpellCast : MonoBehaviour
     public float cooldownLength = 2f;
 
     private bool LightningReady = true;
-    private float LightningTimer = 0f;
-    public float LightningCooldown = 5f;
+    public float LightningCooldown = 8f;
     private float LastLightningTime = 0f;
 
     public Image imageCooldown;
@@ -41,8 +40,6 @@ public class SpellCast : MonoBehaviour
     public GameObject currentFireballPrefab;
 
     private RageSystem rageSystem;
-
-    private IceSpell IceSpell;
 
     [SerializeField] private AudioSource fireballSound;
     [SerializeField] private AudioSource LightningSound;

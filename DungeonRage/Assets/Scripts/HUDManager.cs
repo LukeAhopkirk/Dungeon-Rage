@@ -250,4 +250,9 @@ public class HUDManager : MonoBehaviour
     {
         isAbilityDraining = isDraining;
     }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
