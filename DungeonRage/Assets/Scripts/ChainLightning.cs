@@ -127,7 +127,7 @@ public class ChainLightning : MonoBehaviour
                 EmitParticlesBetween(startObject.transform.position, endObject.transform.position);
 
                 // Destroy the clone if it's not the original chain lightning
-                if (!IsOriginalChainLightning())
+               if (!IsOriginalChainLightning())
                 {
                     Destroy(gameObject);
                 }
