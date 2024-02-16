@@ -98,12 +98,11 @@ public class HUDManager : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerScore", ScoreManager.score);
                 PlayerPrefs.Save();
                 ScoreManager.score = 0;
+                SceneManager.LoadScene(gameOverSceneName);
             }
             TriggerDeathAnimation();
             Debug.Log("Player is dead");
 
-            // Load the GameOverScene
-            SceneManager.LoadScene(gameOverSceneName);
         }
         else
         {
