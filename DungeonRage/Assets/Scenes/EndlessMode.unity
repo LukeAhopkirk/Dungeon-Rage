@@ -4554,7 +4554,7 @@ MonoBehaviour:
   Spell: {fileID: 0}
   spellReady: 1
   cooldownLength: 1
-  LightningCooldown: 4
+  LightningCooldown: 6
   imageCooldown: {fileID: 1194560908}
   lightningCooldownImage: {fileID: 594444504}
   cooldownAnimationTime: 0
