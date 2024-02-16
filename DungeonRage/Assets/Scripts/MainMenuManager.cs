@@ -35,7 +35,10 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
+    public void EndlessMode()
+    {
+        SceneManager.LoadScene("EndlessMode");
+    }
     //public void PlayCutscene()
     //{
         // Set the video to play
