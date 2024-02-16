@@ -22,10 +22,11 @@ public class SpellCast : MonoBehaviour
 
     private bool LightningReady = true;
     private float LightningTimer = 0f;
-    public float LightningCooldown = 8f;
+    public float LightningCooldown = 5f;
     private float LastLightningTime = 0f;
 
     public Image imageCooldown;
+    public Image lightningCooldownImage;
 
     public float cooldownAnimationTime;
     private Coroutine cooldownCoroutine;
@@ -49,6 +50,7 @@ public class SpellCast : MonoBehaviour
     private void Start()
     {
         imageCooldown.fillAmount = 0f;
+        lightningCooldownImage.fillAmount = 0f;
         cooldownAnimationTime = cooldownLength;
         currentFireballPrefab = originalFireballPrefab;
         rageSystem = FindObjectOfType<RageSystem>();
@@ -74,11 +76,11 @@ public class SpellCast : MonoBehaviour
                 float remainingCooldown = Time.time - LastLightningTime;
                 if (remainingCooldown < LightningCooldown)
                 {
-                    imageCooldown.fillAmount = 1 - remainingCooldown / LightningCooldown;
+                    lightningCooldownImage.fillAmount = 1 - remainingCooldown / LightningCooldown;
                 }
                 else
                 {
-                    imageCooldown.fillAmount = 0.0f;
+                    lightningCooldownImage.fillAmount = 0.0f;
                     LightningReady = true; // Reset spell readiness when cooldown is complete
                 }
             }
@@ -127,22 +129,22 @@ public class SpellCast : MonoBehaviour
                     animator.SetTrigger("shot2");
                     LightningSound.Play();
                 }
-                imageCooldown.fillAmount = 1f; // Set fill amount to full at the start of cooldown
+                lightningCooldownImage.fillAmount = 1f; // Set fill amount to full at the start of cooldown
                 LightningReady = false;
                 LastLightningTime = Time.time;
                 // Start the cooldown fill animation coroutine
-                cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
+                cooldownCoroutine = StartCoroutine(LightningCooldownFillAnimation());
             }
             if(!LightningReady)
             {
                 float lightremainingCooldown = Time.time - LastLightningTime;
                 if (lightremainingCooldown < LightningCooldown)
                 {
-                    imageCooldown.fillAmount = 1 - lightremainingCooldown / LightningCooldown;
+                    lightningCooldownImage.fillAmount = 1 - lightremainingCooldown / LightningCooldown;
                 }
                 else
                 {
-                    imageCooldown.fillAmount = 0.0f;
+                    lightningCooldownImage.fillAmount = 0.0f;
                     LightningReady = true; // Reset spell readiness when cooldown is complete
                 }
             }
@@ -177,6 +179,21 @@ public class SpellCast : MonoBehaviour
         }
 
         imageCooldown.fillAmount = 0f;
+    }
+    IEnumerator LightningCooldownFillAnimation()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+        float startFill = 1f; // Start fill amount at full
+
+        while (elapsedTime < LightningCooldown)
+        {
+            lightningCooldownImage.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / LightningCooldown);
+            elapsedTime = Time.time - startTime;
+            yield return null;
+        }
+
+        lightningCooldownImage.fillAmount = 0f;
     }
 
 

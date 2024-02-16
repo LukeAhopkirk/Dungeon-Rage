@@ -56421,11 +56421,10 @@ MonoBehaviour:
   animator: {fileID: 1934519693}
   Spell: {fileID: 0}
   spellReady: 1
-  cooldownLength: 2
-  LightningTimer: 0
-  LightningCooldown: 5
-  LastLightningTime: 0
+  cooldownLength: 1
+  LightningCooldown: 4
   imageCooldown: {fileID: 1031130797}
+  lightningCooldownImage: {fileID: 300093593}
   cooldownAnimationTime: 0
   force: 6
   originalFireballPrefab: {fileID: 8335148672145143256, guid: a13deda6724d14217afa140c67ba1399, type: 3}
