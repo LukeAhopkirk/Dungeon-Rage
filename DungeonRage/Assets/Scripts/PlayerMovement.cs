@@ -156,12 +156,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PlayRunEffect()
     {
-        Debug.Log("Playing run sound effect");
+        //Debug.Log("Playing run sound effect");
         runSoundEffect.Play();
     }
     private void StopRunEffect()
     {
-        Debug.Log("Stopping run sound effect");
+        //Debug.Log("Stopping run sound effect");
         runSoundEffect.Stop();
     }
 
@@ -260,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
     void SpawnHitParticles(Vector3 position)
     {
         // Instantiate the hit particles prefab at the collision point
-        Debug.Log("Spawning hit particles");
+        //Debug.Log("Spawning hit particles");
 
         if (particleSystem != null)
         {

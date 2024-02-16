@@ -165,6 +165,7 @@ public class RangeController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        ScoreManager.score += (int)damage;
         if (dying)
         {
             return;
@@ -177,7 +178,8 @@ public class RangeController : MonoBehaviour
                 dying = true;
                 if (dying)
                 {
-                    hud.GetExperience(10);
+                    hud.GetExperience(15);
+                    ScoreManager.score += 150;
                 }
             }
             //Trigger floating text

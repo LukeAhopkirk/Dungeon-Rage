@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             checkpointManager.UpdateLastCheckpointPosition(transform.position);
-            Debug.Log("Checkpoint reached!");
+            //Debug.Log("Checkpoint reached!");
 
             checkpointManager.ActivateCheckpoint(spriteRenderer);
         }

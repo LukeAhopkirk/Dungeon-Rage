@@ -188,7 +188,7 @@ public class MonsterController : MonoBehaviour
 		attackSound.Play();
         if (isTouching)
         {
-			hud.DealDamage(damage);
+            hud.DealDamage(damage);
         }
 
         //transform.localPosition = pos;
@@ -227,6 +227,7 @@ public class MonsterController : MonoBehaviour
 	public void TakeDamage(float damage)
     {
 		health -= damage;
+		ScoreManager.score += (int)damage;
 		if (dying)
 		{
 			return;
@@ -240,6 +241,7 @@ public class MonsterController : MonoBehaviour
 				if (dying)
 				{
 					hud.GetExperience(10);
+					ScoreManager.score += 100;
 				}
 			}
 			//Trigger floating text
