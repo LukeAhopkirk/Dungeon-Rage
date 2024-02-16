@@ -43,7 +43,7 @@ Dungeon Rage is a top down shooter with a fantasy theme based around magic, with
 - Ranged enemies still shoot projectiles into walls when in different room.
 - If you quit from pause menu into the main menu and try click endless mode you wont be able to move unless you pause again.
 - Volume Slider doesnt work.
-
+- Boss might be a little buggy
   
   
   
