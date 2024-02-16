@@ -32,9 +32,13 @@ public class BossController : MonoBehaviour
     //Health of enemy
     public float health = 1000;
     private float maxHealth;
+    private bool dying = false;
+    private bool invincible = false;
 
     //prefab to spawn around boss
     public GameObject shieldPrefab;
+
+    public GameObject ShadowBossPrefab;
 
     //List to hold all the different enemeis
     HashSet<GameObject> enemyTypes = new HashSet<GameObject>();
@@ -65,6 +69,8 @@ public class BossController : MonoBehaviour
 
     public GameObject roomPrefab;
     private Collider2D roomCollider;
+
+    public GameObject deathText;
     //Settor method for to start the boss attacking
     public static void setAttacking()
     {
@@ -75,6 +81,7 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        deathText.SetActive(false);
         //set the intial health to the max health
         maxHealth = health;
 
@@ -97,53 +104,76 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        faceTarget();
+        if (dying)
+        {
+            StopAllCoroutines();
+            return;
+        }
+        else
+        {
+            faceTarget();
+            if (attacking)
+            {
+                Debug.Log("Stopping all routines");
+                StopAllCoroutines();
+                Debug.Log("Starting routine");
+                StartCoroutine(AttackCoroutine());
+                attacking = false;
+                isChasing = true;
+            }
+
+            if (steeringBasics != null && isChasing)
+            {
+                //Travel towards the target object at certain speed.
+                Vector3 accel = steeringBasics.Arrive(target.transform.position);
+
+                steeringBasics.Steer(accel);
+            }
+        }
         //the attacking varaible is set the first time the player enters the room in room controller
         //Debug.Log(attacking == true);
-        if (attacking)
-        {
-            Debug.Log("Stopping all routines");
-            StopAllCoroutines();
-            Debug.Log("Starting routine");
-            StartCoroutine(AttackCoroutine());
-            attacking = false;
-            isChasing = true;
-        }
-
-        if (steeringBasics != null && isChasing)
-        {
-            //Travel towards the target object at certain speed.
-            Vector3 accel = steeringBasics.Arrive(target.transform.position);
-
-            steeringBasics.Steer(accel);
-        }
     }
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        Debug.Log($"boss taken damage {damage} health left {health}");
-
-
-        if (health <= 0)
+        if (invincible)
         {
-            Debug.Log("dead");
-            Destroy(gameObject);
-            //animator.SetTrigger("death");
-            hud.GetExperience(10);
+            return;
         }
-        if (health < 2f / 3f * maxHealth)
+        else
         {
-            enemyTypes.Add(tankEnemy);
-        }
-        if (health < 1f / 3f * maxHealth)
-        {
-            enemyTypes.Add(rangedEnemy);
-        }
+            health -= damage;
 
-        if (FloatingTextPrefab)
-        {
-            ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+            if (dying)
+            {
+                return;
+            }
+            else
+            {
+                if (health <= 0)
+                {
+                    dying = true;
+                    Debug.Log("dead");
+                    animator.SetTrigger("dead");
+                    //Destroy(gameObject);
+                    return;
+                }
+                else if (health < 2f / 3f * maxHealth)
+                {
+                    enemyTypes.Add(tankEnemy);
+                    return;
+                }
+                else if (health < 1f / 3f * maxHealth)
+                {
+                    enemyTypes.Add(rangedEnemy);
+                    return;
+                }
+
+                if (FloatingTextPrefab)
+                {
+                    ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+                }
+            }
         }
     }
 
@@ -172,7 +202,7 @@ public class BossController : MonoBehaviour
 
     private IEnumerator AttackCoroutine()
     {
-        while (true)
+        while (!dying)
         {
             yield return new WaitForSeconds(2);
             if (spawningNext)
@@ -243,6 +273,7 @@ public class BossController : MonoBehaviour
 
         //Create the shield game object
         GameObject sheild = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+        invincible = true;
 
         //Bounds of the room
         Bounds bounds = roomCollider.bounds;
@@ -265,12 +296,14 @@ public class BossController : MonoBehaviour
                     float spawnY = transform.position.y + radius * Mathf.Sin(angle);
 
                     // Check if the spawn position is within the bounds of the room
-                    if (spawnX >= bounds.min.x && spawnX <= bounds.max.x && spawnY >= bounds.min.y && spawnY <= bounds.max.y)
-                    {
-                        // Spawn position is within the bounds of the room
-                        spawnPosition = new Vector2(spawnX, spawnY);
-                        break; // Exit the loop
-                    }
+                    //if (spawnX >= bounds.min.x && spawnX <= bounds.max.x && spawnY >= bounds.min.y && spawnY <= bounds.max.y)
+                    //{
+                    //    // Spawn position is within the bounds of the room
+                    //    spawnPosition = new Vector2(spawnX, spawnY);
+                    //    break; // Exit the loop
+                    //}
+                    spawnPosition = new Vector2(spawnX, spawnY);
+                    break;
                 }
                 Instantiate(enemytype, spawnPosition, Quaternion.identity);
                 noSpawn++;
@@ -281,6 +314,7 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         Destroy(sheild);
+        invincible = false;
         isChasing = true;
 
     }
@@ -313,6 +347,18 @@ public class BossController : MonoBehaviour
         }
         transform.localScale = scale;
 
+    }
+
+    public void ShowDeathText()
+    {
+        deathText.SetActive(true);
+    }
+
+    public void DeathSequence()
+    {
+        deathText.SetActive(false);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 0.8f, -2f);
+        Instantiate(ShadowBossPrefab, spawnPosition, Quaternion.identity);
     }
 
 }

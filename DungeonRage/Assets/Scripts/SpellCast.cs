@@ -18,14 +18,22 @@ public class SpellCast : MonoBehaviour
 
     public bool spellReady = true;
     private float Timer = 0f;
-    public float cooldownLength = .2f;
+    public float cooldownLength = 2f;
+
+    private bool LightningReady = true;
+    private float LightningTimer = 0f;
+    public float LightningCooldown = 5f;
+    private float LastLightningTime = 0f;
 
     public Image imageCooldown;
+    public Image lightningCooldownImage;
 
     public float cooldownAnimationTime;
     private Coroutine cooldownCoroutine;
     private float lastFireballTime = 0f;
 
+    public Image fireballSelected; 
+    public Image lightningSelected;
 
     public float force = 10f;
 
@@ -37,13 +45,17 @@ public class SpellCast : MonoBehaviour
     private IceSpell IceSpell;
 
     [SerializeField] private AudioSource fireballSound;
+    [SerializeField] private AudioSource LightningSound;
 
     private void Start()
     {
         imageCooldown.fillAmount = 0f;
+        lightningCooldownImage.fillAmount = 0f;
         cooldownAnimationTime = cooldownLength;
         currentFireballPrefab = originalFireballPrefab;
         rageSystem = FindObjectOfType<RageSystem>();
+        fireballSelected.gameObject.SetActive(true);
+        lightningSelected.gameObject.SetActive(false);
 
     }
 
@@ -61,21 +73,33 @@ public class SpellCast : MonoBehaviour
                     Timer = 0;
                 }
             }
+            if (!LightningReady)
+            {
+                float remainingCooldown = Time.time - LastLightningTime;
+                if (remainingCooldown < LightningCooldown)
+                {
+                    lightningCooldownImage.fillAmount = 1 - remainingCooldown / LightningCooldown;
+                }
+                else
+                {
+                    lightningCooldownImage.fillAmount = 0.0f;
+                    LightningReady = true; // Reset spell readiness when cooldown is complete
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 spellType = 1;
+                lightningSelected.gameObject.SetActive(false);
+                fireballSelected.gameObject.SetActive(true);
             }
-            /*else if (Input.GetKeyDown(KeyCode.E))
-            {
-                spellType = 2;
-            }*/
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                spellType = 3;
+                spellType = 2;
+                fireballSelected.gameObject.SetActive(false);
+                lightningSelected.gameObject.SetActive(true);
             }
 
-
-            if (spellReady && Input.GetButtonDown("Fire1"))
+            if (spellReady && Input.GetButtonDown("Fire1") && spellType == 1)
             {
                 //fireballSound.Play();
                 if (PlayerMovement.isMoving)
@@ -96,6 +120,39 @@ public class SpellCast : MonoBehaviour
 
                 // Start the cooldown fill animation coroutine
                 cooldownCoroutine = StartCoroutine(CooldownFillAnimation());
+            }
+            if (LightningReady && Input.GetButtonDown("Fire1") && spellType == 2)
+            {
+                //fireballSound.Play();
+                if (PlayerMovement.isMoving)
+                {
+                    animator.SetTrigger("shot1");
+                    LightningSound.Play();
+
+                }
+                else
+                {
+                    animator.SetTrigger("shot2");
+                    LightningSound.Play();
+                }
+                lightningCooldownImage.fillAmount = 1f; // Set fill amount to full at the start of cooldown
+                LightningReady = false;
+                LastLightningTime = Time.time;
+                // Start the cooldown fill animation coroutine
+                cooldownCoroutine = StartCoroutine(LightningCooldownFillAnimation());
+            }
+            if(!LightningReady)
+            {
+                float lightremainingCooldown = Time.time - LastLightningTime;
+                if (lightremainingCooldown < LightningCooldown)
+                {
+                    lightningCooldownImage.fillAmount = 1 - lightremainingCooldown / LightningCooldown;
+                }
+                else
+                {
+                    lightningCooldownImage.fillAmount = 0.0f;
+                    LightningReady = true; // Reset spell readiness when cooldown is complete
+                }
             }
 
             if (!spellReady)
@@ -129,6 +186,21 @@ public class SpellCast : MonoBehaviour
 
         imageCooldown.fillAmount = 0f;
     }
+    IEnumerator LightningCooldownFillAnimation()
+    {
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+        float startFill = 1f; // Start fill amount at full
+
+        while (elapsedTime < LightningCooldown)
+        {
+            lightningCooldownImage.fillAmount = Mathf.Lerp(startFill, 0f, elapsedTime / LightningCooldown);
+            elapsedTime = Time.time - startTime;
+            yield return null;
+        }
+
+        lightningCooldownImage.fillAmount = 0f;
+    }
 
 
 
@@ -147,11 +219,7 @@ public class SpellCast : MonoBehaviour
         switch (spellType)
         {
             case 2:
-                //IceSpell.UseFreezeAbility();
-                //Debug.Log("Ice spell cast");
-                break;
-            case 3:
-                // Instantiate the lightning spell only when spellType is 3 (lightning spell)
+                //Instantiate the lightning spell only when spellType is 3 (lightning spell)
                 Spell = Instantiate(LightningPrefab, SpellCastPos.position, Quaternion.identity);
                 break;
             default:
