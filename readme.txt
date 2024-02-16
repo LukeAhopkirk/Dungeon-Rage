@@ -39,7 +39,8 @@ Dungeon Rage is a top down shooter with a fantasy theme based around magic, with
 - Endless mode is unbalanced
 - Dash very rarely gets the player stuck in the wall/outside the map
 - Dashing through the portal will sometimes get you stuck outside the map
-- Level up text and pause screen text sometimes doesn’t show up
+- Font doesnt work properly on some assets.
+- Ranged enemies still shoot projectiles into walls when in different room.
 
   
   
