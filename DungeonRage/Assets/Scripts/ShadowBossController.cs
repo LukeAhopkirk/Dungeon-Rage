@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShadowBossController : MonoBehaviour
 {
@@ -12,8 +13,15 @@ public class ShadowBossController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void textPanelActive()
+    public void TextPanelActive()
     {
         textPanel.SetActive(true);
+        StartCoroutine(GameOver(10f));
+    }
+
+    public IEnumerator GameOver(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOverScene");
     }
 }
