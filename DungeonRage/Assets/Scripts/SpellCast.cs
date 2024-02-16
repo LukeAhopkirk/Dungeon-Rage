@@ -44,6 +44,7 @@ public class SpellCast : MonoBehaviour
     private IceSpell IceSpell;
 
     [SerializeField] private AudioSource fireballSound;
+    [SerializeField] private AudioSource LightningSound;
 
     private void Start()
     {
@@ -114,13 +115,13 @@ public class SpellCast : MonoBehaviour
                 if (PlayerMovement.isMoving)
                 {
                     animator.SetTrigger("shot1");
-                    fireballSound.Play();
+                    LightningSound.Play();
 
                 }
                 else
                 {
                     animator.SetTrigger("shot2");
-                    fireballSound.Play();
+                    LightningSound.Play();
                 }
                 imageCooldown.fillAmount = 1f; // Set fill amount to full at the start of cooldown
                 LightningReady = false;
