@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: fb3291e37d57c31498ae8c3e8ffd5e76
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: e4e4f220ebae1421eb56689f2e4e5566
+  - enabled: 1
+    path: Assets/Scenes/EndlessMode.unity
+    guid: 0773d5f37f86d41cb88d2118c965cb31
   - enabled: 0
     path: Assets/Scenes/Level2.unity
     guid: 2a9150ca7cb968345818f71c3e145fe7
