@@ -22,6 +22,6 @@ public class ShadowBossController : MonoBehaviour
     public IEnumerator GameOver(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("MainMenu");
     }
 }
