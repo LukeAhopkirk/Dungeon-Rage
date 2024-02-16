@@ -22,7 +22,7 @@ public class SpellCast : MonoBehaviour
 
     private bool LightningReady = true;
     public float LightningTimer = 0f;
-    public float LightningCooldown = 2f;
+    public float LightningCooldown = 8f;
     public float LastLightningTime = 0f;
 
     public Image imageCooldown;
@@ -131,9 +131,9 @@ public class SpellCast : MonoBehaviour
             if(!LightningReady)
             {
                 float remainingCooldown = Time.time - LastLightningTime;
-                if (remainingCooldown < cooldownLength)
+                if (remainingCooldown < LightningCooldown)
                 {
-                    imageCooldown.fillAmount = 1 - remainingCooldown / cooldownLength;
+                    imageCooldown.fillAmount = 1 - remainingCooldown / LightningCooldown;
                 }
                 else
                 {
