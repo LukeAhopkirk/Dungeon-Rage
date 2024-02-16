@@ -4,6 +4,7 @@ using System.Net.NetworkInformation;
 using TMPro;
 //using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankController : MonoBehaviour
 {
@@ -214,7 +215,10 @@ public class TankController : MonoBehaviour
                 if (dying)
                 {
                     hud.GetExperience(30);
-                    ScoreManager.score += 300;
+                    if (SceneManager.GetActiveScene().name == "EndlessMode")
+                    {
+                        ScoreManager.score += 300;
+                    }
                 }
             }
             //Trigger floating text

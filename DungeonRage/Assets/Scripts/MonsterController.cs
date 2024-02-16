@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 //using UnityMovementAI;
 
 public class MonsterController : MonoBehaviour
@@ -241,7 +242,11 @@ public class MonsterController : MonoBehaviour
 				if (dying)
 				{
 					hud.GetExperience(10);
-					ScoreManager.score += 100;
+                    if (SceneManager.GetActiveScene().name == "EndlessMode")
+					{
+                        ScoreManager.score += 100;
+                    }
+
 				}
 			}
 			//Trigger floating text
