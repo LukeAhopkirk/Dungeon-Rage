@@ -94,6 +94,9 @@ public class HUDManager : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == resetSceneName)
             {
+                // Save the score before loading the game over scene
+                PlayerPrefs.SetInt("PlayerScore", ScoreManager.score);
+                PlayerPrefs.Save();
                 ScoreManager.score = 0;
             }
             TriggerDeathAnimation();
@@ -107,6 +110,7 @@ public class HUDManager : MonoBehaviour
             return;
         }
     }
+
 
     private void TriggerDeathAnimation()
     {
