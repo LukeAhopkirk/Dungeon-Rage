@@ -257,5 +257,7 @@ public class HUDManager : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.LoadScene("MainMenu");
+        ScoreManager.score = 0;
+
     }
 }
