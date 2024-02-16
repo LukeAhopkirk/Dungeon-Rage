@@ -57,6 +57,7 @@ public class SkillPointManager : MonoBehaviour
         UpdatePlayerLevel();
         levelUpSound.Play();
         HUDManager.Heal(1000000);
+        levelNotifDuration = 2f;
         StartCoroutine(ShowLevelUpPanel());
     }
 
