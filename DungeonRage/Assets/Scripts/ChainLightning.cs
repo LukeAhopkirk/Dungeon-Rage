@@ -113,8 +113,6 @@ public class ChainLightning : MonoBehaviour
                         rageSystem.DealDamage(totalDamage);
                     }
 
-                    // Show debug log for damage dealt
-                    Debug.Log($"Lightning dealt {totalDamage} damage to {enemy.gameObject.name}");
                 }
             
 
