@@ -21,9 +21,9 @@ public class SpellCast : MonoBehaviour
     public float cooldownLength = 2f;
 
     private bool LightningReady = true;
-    public float LightningTimer = 0f;
+    private float LightningTimer = 0f;
     public float LightningCooldown = 8f;
-    public float LastLightningTime = 0f;
+    private float LastLightningTime = 0f;
 
     public Image imageCooldown;
 
@@ -71,11 +71,15 @@ public class SpellCast : MonoBehaviour
             }
             if (!LightningReady)
             {
-                LightningTimer += Time.deltaTime;
-                if (LightningTimer > LightningCooldown)
+                float remainingCooldown = Time.time - LastLightningTime;
+                if (remainingCooldown < LightningCooldown)
                 {
-                    LightningReady = true;
-                    LightningTimer = 0;
+                    imageCooldown.fillAmount = 1 - remainingCooldown / LightningCooldown;
+                }
+                else
+                {
+                    imageCooldown.fillAmount = 0.0f;
+                    LightningReady = true; // Reset spell readiness when cooldown is complete
                 }
             }
             if (Input.GetKeyDown(KeyCode.Q))
@@ -131,10 +135,10 @@ public class SpellCast : MonoBehaviour
             }
             if(!LightningReady)
             {
-                float remainingCooldown = Time.time - LastLightningTime;
-                if (remainingCooldown < LightningCooldown)
+                float lightremainingCooldown = Time.time - LastLightningTime;
+                if (lightremainingCooldown < LightningCooldown)
                 {
-                    imageCooldown.fillAmount = 1 - remainingCooldown / LightningCooldown;
+                    imageCooldown.fillAmount = 1 - lightremainingCooldown / LightningCooldown;
                 }
                 else
                 {
