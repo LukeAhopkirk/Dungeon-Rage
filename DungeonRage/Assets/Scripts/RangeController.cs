@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 //using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RangeController : MonoBehaviour
 {
@@ -179,7 +180,10 @@ public class RangeController : MonoBehaviour
                 if (dying)
                 {
                     hud.GetExperience(15);
-                    ScoreManager.score += 150;
+                    if (SceneManager.GetActiveScene().name == "EndlessMode")
+                    {
+                        ScoreManager.score += 150;
+                    }
                 }
             }
             //Trigger floating text
