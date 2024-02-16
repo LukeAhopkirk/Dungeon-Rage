@@ -5929,6 +5929,44 @@ MonoBehaviour:
     - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
       maxEnemies: 20
     timeBeforeNextWave: 20
+  - enemyTypes:
+    - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+      maxEnemies: 10
+    - prefab: {fileID: 8578203095531965538, guid: 9fa810daedfc14652ac9d3008a77498e, type: 3}
+      maxEnemies: 8
+    timeBeforeNextWave: 35
+  - enemyTypes:
+    - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+      maxEnemies: 20
+    - prefab: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+      maxEnemies: 4
+    - prefab: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+      maxEnemies: 4
+    timeBeforeNextWave: 45
+  - enemyTypes:
+    - prefab: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+      maxEnemies: 4
+    timeBeforeNextWave: 50
+  - enemyTypes:
+    - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+      maxEnemies: 100
+    timeBeforeNextWave: 60
+  - enemyTypes:
+    - prefab: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+      maxEnemies: 4
+    - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+      maxEnemies: 20
+    - prefab: {fileID: 8578203095531965538, guid: 9fa810daedfc14652ac9d3008a77498e, type: 3}
+      maxEnemies: 15
+    timeBeforeNextWave: 70
+  - enemyTypes:
+    - prefab: {fileID: 8648417882053811735, guid: 7d18ccd5edc7e41d2b51333278bb3d10, type: 3}
+      maxEnemies: 12
+    - prefab: {fileID: 4829898755323246806, guid: f01d4f607e06b441f9441c4235bb5ba4, type: 3}
+      maxEnemies: 50
+    - prefab: {fileID: 8578203095531965538, guid: 9fa810daedfc14652ac9d3008a77498e, type: 3}
+      maxEnemies: 20
+    timeBeforeNextWave: 80
 --- !u!1 &988668896
 GameObject:
   m_ObjectHideFlags: 0
