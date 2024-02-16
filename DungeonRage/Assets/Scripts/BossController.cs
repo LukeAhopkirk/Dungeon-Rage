@@ -33,9 +33,12 @@ public class BossController : MonoBehaviour
     public float health = 1000;
     private float maxHealth;
     private bool dying = false;
+    private bool invincible = false;
 
     //prefab to spawn around boss
     public GameObject shieldPrefab;
+
+    public GameObject ShadowBossPrefab;
 
     //List to hold all the different enemeis
     HashSet<GameObject> enemyTypes = new HashSet<GameObject>();
@@ -66,6 +69,8 @@ public class BossController : MonoBehaviour
 
     public GameObject roomPrefab;
     private Collider2D roomCollider;
+
+    public GameObject deathText;
     //Settor method for to start the boss attacking
     public static void setAttacking()
     {
@@ -76,6 +81,7 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        deathText.SetActive(false);
         //set the intial health to the max health
         maxHealth = health;
 
@@ -130,42 +136,45 @@ public class BossController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        Debug.Log($"boss taken damage {damage} health left {health}");
-
-        if (dying)
+        if (invincible)
         {
             return;
         }
-        else 
+        else
         {
-            if (health <= 0)
-            {
-                dying = true;
-                Debug.Log("dead");
-                animator.SetTrigger("dead");
-                //Destroy(gameObject);
-                return;
-            } 
-            else if (health < 2f / 3f * maxHealth)
-            {
-                enemyTypes.Add(tankEnemy);
-                return;
-            }
-            else if (health < 1f / 3f * maxHealth)
-            {
-                enemyTypes.Add(rangedEnemy);
-                return;
-            }
+            health -= damage;
 
-            if (FloatingTextPrefab)
+            if (dying)
             {
-                ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+                return;
+            }
+            else
+            {
+                if (health <= 0)
+                {
+                    dying = true;
+                    Debug.Log("dead");
+                    animator.SetTrigger("dead");
+                    //Destroy(gameObject);
+                    return;
+                }
+                else if (health < 2f / 3f * maxHealth)
+                {
+                    enemyTypes.Add(tankEnemy);
+                    return;
+                }
+                else if (health < 1f / 3f * maxHealth)
+                {
+                    enemyTypes.Add(rangedEnemy);
+                    return;
+                }
+
+                if (FloatingTextPrefab)
+                {
+                    ShowFloatingText(Mathf.RoundToInt(damage).ToString());
+                }
             }
         }
-      
-
-
     }
 
     void ShowFloatingText(string text)
@@ -264,6 +273,7 @@ public class BossController : MonoBehaviour
 
         //Create the shield game object
         GameObject sheild = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+        invincible = true;
 
         //Bounds of the room
         Bounds bounds = roomCollider.bounds;
@@ -304,6 +314,7 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         Destroy(sheild);
+        invincible = false;
         isChasing = true;
 
     }
@@ -336,6 +347,18 @@ public class BossController : MonoBehaviour
         }
         transform.localScale = scale;
 
+    }
+
+    public void ShowDeathText()
+    {
+        deathText.SetActive(true);
+    }
+
+    public void DeathSequence()
+    {
+        deathText.SetActive(false);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 0.8f, -2f);
+        Instantiate(ShadowBossPrefab, spawnPosition, Quaternion.identity);
     }
 
 }

@@ -18,7 +18,7 @@ public class SpellCast : MonoBehaviour
 
     public bool spellReady = true;
     private float Timer = 0f;
-    public float cooldownLength = .2f;
+    public float cooldownLength = 2f;
 
     private bool LightningReady = true;
     private float LightningTimer = 0f;
