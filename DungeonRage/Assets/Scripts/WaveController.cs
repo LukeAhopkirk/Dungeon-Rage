@@ -97,7 +97,7 @@ public class WaveController : MonoBehaviour
             enemyType.IncrementEnemyCount();
 
             // Random interval before spawning the next enemy
-            float spawnInterval = Random.Range(1f, 3f); // Example spawn interval
+            float spawnInterval = Random.Range(.2f, 1f); // Example spawn interval
             yield return new WaitForSeconds(spawnInterval);
         }
     }
