@@ -1,57 +1,54 @@
-## Dungeon Rage
+# Dungeon Rage
 
-By:
+Dungeon Rage is a top-down shooter with a fantasy theme, created over six weeks during a summer school course on Unity. This project taught us game design from the ground up, and we’re proud of how it turned out. Try out the game here: [Dungeon Rage](https://cosc360.otago.ac.nz/games/2024/DungeonRage).
 
-- Nick Garner: Programmer, Designer, Sound
-- Aidan Dougherty: Programmer, Designer, Art Lead
-- Hayden Aish: Programmer, Designer
-- Luke Hopkirk: programmer, Designer
-## Description:
+### By:
+- **Nick Garner**: Programmer, Designer, Sound
+- **Aidan Dougherty**: Programmer, Designer, Art Lead
+- **Hayden Aish**: Programmer, Designer
+- **Luke Hopkirk**: Programmer, Designer
 
-Dungeon Rage is a top down shooter with a fantasy theme based around magic, with a unique rage mechanic and a minor story element. Dungeon Rage is focused around the main protagonist who becomes overcome with rage and vengeance after the destruction of his village. Chasing after the evil mage into a dungeon the protagonist unlocks ways to utilize his rage thanks to the help of a mysterious shadow. In Dungeon rage you have the option of playing the main story talked about above or an endless mode where the player can test their skills on endless hordes of enemies. 
-## Controls:
-**WASD** - Movement
+---
 
-**Space** - Dash
+## Description
 
-  
+**Dungeon Rage** features a unique rage mechanic and a narrative centered on revenge. The protagonist, seeking vengeance after his village’s destruction, pursues an evil mage into a dungeon and discovers how to harness his rage, with help from a mysterious shadow. The game includes a main story mode and an endless mode for players to test their skills.
 
-**Left Click** - Aim and Fire Fireball and Lightning Spells
+## Controls
 
-**Q** - Fireball Spell: casts two fireballs at once
+- **WASD**: Move
+- **Space**: Dash
+- **Left Click**: Aim and Fire Fireball or Lightning Spells
+- **Q**: Cast Fireball Spell (double fireballs)
+- **E**: Cast Lightning Spell (chains to six enemies for heavy damage)
+- **1**: Knockback Rage Ability (knocks enemies back, dealing minor damage)
+- **2**: AOE Rage Ability (adds Area of Effect to fireball attacks)
+- **3**: Outrage Ability (ultimate rage skill)
+- **P**: Pause Menu
+  - **Options**: Adjust volume
+  - **Skill Points**: Allocate to max health, damage, movement speed, and rage gain
+  - **Controls**: View controls
+- **R**: Reset to last checkpoint
 
-**E** - Lightning Spell: casts a chain lightning that chains 6 enemies dealing huge damage.
+---
 
-**1** - Knockback Rage Ability: knocks enemies back and does a small amount of damage.
+## Known Issues
+- Endless mode difficulty needs balancing.
+- Dashing may sometimes cause the player to get stuck in walls or outside the map.
+- Dashing through the portal can cause the player to get stuck outside the map.
+- Fonts occasionally don’t display correctly on certain assets.
+- Ranged enemies may shoot projectiles into walls when in different rooms.
+- Exiting to the main menu from pause and re-entering endless mode may disable movement until pausing again.
+- Occasional bugs with boss encounters.
 
-**2**- AOE Rage Ability: changes fireballs attack to Area Of Effect.
+---
 
-**3** - Outrage Ability:  final and most powerful rage ability
+## Music Copyright
 
-**P** - Pause menu
+- **Song**: *Flowing Into The Darkness* by Nyoko
+- **License**: [Creative Commons CC BY 3.0](https://creativecommons.org/licenses/by/3.0)
+- Music provided by [BreakingCopyright](https://breakingcopyright.com)
 
-- Options: change volume
-- Skill points: Max health, Damage, Movement Speed, Rage gain
-- Controls: like above
+---
 
-**R** - Reset player to last checkpoint
-## Known Issues:
-- Endless mode is unbalanced
-- Dash very rarely gets the player stuck in the wall/outside the map
-- Dashing through the portal will sometimes get you stuck outside the map
-- Font doesnt work properly on some assets.
-- Ranged enemies still shoot projectiles into walls when in different room.
-- If you quit from pause menu into the main menu and try click endless mode you wont be able to move unless you pause again.
-- Boss might be a little buggy
-  
-  
-  
-  
-
-#### Music copyright:
-
-Song: Nyoko - Flowing Into The Darkness
-
-License: Creative Commons (CC BY 3.0) https://creativecommons.org/licenses/by/3.0
-
-Music powered by BreakingCopyright: [https://breakingcopyright.com](https://breakingcopyright.com)
+This version should display properly on GitHub and improves readability.
